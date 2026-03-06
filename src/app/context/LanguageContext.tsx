@@ -39,7 +39,7 @@ const translations: Record<Language, Record<string, string>> = {
     'home.services.title': 'Our Services',
     'home.services.subtitle': 'Whether you prefer to do it yourself or have us take care of everything, we have the perfect laundry solution for you.',
     'home.services.selfService.title': 'Self-Service Laundry',
-    'home.services.selfService.description': 'Take control of your laundry with our state-of-the-art Maytag washers and dryers. Multiple machine sizes available to handle any load, from everyday clothes to bulky comforters. Enjoy free WiFi and a comfortable environment while you wait.',
+    'home.services.selfService.description': 'Make laundry easy with high-performance Maytag washers and dryers in a variety of sizes. From small loads to comforters, we\'ve got you covered—plus free WiFi while you wait.',
     'home.services.selfService.feature1': 'High-efficiency machines',
     'home.services.selfService.feature2': 'Multiple load sizes',
     'home.services.selfService.feature3': 'Free WiFi',
