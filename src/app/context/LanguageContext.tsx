@@ -87,6 +87,18 @@ const translations: Record<Language, Record<string, string>> = {
     // Home Page - Testimonials
     'home.testimonials.title': 'What Our Customers Say',
     'home.testimonials.subtitle': "Don't just take our word for it. Here's what our valued customers have to say about their experience.",
+    'home.testimonials.1.name': 'Sarah Johnson',
+    'home.testimonials.1.text': 'The cleanest laundromat in Raleigh! The machines are always in perfect condition and the staff is incredibly helpful.',
+    'home.testimonials.2.name': 'Michael Chen',
+    'home.testimonials.2.text': 'I love the extended hours and free WiFi. Makes doing laundry so much more convenient. Highly recommend!',
+    'home.testimonials.3.name': 'Emily Rodriguez',
+    'home.testimonials.3.text': 'Great prices and excellent service. The facility is always spotless and well-maintained. My go-to laundromat.',
+    'home.testimonials.4.name': 'David Thompson',
+    'home.testimonials.4.text': 'Been coming here for years. Best laundromat in the area without a doubt. Always clean and machines work perfectly.',
+    'home.testimonials.5.name': 'Lisa Martinez',
+    'home.testimonials.5.text': 'The wash and fold service is a lifesaver! Professional, quick, and my clothes always come back perfectly folded.',
+    'home.testimonials.6.name': 'James Wilson',
+    'home.testimonials.6.text': 'Friendly staff, clean facility, and great prices. What more could you ask for? Highly recommend to everyone.',
 
     // Home Page - CTA
     'home.cta.title': 'Ready to Experience the Difference?',
@@ -380,6 +392,18 @@ const translations: Record<Language, Record<string, string>> = {
     // Home Page - Testimonials
     'home.testimonials.title': 'Lo Que Dicen Nuestros Clientes',
     'home.testimonials.subtitle': 'No solo tome nuestra palabra. Esto es lo que nuestros valiosos clientes dicen sobre su experiencia.',
+    'home.testimonials.1.name': 'Sarah Johnson',
+    'home.testimonials.1.text': '¡La lavandería más limpia de Raleigh! Las máquinas siempre están en perfectas condiciones y el personal es increíblemente servicial.',
+    'home.testimonials.2.name': 'Michael Chen',
+    'home.testimonials.2.text': 'Me encantan los horarios extendidos y el WiFi gratis. Hace que lavar la ropa sea mucho más conveniente. ¡Muy recomendado!',
+    'home.testimonials.3.name': 'Emily Rodriguez',
+    'home.testimonials.3.text': 'Excelentes precios y servicio. Las instalaciones siempre están impecables y bien mantenidas. Mi lavandería favorita.',
+    'home.testimonials.4.name': 'David Thompson',
+    'home.testimonials.4.text': 'Vengo aquí desde hace años. Sin duda la mejor lavandería de la zona. Siempre limpia y las máquinas funcionan perfectamente.',
+    'home.testimonials.5.name': 'Lisa Martinez',
+    'home.testimonials.5.text': '¡El servicio de lavado y doblado es un salvavidas! Profesional, rápido y mi ropa siempre vuelve perfectamente doblada.',
+    'home.testimonials.6.name': 'James Wilson',
+    'home.testimonials.6.text': 'Personal amable, instalaciones limpias y excelentes precios. ¿Qué más se puede pedir? Muy recomendado para todos.',
 
     // Home Page - CTA
     'home.cta.title': 'Listo para Experimentar la Diferencia?',

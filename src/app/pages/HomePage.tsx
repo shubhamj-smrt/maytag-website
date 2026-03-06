@@ -20,42 +20,12 @@ export function HomePage() {
   const [selectedArea, setSelectedArea] = useState<AreaKey>('raleigh');
 
   const testimonials = [
-    {
-      name: 'Sarah Johnson',
-      rating: 5,
-      text: 'The cleanest laundromat in Raleigh! The machines are always in perfect condition and the staff is incredibly helpful.',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face',
-    },
-    {
-      name: 'Michael Chen',
-      rating: 5,
-      text: 'I love the extended hours and free WiFi. Makes doing laundry so much more convenient. Highly recommend!',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-    },
-    {
-      name: 'Emily Rodriguez',
-      rating: 5,
-      text: 'Great prices and excellent service. The facility is always spotless and well-maintained. My go-to laundromat.',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
-    },
-    {
-      name: 'David Thompson',
-      rating: 5,
-      text: 'Been coming here for years. Best laundromat in the area without a doubt. Always clean and machines work perfectly.',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-    },
-    {
-      name: 'Lisa Martinez',
-      rating: 5,
-      text: 'The wash and fold service is a lifesaver! Professional, quick, and my clothes always come back perfectly folded.',
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face',
-    },
-    {
-      name: 'James Wilson',
-      rating: 5,
-      text: 'Friendly staff, clean facility, and great prices. What more could you ask for? Highly recommend to everyone.',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face',
-    },
+    { rating: 5, nameKey: 'home.testimonials.1.name', textKey: 'home.testimonials.1.text', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face' },
+    { rating: 5, nameKey: 'home.testimonials.2.name', textKey: 'home.testimonials.2.text', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face' },
+    { rating: 5, nameKey: 'home.testimonials.3.name', textKey: 'home.testimonials.3.text', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face' },
+    { rating: 5, nameKey: 'home.testimonials.4.name', textKey: 'home.testimonials.4.text', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face' },
+    { rating: 5, nameKey: 'home.testimonials.5.name', textKey: 'home.testimonials.5.text', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face' },
+    { rating: 5, nameKey: 'home.testimonials.6.name', textKey: 'home.testimonials.6.text', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face' },
   ];
 
   return (
@@ -106,15 +76,15 @@ export function HomePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Self-Service Card */}
-            <div className="group flex h-auto bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-[#00bfb3] hover:shadow-lg transition-all">
-              <div className="w-3/5 flex-shrink-0">
+            <div className="flex flex-row h-fit bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-[#00bfb3] hover:shadow-lg transition-all">
+              <div className="w-full h-full">
                 <img
                   src="/images/self-service-laundry.jpg"
                   alt="Self-Service Laundry"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="w-2/5 p-6 bg-gray-50 flex flex-col justify-between">
+              <div className="w-full p-6 bg-gray-50 h-auto flex flex-col justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-black mb-3">{t('home.services.selfService.title')}</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed text-sm">{t('home.services.selfService.description')}</p>
@@ -136,21 +106,30 @@ export function HomePage() {
             </div>
 
             {/* Wash & Fold Card */}
-            <div className="group flex h-auto bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-[#00bfb3] hover:shadow-lg transition-all">
-              <div className="w-3/5 flex-shrink-0">
+            <div className="flex flex-row h-auto bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-[#00bfb3] hover:shadow-lg transition-all">
+              <div className="w-full h-full">
                 <img
                   src="/images/01-wash-fold-service.png"
                   alt="Wash and Fold Service"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="w-2/5 p-6 bg-gray-50 flex flex-col justify-between">
+              <div className="w-full p-6 bg-gray-50 h-auto flex flex-col justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-black mb-3">{t('home.services.washFold.title')}</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed text-sm">{t('home.services.washFold.description')}</p>
-                  <div className="space-y-1">
-                    <p className="font-semibold text-black text-sm">{t('home.services.washFold.feature1')}</p>
-                    <p className="text-gray-600 text-sm">{t('home.services.washFold.feature2')}, {t('home.services.washFold.feature3')}, {t('home.services.washFold.feature4')}</p>
+                  <div className="space-y-2">
+                    {[
+                      'home.services.washFold.feature1',
+                      'home.services.washFold.feature2',
+                      'home.services.washFold.feature3',
+                      'home.services.washFold.feature4',
+                    ].map((key) => (
+                      <div key={key} className="flex items-center gap-2">
+                        <CircleCheck className="w-5 h-5 flex-shrink-0 text-white fill-[#00bfb3]" />
+                        <p className="text-gray-700 text-sm font-semibold">{t(key)}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -306,11 +285,11 @@ export function HomePage() {
                 <div className="flex items-center gap-4 mb-4">
                   <img
                     src={testimonial.image}
-                    alt={testimonial.name}
+                    alt={t(testimonial.nameKey)}
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="font-semibold text-black">{testimonial.name}</p>
+                    <p className="font-semibold text-black">{t(testimonial.nameKey)}</p>
                     <div className="flex gap-0.5">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-[#00bfb3] text-[#00bfb3]" />
@@ -318,7 +297,7 @@ export function HomePage() {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">{testimonial.text}</p>
+                <p className="text-gray-700 leading-relaxed">{t(testimonial.textKey)}</p>
               </div>
             ))}
           </div>
