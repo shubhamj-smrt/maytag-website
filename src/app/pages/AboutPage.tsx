@@ -40,7 +40,7 @@ export function AboutPage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_kz4s7skz4s7skz4s.png-UZxfH0EeAvowjxI9IOXYERXRCQViKP.jpeg"
+              src="/images/01-hero-image.png"
             alt="Maytag Coin Laundry Storefront"
             className="w-full h-full object-cover"
           />
