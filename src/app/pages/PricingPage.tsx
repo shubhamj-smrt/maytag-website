@@ -244,7 +244,7 @@ export function PricingPage() {
               Visit Us Today
             </Link>
             <a
-              href="tel:9198516670"
+              href="tel:2523083052"
               className="bg-black text-white px-8 py-4 rounded hover:bg-gray-800 transition-colors"
             >
               Call for Questions

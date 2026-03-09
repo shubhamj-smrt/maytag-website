@@ -53,6 +53,13 @@ const translations: Record<Language, Record<string, string>> = {
     'home.services.washFold.feature3': 'Premium detergents',
     'home.services.washFold.feature4': 'Convenient drop-off',
 
+    'home.services.pickupDelivery.title': 'Free Pickup & Delivery',
+    'home.services.pickupDelivery.description': 'Too busy to visit? We\'ll pick up your laundry and deliver it fresh and folded right to your door. Free pickup and delivery within our service area—laundry made effortless.',
+    'home.services.pickupDelivery.feature1': 'Free pickup and delivery',
+    'home.services.pickupDelivery.feature2': 'Same wash & fold quality',
+    'home.services.pickupDelivery.feature3': 'Flexible scheduling',
+    'home.services.pickupDelivery.feature4': 'Serving the Triangle area',
+
     // Home Page - Areas Section
     'home.areas.title': 'Areas We Serve',
     'home.areas.subtitle': "Conveniently located in Raleigh, we proudly serve customers from across the Triangle area. Whether you're from downtown or the surrounding communities, we're here to help with all your laundry needs.",
@@ -83,7 +90,7 @@ const translations: Record<Language, Record<string, string>> = {
     'home.questions.whenOpen': "When we're open",
     'home.questions.hours': '5 AM - 11 PM, Open 7 Days Including Public Holidays',
     'home.questions.getInTouch': 'Get in touch',
-    'home.questions.email': '(919) 851-6670',
+    'home.questions.email': '(252) 308-3052',
 
     // Home Page - Testimonials
     'home.testimonials.title': 'What Our Customers Say',
@@ -266,7 +273,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Feedback',
     'contact.form.namePlaceholder': 'Your name',
     'contact.form.emailPlaceholder': 'your@email.com',
-    'contact.form.phonePlaceholder': '(919) 851-6670',
+    'contact.form.phonePlaceholder': '(252) 308-3052',
     'contact.form.messagePlaceholder': 'Tell us how we can help you...',
     'contact.form.submit': 'Send Message',
     'contact.form.submitted': 'Message Sent!',
@@ -358,6 +365,13 @@ const translations: Record<Language, Record<string, string>> = {
     'home.services.washFold.feature2': 'Doblado profesional',
     'home.services.washFold.feature3': 'Detergentes premium',
     'home.services.washFold.feature4': 'Entrega conveniente',
+
+    'home.services.pickupDelivery.title': 'Recogida y Entrega Gratis',
+    'home.services.pickupDelivery.description': 'Muy ocupado para visitar? Recogemos su ropa y la entregamos fresca y doblada en su puerta. Recogida y entrega gratis en nuestra area de servicio—lavanderia sin esfuerzo.',
+    'home.services.pickupDelivery.feature1': 'Recogida y entrega gratis',
+    'home.services.pickupDelivery.feature2': 'Misma calidad de lavado y doblado',
+    'home.services.pickupDelivery.feature3': 'Horarios flexibles',
+    'home.services.pickupDelivery.feature4': 'Sirviendo el area del Triangulo',
 
     // Home Page - Areas Section
     'home.areas.title': 'Areas que Servimos',
@@ -572,7 +586,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Comentarios',
     'contact.form.namePlaceholder': 'Su nombre',
     'contact.form.emailPlaceholder': 'su@correo.com',
-    'contact.form.phonePlaceholder': '(919) 851-6670',
+    'contact.form.phonePlaceholder': '(252) 308-3052',
     'contact.form.messagePlaceholder': 'Diganos como podemos ayudarle...',
     'contact.form.submit': 'Enviar Mensaje',
     'contact.form.submitted': 'Mensaje Enviado!',

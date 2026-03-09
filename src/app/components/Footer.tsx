@@ -68,7 +68,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} className="text-[#00bfb3] flex-shrink-0" />
-                <span>(919) 851-6670</span>
+                <span>(252) 308-3052</span>
               </li>
             </ul>
           </div>
