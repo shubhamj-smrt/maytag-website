@@ -15,12 +15,12 @@ export function HomePage() {
   const { t } = useLanguage();
 
   const testimonials = [
-    { rating: 5, nameKey: 'home.testimonials.1.name', textKey: 'home.testimonials.1.text', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face' },
-    { rating: 5, nameKey: 'home.testimonials.2.name', textKey: 'home.testimonials.2.text', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face' },
-    { rating: 5, nameKey: 'home.testimonials.3.name', textKey: 'home.testimonials.3.text', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face' },
-    { rating: 5, nameKey: 'home.testimonials.4.name', textKey: 'home.testimonials.4.text', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face' },
-    { rating: 5, nameKey: 'home.testimonials.5.name', textKey: 'home.testimonials.5.text', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face' },
-    { rating: 5, nameKey: 'home.testimonials.6.name', textKey: 'home.testimonials.6.text', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face' },
+    { rating: 5, nameKey: 'home.testimonials.1.name', textKey: 'home.testimonials.1.text', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=400&fit=crop&crop=faces&q=80' },
+    { rating: 5, nameKey: 'home.testimonials.2.name', textKey: 'home.testimonials.2.text', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&crop=faces&q=80' },
+    { rating: 5, nameKey: 'home.testimonials.3.name', textKey: 'home.testimonials.3.text', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=400&fit=crop&crop=faces&q=80' },
+    { rating: 5, nameKey: 'home.testimonials.4.name', textKey: 'home.testimonials.4.text', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=400&fit=crop&crop=faces&q=80' },
+    { rating: 5, nameKey: 'home.testimonials.5.name', textKey: 'home.testimonials.5.text', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=400&fit=crop&crop=faces&q=80' },
+    { rating: 5, nameKey: 'home.testimonials.6.name', textKey: 'home.testimonials.6.text', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=400&fit=crop&crop=faces&q=80' },
   ];
 
   return (
@@ -29,7 +29,7 @@ export function HomePage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_kz4s7skz4s7skz4s.png-UZxfH0EeAvowjxI9IOXYERXRCQViKP.jpeg"
+            src="/images/01-hero-image.png"
             alt="Maytag Coin Laundry Storefront"
             className="w-full h-full object-cover"
           />
@@ -134,9 +134,9 @@ export function HomePage() {
             <div className="flex flex-col bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-[#00bfb3] hover:shadow-lg transition-all">
               <div className="relative overflow-hidden aspect-[4/3]">
                 <img
-                  src="/images/01-wash-fold-service.png"
+                  src="/images/01-free-pickup-delivery.png"
                   alt="Free Pickup and Delivery"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               <div className="p-6 flex flex-col justify-between flex-1">
@@ -198,7 +198,7 @@ export function HomePage() {
             {/* Right: Laundromat image */}
             <div className="w-full min-w-0 rounded-2xl overflow-hidden shadow-lg border border-gray-200 aspect-[4/3] min-h-[280px] lg:min-h-[360px]">
               <img
-                src="/images/storefront-areas.png"
+                src="/images/01-hero-image.png"
                 alt="Maytag Coin Laundry Storefront"
                 className="w-full h-full object-cover"
               />
@@ -264,24 +264,24 @@ export function HomePage() {
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-[400px] mx-4 bg-gray-50 p-6 rounded-xl border border-gray-200"
+                className="flex-shrink-0 w-[400px] mx-4 bg-gray-50 rounded-xl border border-gray-200 flex overflow-hidden"
               >
-                <div className="flex items-center gap-4 mb-4">
+                <div className="w-28 flex-shrink-0 self-stretch">
                   <img
                     src={testimonial.image}
                     alt={t(testimonial.nameKey)}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-full h-full object-cover"
                   />
-                  <div>
-                    <p className="font-semibold text-black">{t(testimonial.nameKey)}</p>
-                    <div className="flex gap-0.5">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-[#00bfb3] text-[#00bfb3]" />
-                      ))}
-                    </div>
-                  </div>
                 </div>
-                <p className="text-gray-700 leading-relaxed">{t(testimonial.textKey)}</p>
+                <div className="flex-1 min-w-0 p-6 flex flex-col justify-center">
+                  <p className="font-semibold text-black mb-1">{t(testimonial.nameKey)}</p>
+                  <div className="flex gap-0.5 mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#00bfb3] text-[#00bfb3]" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 leading-relaxed text-sm">{t(testimonial.textKey)}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -314,12 +314,14 @@ export function HomePage() {
           <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
             {t('home.cta.subtitle')}
           </p>
-          <Link
-            to="/contact"
+          <a
+            href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
             {t('home.cta.button')}
-          </Link>
+          </a>
         </div>
       </section>
     </div>
