@@ -46,7 +46,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* Story Section - commented out
       <section className="py-16 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -77,6 +77,7 @@ export function AboutPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Values Section */}
       <section className="py-16 sm:py-20 bg-gray-50">
