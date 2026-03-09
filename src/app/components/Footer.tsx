@@ -70,10 +70,6 @@ export function Footer() {
                 <Phone size={16} className="text-[#00bfb3] flex-shrink-0" />
                 <span>(919) 851-6670</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Mail size={16} className="text-[#00bfb3] flex-shrink-0" />
-                <span>info@maytaglaundry.com</span>
-              </li>
             </ul>
           </div>
         </div>
