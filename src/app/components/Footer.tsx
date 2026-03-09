@@ -52,8 +52,15 @@ export function Footer() {
             <h3 className="font-semibold mb-4">{t('footer.businessHours')}</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li className="flex items-center gap-2">
-                <Clock size={16} className="text-[#00bfb3]" />
-                <span>{t('footer.hours')}</span>
+                <Clock size={16} className="text-[#00bfb3] flex-shrink-0" />
+                <a
+                  href="https://www.yelp.com/biz/maytag-coin-laundry-of-raleigh-raleigh-3?dd_referrer=https%3A%2F%2Fwww.google.com%2F"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#00bfb3] transition-colors"
+                >
+                  {t('footer.hours')}
+                </a>
               </li>
             </ul>
           </div>
@@ -64,11 +71,23 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="text-[#00bfb3] mt-1 flex-shrink-0" />
-                <span>15 Jones Franklin Rd, Raleigh, NC 27606</span>
+                <a
+                  href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#00bfb3] transition-colors"
+                >
+                  15 Jones Franklin Rd,<br />Raleigh, NC 27606
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} className="text-[#00bfb3] flex-shrink-0" />
-                <span>(252) 308-3052</span>
+                <a
+                  href="tel:2523083052"
+                  className="hover:text-[#00bfb3] transition-colors"
+                >
+                  (252) 308-3052
+                </a>
               </li>
             </ul>
           </div>
