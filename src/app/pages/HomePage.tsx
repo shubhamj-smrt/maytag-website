@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
-import { WashingMachine, Shirt, Star, MapPin, Clock, Mail, Check, CircleCheck } from 'lucide-react';
+import { WashingMachine, Shirt, Star, MapPin, Clock, Phone, Check, CircleCheck } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -252,7 +252,7 @@ export function HomePage() {
               {/* Get in Touch */}
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
                 <div className="flex items-center gap-3 mb-4">
-                  <Mail className="w-6 h-6 text-black" />
+                  <Phone className="w-6 h-6 text-black" />
                   <h4 className="font-bold text-black text-lg">{t('home.questions.getInTouch')}</h4>
                 </div>
                 <p className="text-gray-600">{t('home.questions.email')}</p>
