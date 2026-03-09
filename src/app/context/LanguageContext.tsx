@@ -27,6 +27,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.monFri': 'Mon-Fri: 6:00 AM - 10:00 PM',
     'footer.sat': 'Sat: 7:00 AM - 9:00 PM',
     'footer.sun': 'Sun: 7:00 AM - 9:00 PM',
+    'footer.hours': 'Mon-Sun, 5AM to 11PM',
     'footer.aboutUs': 'About Us',
     'footer.copyright': 'Maytag Coin Laundry Raleigh. All rights reserved.',
 
@@ -265,7 +266,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Feedback',
     'contact.form.namePlaceholder': 'Your name',
     'contact.form.emailPlaceholder': 'your@email.com',
-    'contact.form.phonePlaceholder': '(919) 555-0123',
+    'contact.form.phonePlaceholder': '(919) 851-6670',
     'contact.form.messagePlaceholder': 'Tell us how we can help you...',
     'contact.form.submit': 'Send Message',
     'contact.form.submitted': 'Message Sent!',
@@ -333,6 +334,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.monFri': 'Lun-Vie: 6:00 AM - 10:00 PM',
     'footer.sat': 'Sab: 7:00 AM - 9:00 PM',
     'footer.sun': 'Dom: 7:00 AM - 9:00 PM',
+    'footer.hours': 'Lun-Dom, 5AM a 11PM',
     'footer.aboutUs': 'Sobre Nosotros',
     'footer.copyright': 'Maytag Coin Laundry Raleigh. Todos los derechos reservados.',
 
@@ -570,7 +572,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Comentarios',
     'contact.form.namePlaceholder': 'Su nombre',
     'contact.form.emailPlaceholder': 'su@correo.com',
-    'contact.form.phonePlaceholder': '(919) 555-0123',
+    'contact.form.phonePlaceholder': '(919) 851-6670',
     'contact.form.messagePlaceholder': 'Diganos como podemos ayudarle...',
     'contact.form.submit': 'Enviar Mensaje',
     'contact.form.submitted': 'Mensaje Enviado!',

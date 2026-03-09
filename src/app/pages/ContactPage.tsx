@@ -55,8 +55,8 @@ export function ContactPage() {
                 <Phone className="w-6 h-6 text-[#00bfb3]" />
               </div>
               <h3 className="font-semibold text-black mb-2">Phone</h3>
-              <a href="tel:9195550123" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
-                (919) 555-0123
+              <a href="tel:9198516670" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
+                (919) 851-6670
               </a>
             </div>
 
@@ -127,7 +127,7 @@ export function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                    placeholder="(919) 555-0123"
+                    placeholder="(919) 851-6670"
                   />
                 </div>
 
@@ -292,10 +292,10 @@ export function ContactPage() {
             Give us a call or stop by during business hours. We're always happy to help!
           </p>
           <a
-            href="tel:9195550123"
+            href="tel:9198516670"
             className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
-            Call Us: (919) 555-0123
+            Call Us: (919) 851-6670
           </a>
         </div>
       </section>

@@ -130,7 +130,7 @@ export function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:9195550123"
+              href="tel:9198516670"
               className="bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors"
             >
               Call Us Now
