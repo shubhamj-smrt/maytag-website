@@ -41,7 +41,7 @@ export function ContactPage() {
       {/* Contact Information */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#00bfb3] hover:shadow-lg transition-all">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
                 <MapPin className="w-6 h-6 text-[#00bfb3]" />
@@ -62,20 +62,10 @@ export function ContactPage() {
 
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#00bfb3] hover:shadow-lg transition-all">
               <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
-                <Mail className="w-6 h-6 text-[#00bfb3]" />
-              </div>
-              <h3 className="font-semibold text-black mb-2">Email</h3>
-              <a href="mailto:info@maytaglaundry.com" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
-                info@maytaglaundry.com
-              </a>
-            </div>
-
-            <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#00bfb3] hover:shadow-lg transition-all">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
                 <Clock className="w-6 h-6 text-[#00bfb3]" />
               </div>
               <h3 className="font-semibold text-black mb-2">Hours</h3>
-              <p className="text-gray-600 text-sm">Mon-Fri: 6AM-10PM<br />Sat-Sun: 7AM-9PM</p>
+              <p className="text-gray-600 text-sm">Mon-Sun: 5AM-11PM</p>
             </div>
           </div>
 
@@ -195,7 +185,7 @@ export function ContactPage() {
               <div className="bg-gray-200 rounded-lg mb-6 h-[300px] flex items-center justify-center border border-gray-300">
                 <div className="text-center">
                   <MapPin className="w-12 h-12 text-[#00bfb3] mx-auto mb-2" />
-                  <p className="text-gray-600">123 Main Street, Raleigh, NC 27601</p>
+                  <p className="text-gray-600">15 Jones Franklin Rd, Raleigh, NC 27606</p>
                 </div>
               </div>
 
@@ -203,16 +193,8 @@ export function ContactPage() {
                 <h3 className="font-semibold text-black mb-4">Business Hours</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Friday</span>
-                    <span className="text-black font-semibold">6:00 AM - 10:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Saturday</span>
-                    <span className="text-black font-semibold">7:00 AM - 9:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Sunday</span>
-                    <span className="text-black font-semibold">7:00 AM - 9:00 PM</span>
+                    <span className="text-gray-600">Monday - Sunday</span>
+                    <span className="text-black font-semibold">5:00 AM - 11:00 PM</span>
                   </div>
                 </div>
               </div>
