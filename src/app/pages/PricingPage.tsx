@@ -62,12 +62,27 @@ export function PricingPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-black text-white py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">Affordable Pricing</h1>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl">
-            Transparent, competitive pricing with no hidden fees. Pay only for what you use with our flexible options.
-          </p>
+      <section className="relative text-white min-h-screen flex items-end">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_kz4s7skz4s7skz4s.png-UZxfH0EeAvowjxI9IOXYERXRCQViKP.jpeg"
+            alt="Maytag Coin Laundry Storefront"
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            style={{
+              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">Affordable Pricing</h1>
+            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
+              Transparent, competitive pricing with no hidden fees. Pay only for what you use with our flexible options.
+            </p>
+          </div>
         </div>
       </section>
 

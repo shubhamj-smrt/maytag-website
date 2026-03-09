@@ -59,12 +59,27 @@ export function TestimonialsPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-black text-white py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">Customer Testimonials</h1>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl">
-            See what our customers have to say about their experience at Maytag Coin Laundry. Serving Raleigh since 1995.
-          </p>
+      <section className="relative text-white min-h-screen flex items-end">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_kz4s7skz4s7skz4s.png-UZxfH0EeAvowjxI9IOXYERXRCQViKP.jpeg"
+            alt="Maytag Coin Laundry Storefront"
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            style={{
+              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">Customer Testimonials</h1>
+            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
+              See what our customers have to say about their experience at Maytag Coin Laundry. Serving Raleigh since 1995.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -175,7 +190,9 @@ export function TestimonialsPage() {
             Join thousands of satisfied customers who trust Maytag Coin Laundry for all their laundry needs.
           </p>
           <a
-            href="/contact"
+            href="https://www.yelp.com/biz/maytag-coin-laundry-of-raleigh-raleigh-3?dd_referrer=https%3A%2F%2Fwww.google.com%2F"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-100 transition-colors"
           >
             Visit Us Today

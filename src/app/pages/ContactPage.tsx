@@ -29,12 +29,27 @@ export function ContactPage() {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-black text-white py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6">Contact Us</h1>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl">
-            Have questions? We're here to help. Reach out to us and we'll respond as soon as possible.
-          </p>
+      <section className="relative text-white min-h-screen flex items-end">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_kz4s7skz4s7skz4s.png-UZxfH0EeAvowjxI9IOXYERXRCQViKP.jpeg"
+            alt="Maytag Coin Laundry Storefront"
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            style={{
+              background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">Contact Us</h1>
+            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
+              Have questions? We're here to help. Reach out to us and we'll respond as soon as possible.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -47,7 +62,7 @@ export function ContactPage() {
                 <MapPin className="w-6 h-6 text-[#00bfb3]" />
               </div>
               <h3 className="font-semibold text-black mb-2">Address</h3>
-              <p className="text-gray-600 text-sm">123 Main Street<br />Raleigh, NC 27601</p>
+              <p className="text-gray-600 text-sm">15 Jones Franklin Rd<br />Raleigh, NC 27606</p>
             </div>
 
             <div className="text-center p-6 border border-gray-200 rounded-lg hover:border-[#00bfb3] hover:shadow-lg transition-all">
@@ -181,12 +196,19 @@ export function ContactPage() {
             <div>
               <h2 className="text-3xl font-bold text-black mb-6">Visit Our Location</h2>
               
-              {/* Mock Map */}
-              <div className="bg-gray-200 rounded-lg mb-6 h-[300px] flex items-center justify-center border border-gray-300">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-[#00bfb3] mx-auto mb-2" />
-                  <p className="text-gray-600">15 Jones Franklin Rd, Raleigh, NC 27606</p>
-                </div>
+              {/* Google Maps Embed */}
+              <div className="rounded-lg mb-6 h-[300px] overflow-hidden border border-gray-300">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.834389257489!2d-78.7209034!3d35.7855752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s15%20Jones%20Franklin%20Rd%2C%20Raleigh%2C%20NC%2027606!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Maytag Coin Laundry - 15 Jones Franklin Rd, Raleigh, NC 27606"
+                  className="w-full h-full"
+                />
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
