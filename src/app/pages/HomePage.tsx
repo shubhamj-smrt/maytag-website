@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router';
+import { AreasMap } from '../components/AreasMap';
 import { Star, MapPin, Clock, Phone, CircleCheck } from 'lucide-react';
 import { Card, CardContent } from '../components/Card';
 import { useLanguage } from '../context/LanguageContext';
@@ -247,10 +248,12 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 w-fit mx-auto">
-            {/* Left: Areas served list */}
-            <div className="flex flex-col gap-4">
-              <h3 className="text-2xl font-semibold text-black">{t('home.areas.serviceAreas')}</h3>
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10">
+            {/* Left: Service areas map */}
+            <AreasMap className="w-full aspect-[4/3] lg:w-[420px] lg:h-[315px] lg:flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border border-gray-200" />
+
+            {/* Right: Areas served list */}
+            <div className="w-full lg:w-auto flex flex-col gap-4">
               <ul className="space-y-2">
                 {areas.map((area) => (
                   <li key={area.nameKey} className="flex items-center gap-2 text-gray-700 text-sm md:text-base">
@@ -261,15 +264,6 @@ export function HomePage() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Right: Laundromat image */}
-            <div className="relative self-stretch min-w-[280px] min-h-[280px] w-[360px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-              <img
-                src="/images/01-hero-image.png"
-                alt={t('common.heroAlt')}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
             </div>
           </div>
 
@@ -283,32 +277,54 @@ export function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Find Us */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <MapPin className="w-6 h-6 text-black" />
-                  <h4 className="font-bold text-black text-lg">{t('home.questions.findUs')}</h4>
-                </div>
-                <p className="text-gray-600">{t('home.questions.address')}</p>
-              </div>
+              {/* Find Us → Google Maps */}
+              <a
+                href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full"
+              >
+                <Card hover className="h-full">
+                  <CardContent>
+                    <div className="flex items-center gap-3 mb-4">
+                      <MapPin className="w-6 h-6 text-black" />
+                      <h4 className="font-bold text-black text-lg">{t('home.questions.findUs')}</h4>
+                    </div>
+                    <p className="text-gray-600">{t('home.questions.address')}</p>
+                  </CardContent>
+                </Card>
+              </a>
 
-              {/* When We're Open */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-6 h-6 text-black" />
-                  <h4 className="font-bold text-black text-lg">{t('home.questions.whenOpen')}</h4>
-                </div>
-                <p className="text-gray-600">{t('home.questions.hours')}</p>
-              </div>
+              {/* When We're Open → Yelp */}
+              <a
+                href="https://www.yelp.com/biz/maytag-coin-laundry-of-raleigh-raleigh-3?dd_referrer=https%3A%2F%2Fwww.google.com%2F"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full"
+              >
+                <Card hover className="h-full">
+                  <CardContent>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Clock className="w-6 h-6 text-black" />
+                      <h4 className="font-bold text-black text-lg">{t('home.questions.whenOpen')}</h4>
+                    </div>
+                    <p className="text-gray-600 text-balance">{t('home.questions.hours')}</p>
+                  </CardContent>
+                </Card>
+              </a>
 
-              {/* Get in Touch */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <Phone className="w-6 h-6 text-black" />
-                  <h4 className="font-bold text-black text-lg">{t('home.questions.getInTouch')}</h4>
-                </div>
-                <p className="text-gray-600">{t('home.questions.email')}</p>
-              </div>
+              {/* Get in Touch → Call */}
+              <a href="tel:9842059506" className="block h-full">
+                <Card hover className="h-full">
+                  <CardContent>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Phone className="w-6 h-6 text-black" />
+                      <h4 className="font-bold text-black text-lg">{t('home.questions.getInTouch')}</h4>
+                    </div>
+                    <p className="text-gray-600">{t('home.questions.email')}</p>
+                  </CardContent>
+                </Card>
+              </a>
             </div>
           </div>
         </div>
