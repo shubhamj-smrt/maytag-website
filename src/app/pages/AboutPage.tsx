@@ -21,12 +21,12 @@ export function AboutPage() {
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/images/about-hero-mobile.png"
-            alt="Maytag Coin Laundry Storefront"
+            alt={t('common.heroAlt')}
             className="block md:hidden w-full h-full object-cover"
           />
           <img
             src="/images/01-about-hero.png"
-            alt="Maytag Coin Laundry Storefront"
+            alt={t('common.heroAlt')}
             className="hidden md:block w-full h-full object-cover"
           />
           {/* Mobile: overlay from bottom */}
@@ -46,15 +46,15 @@ export function AboutPage() {
         </div>
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">About Us</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">{t('about.hero.title')}</h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-[450px] mb-8">
-              For over 15 years, we've been Raleigh's trusted choice for quality laundry services and exceptional customer care.
+              {t('about.hero.subtitle')}
             </p>
             <Link
               to="/services"
               className="block w-full md:w-auto md:inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
             >
-              Explore Services
+              {t('about.hero.exploreServices')}
             </Link>
           </div>
         </div>
@@ -65,18 +65,18 @@ export function AboutPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">The Maytag Standard</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">{t('about.maytagStandard.title')}</h2>
               <p className="text-gray-600 leading-relaxed mb-4 text-balance">
-                Laundry is part of everyday life, and we believe the experience should be dependable and comfortable. At Maytag Coin Laundry, we focus on providing clean machines, a modern space, and a place customers can rely on when it’s time to get laundry done.
+                {t('about.maytagStandard.p1')}
               </p>
               <p className="text-gray-600 leading-relaxed mb-4 text-balance">
-              We’re proud to be part of the Raleigh community. Our team takes pride in maintaining a clean laundromat and offering friendly, professional service to every customer who visits.
+                {t('about.maytagStandard.p2')}
               </p>
             </div>
             <div>
               <img
                 src="/images/the-maytag-standard.jpg"
-                alt="Clean, modern laundromat with Maytag equipment"
+                alt={t('common.imageAlt.laundromat')}
                 className="w-full h-[400px] lg:h-[500px] object-cover rounded-lg shadow-xl"
               />
             </div>
@@ -146,10 +146,10 @@ export function AboutPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
-            Where Service Meets Innovation
+              {t('about.equipment.sectionTitle')}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto mt-4">
-              We exclusively use commercial-grade Maytag equipment, known for reliability and superior cleaning performance.
+              {t('about.equipment.sectionSubtitle')}
             </p>
           </div>
 
@@ -159,9 +159,9 @@ export function AboutPage() {
                 <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
                   <DropIcon size={32} weight="duotone" />
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-black">Smart Laundry Experience</h3>
+                <h3 className="mb-2 text-xl font-bold text-black">{t('about.equipment.smartLaundry.title')}</h3>
                 <p className="text-sm leading-relaxed text-[#363d4f]">
-                  Simple digital payments, easy ordering, and a seamless system that makes doing laundry faster and more convenient every visit.
+                  {t('about.equipment.smartLaundry.desc')}
                 </p>
               </CardContent>
             </Card>
@@ -171,9 +171,9 @@ export function AboutPage() {
                 <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
                   <SunHorizonIcon size={32} weight="duotone" />
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-black">Powered by Our Community</h3>
+                <h3 className="mb-2 text-xl font-bold text-black">{t('about.equipment.community.title')}</h3>
                 <p className="text-sm leading-relaxed text-[#363d4f]">
-                  Our team comes from our community, creating a welcoming space where neighbors support neighbors and loyalty rewards give back.
+                  {t('about.equipment.community.desc')}
                 </p>
               </CardContent>
             </Card>
@@ -183,9 +183,9 @@ export function AboutPage() {
                 <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
                   <WrenchIcon size={32} weight="duotone" />
                 </div>
-                <h3 className="mb-2 text-xl font-bold text-black">Care You Can See</h3>
+                <h3 className="mb-2 text-xl font-bold text-black">{t('about.equipment.care.title')}</h3>
                 <p className="text-sm leading-relaxed text-[#363d4f]">
-                  Hands-on oversight from the owners ensures clean facilities, well-maintained machines, and a laundry experience you can rely on.
+                  {t('about.equipment.care.desc')}
                 </p>
               </CardContent>
             </Card>
@@ -197,10 +197,10 @@ export function AboutPage() {
       <section className="py-16 sm:py-20 bg-[#00bfb3]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Experience the Difference
+            {t('about.cta.title')}
           </h2>
           <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
-            Visit us today and discover why thousands of Raleigh residents trust us with their laundry needs.
+            {t('about.cta.subtitle')}
           </p>
           <a
             href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
@@ -208,7 +208,7 @@ export function AboutPage() {
             rel="noopener noreferrer"
             className="inline-block bg-white font-medium text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
-            Visit Our Location
+            {t('about.cta.button')}
           </a>
         </div>
       </section>
