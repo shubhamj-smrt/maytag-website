@@ -30,9 +30,14 @@ export function HomePage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
+            src="/images/01-homepage-hero-mobile.png"
+            alt={t('common.heroAlt')}
+            className="block md:hidden w-full h-full object-cover"
+          />
+          <img
             src="/images/01-hero-image.png"
-            alt="Maytag Coin Laundry Storefront"
-            className="w-full h-full object-cover"
+            alt={t('common.heroAlt')}
+            className="hidden md:block w-full h-full object-cover"
           />
           {/* Mobile: overlay from bottom */}
           <div
@@ -183,7 +188,7 @@ export function HomePage() {
             <div className="w-full min-w-0 rounded-2xl overflow-hidden shadow-lg border border-gray-200 aspect-[4/3] min-h-[280px] lg:min-h-[360px]">
               <img
                 src="/images/01-hero-image.png"
-                alt="Maytag Coin Laundry Storefront"
+                alt={t('common.heroAlt')}
                 className="w-full h-full object-cover"
               />
             </div>
