@@ -20,12 +20,25 @@ export function AboutPage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
+            src="/images/about-hero-mobile.png"
+            alt="Maytag Coin Laundry Storefront"
+            className="block md:hidden w-full h-full object-cover"
+          />
+          <img
             src="/images/01-about-hero.png"
             alt="Maytag Coin Laundry Storefront"
-            className="w-full h-full object-cover"
+            className="hidden md:block w-full h-full object-cover"
           />
+          {/* Mobile: overlay from bottom */}
           <div
-            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            className="absolute inset-x-0 bottom-0 h-2/3 md:hidden"
+            style={{
+              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+          {/* Desktop: overlay from left */}
+          <div
+            className="hidden md:block absolute inset-y-0 left-0 w-3/5"
             style={{
               background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
             }}
@@ -39,7 +52,7 @@ export function AboutPage() {
             </p>
             <Link
               to="/services"
-              className="inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
+              className="block w-full md:w-auto md:inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
             >
               Explore Services
             </Link>

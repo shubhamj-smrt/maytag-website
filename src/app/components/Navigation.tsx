@@ -20,7 +20,7 @@ export function Navigation() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="bg-white text-black sticky top-0 z-50 border-b border-gray-200">
+    <nav className="relative bg-white text-black sticky top-0 z-[100] border-b border-gray-200">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -80,16 +80,27 @@ export function Navigation() {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             className="md:hidden text-black cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden pb-4">
+        {/* Mobile Navigation - absolute overlay with smooth animation */}
+        <div
+          id="mobile-nav"
+          aria-hidden={!isMenuOpen}
+          className={`absolute top-full left-0 right-0 md:hidden bg-white border-b border-gray-200 shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+            isMenuOpen
+              ? 'max-h-96 opacity-100'
+              : 'max-h-0 opacity-0 pointer-events-none'
+          }`}
+        >
+          <div className="pb-4 pt-2 px-4 sm:px-6">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -102,7 +113,6 @@ export function Navigation() {
               </Link>
             ))}
             <div className="flex items-center gap-3 py-3">
-              <Globe size={18} className="text-gray-700" aria-hidden="true" />
               <div
                 className="inline-flex items-center rounded-full border border-gray-300 bg-gray-50 p-0.5 cursor-pointer hover:border-[#00bfb3] hover:bg-white transition-colors"
                 role="group"
@@ -117,7 +127,7 @@ export function Navigation() {
                   }`}
                   aria-pressed={language === 'en'}
                 >
-                  English
+                  EN
                 </button>
                 <button
                   type="button"
@@ -128,7 +138,7 @@ export function Navigation() {
                   }`}
                   aria-pressed={language === 'es'}
                 >
-                  Español
+                  ES
                 </button>
               </div>
             </div>
@@ -140,7 +150,7 @@ export function Navigation() {
               {t('nav.callUs')}
             </a>
           </div>
-        )}
+        </div>
       </div>
     </nav>
   );

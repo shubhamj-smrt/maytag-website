@@ -51,8 +51,16 @@ export function ServicesPage() {
             alt="Maytag Coin Laundry Storefront"
             className="w-full h-full object-cover"
           />
+          {/* Mobile: overlay from bottom */}
           <div
-            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            className="absolute inset-x-0 bottom-0 h-2/3 md:hidden"
+            style={{
+              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+          {/* Desktop: overlay from left */}
+          <div
+            className="hidden md:block absolute inset-y-0 left-0 w-3/5"
             style={{
               background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
             }}
