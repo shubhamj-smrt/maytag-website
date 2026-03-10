@@ -36,7 +36,7 @@ export function HomePage() {
       mainEntityOfPage: 'https://maytaglaundromat.com/',
       description:
         'Modern Raleigh laundromat offering self-service laundry, wash dry fold, and convenient cashless and coin laundry options. Clean, affordable, and convenient laundry service in Raleigh, NC.',
-      telephone: '+1-919-851-6770',
+      telephone: '+1-984-205-9506',
       priceRange: '$',
       paymentAccepted: 'Coins, Credit Card, Debit Card',
       currenciesAccepted: 'USD',
