@@ -29,10 +29,17 @@ export function TestimonialsPage() {
       {/* Hero Section */}
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
+          {/* Mobile hero image — replace src with a portrait-cropped version when available */}
           <img
-            src="/images/01-hero-image.png"
+            src="/images/01-testimonial-hero-mobile.png"
             alt={t('common.heroAlt')}
-            className="w-full h-full object-cover"
+            className="block md:hidden w-full h-full object-cover"
+          />
+          {/* Desktop hero image */}
+          <img
+            src="/images/testimonial-hero.png"
+            alt={t('common.heroAlt')}
+            className="hidden md:block w-full h-full object-cover"
           />
           {/* Mobile: overlay from bottom */}
           <div
