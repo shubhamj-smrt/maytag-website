@@ -1,38 +1,17 @@
-import { Users, Award, Heart, Shield } from 'lucide-react';
-import { HeartIcon, HeartStraightIcon, ShieldIcon, TrophyIcon, UsersThreeIcon } from '@phosphor-icons/react'
+import { Link } from 'react-router';
+import { DropIcon, HeartStraightIcon, ShieldIcon, SunHorizonIcon, TrophyIcon, UsersThreeIcon, WrenchIcon } from '@phosphor-icons/react';
+import { Card, CardContent } from '../components/Card';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { useLanguage } from '../context/LanguageContext';
 
 export function AboutPage() {
-  const values = [
-    {
-      icon: <Heart className="w-10 h-10" />,
-      title: 'Customer First',
-      description: 'Your satisfaction is our top priority. We go above and beyond to ensure every visit exceeds your expectations.',
-    },
-    {
-      icon: <Shield className="w-10 h-10" />,
-      title: 'Quality Guaranteed',
-      description: 'We maintain the highest standards in equipment maintenance and facility cleanliness for the best results.',
-    },
-    {
-      icon: <Award className="w-10 h-10" />,
-      title: 'Professional Service',
-      description: 'Our experienced staff provides knowledgeable assistance and ensures a smooth laundry experience.',
-    },
-    {
-      icon: <Users className="w-10 h-10" />,
-      title: 'Community Focused',
-      description: 'As a local business, we\'re committed to serving and supporting the Raleigh community.',
-    },
-  ];
+  const { t } = useLanguage();
 
-  const timeline = [
-    { year: '2010', event: 'Opened our doors to serve the Raleigh community' },
-    { year: '2013', event: 'Expanded facility and added premium washers' },
-    { year: '2016', event: 'Introduced wash & fold service' },
-    { year: '2019', event: 'Complete facility renovation and equipment upgrade' },
-    { year: '2022', event: 'Added commercial services for local businesses' },
-    { year: '2026', event: 'Celebrating 16 years of service excellence' },
+  const values = [
+    { Icon: HeartStraightIcon, titleKey: 'about.values.customerFirst', descKey: 'about.values.customerFirstDesc' },
+    { Icon: ShieldIcon, titleKey: 'about.values.quality', descKey: 'about.values.qualityDesc' },
+    { Icon: TrophyIcon, titleKey: 'about.values.professional', descKey: 'about.values.professionalDesc' },
+    { Icon: UsersThreeIcon, titleKey: 'about.values.community', descKey: 'about.values.communityDesc' },
   ];
 
   return (
@@ -41,7 +20,7 @@ export function AboutPage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-              src="/images/01-about-hero.png"
+            src="/images/01-about-hero.png"
             alt="Maytag Coin Laundry Storefront"
             className="w-full h-full object-cover"
           />
@@ -55,39 +34,93 @@ export function AboutPage() {
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">About Us</h1>
-            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
+            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px] mb-8">
               For over 15 years, we've been Raleigh's trusted choice for quality laundry services and exceptional customer care.
             </p>
+            <Link
+              to="/services"
+              className="inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
+            >
+              Explore Services
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Story Section - commented out
+      {/* The Maytag Standard */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">Our Story</h2>
-              <div className="space-y-4 text-gray-600">
-                <p>
-                  Maytag Coin Laundry Raleigh was founded in 2010 with a simple mission: to provide the Raleigh community with a clean, modern, and welcoming place to do laundry. What started as a small neighborhood laundromat has grown into a full-service facility trusted by thousands of customers.
-                </p>
-                <p>
-                  We understand that doing laundry is a necessity, but that doesn't mean it has to be a chore. That's why we've invested in the best equipment, maintained the highest standards of cleanliness, and created a comfortable environment where you can get your laundry done efficiently.
-                </p>
-                <p>
-                  Over the years, we've continuously improved our services based on customer feedback, adding wash and fold services, commercial options, and modern amenities like free WiFi and comfortable seating areas. Our commitment to excellence has made us a cornerstone of the community.
-                </p>
-                <p>
-                  Today, we're proud to be locally owned and operated, serving families, students, professionals, and businesses throughout Raleigh and the surrounding areas.
-                </p>
-              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">The Maytag Standard</h2>
+              <p className="text-gray-600 leading-relaxed mb-4 text-balance">
+                Laundry is part of everyday life, and we believe the experience should be dependable and comfortable. At Maytag Coin Laundry, we focus on providing clean machines, a modern space, and a place customers can rely on when it’s time to get laundry done.
+              </p>
+              <p className="text-gray-600 leading-relaxed mb-4 text-balance">
+              We’re proud to be part of the Raleigh community. Our team takes pride in maintaining a clean laundromat and offering friendly, professional service to every customer who visits.
+              </p>
             </div>
             <div>
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1764120656278-994739787d38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGVhbiUyMGZvbGRlZCUyMGxhdW5kcnl8ZW58MXx8fHwxNzcyNzM2NTI2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Clean Folded Laundry"
-                className="w-full h-[500px] object-cover rounded-lg shadow-xl"
+              <img
+                src="/images/the-maytag-standard.jpg"
+                alt="Clean, modern laundromat with Maytag equipment"
+                className="w-full h-[400px] lg:h-[500px] object-cover rounded-lg shadow-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-16 sm:py-20 bg-gray-50">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">{t('about.values.title')}</h2>
+            <p className="text-lg sm:text-xl font-semibold text-black max-w-2xl mx-auto mb-4">
+              {t('about.values.subtitle')}
+            </p>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-balance">
+              {t('about.values.description')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => {
+              const IconComponent = value.Icon;
+              return (
+                <Card key={index} hover>
+                  <CardContent className="text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-[#00bfb3]/10 rounded-full mb-4">
+                      <IconComponent className="w-10 h-10 text-[#00bfb3]" weight="regular" />
+                    </div>
+                    <h3 className="text-xl font-bold text-black mb-3">{t(value.titleKey)}</h3>
+                    <p className="text-gray-600">{t(value.descKey)}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Journey - Two-column section
+      <section className="py-16 sm:py-20">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">Our Journey</h2>
+              <p className="text-gray-600 leading-relaxed mb-4 text-balance">
+                Maytag Coin Laundry Raleigh was founded in 2010 with a simple mission: to provide the Raleigh community with a clean, modern, and welcoming place to do laundry. What started as a small neighborhood laundromat has grown into a full-service facility trusted by thousands of customers.
+              </p>
+              <p className="text-gray-600 leading-relaxed">
+                Today, we're proud to be locally owned and operated, serving families, students, professionals, and businesses throughout Raleigh and the surrounding areas. Our commitment to excellence has made us a cornerstone of the community.
+              </p>
+            </div>
+            <div>
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                alt="Our team and community"
+                className="w-full h-[400px] lg:h-[500px] object-cover rounded-lg shadow-xl"
               />
             </div>
           </div>
@@ -95,137 +128,54 @@ export function AboutPage() {
       </section>
       */}
 
-      {/* Values Section */}
-      <section className="py-16 sm:py-20 bg-gray-50">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">Our Values</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              These core values guide everything we do and shape the experience we provide to our customers.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg border border-gray-200 hover:border-[#00bfb3] hover:shadow-lg transition-all text-center"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
-                  <div className="text-[#00bfb3]">{value.icon}</div>
-                </div>
-                <h3 className="text-xl font-bold text-black mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-16 sm:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">Our Journey</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              From our humble beginnings to becoming Raleigh's premier coin laundry, here are the milestones that shaped our story.
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto">
-            {timeline.map((item, index) => (
-              <div key={index} className="flex gap-6 mb-8 last:mb-0">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-[#00bfb3] rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
-                    {item.year.slice(2)}
-                  </div>
-                  {index !== timeline.length - 1 && (
-                    <div className="w-0.5 h-full bg-gray-200 mt-2"></div>
-                  )}
-                </div>
-                <div className="pb-8">
-                  <div className="text-xl font-bold text-black mb-1">{item.year}</div>
-                  <p className="text-gray-600">{item.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Equipment Section */}
+      {/* Equipment Section - 2-column layout */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">State-of-the-Art Equipment</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
+            Where Service Meets Innovation
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mt-4">
               We exclusively use commercial-grade Maytag equipment, known for reliability and superior cleaning performance.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-black mb-3">High-Efficiency Washers</h3>
-              <p className="text-gray-600 mb-4">
-                Our Maytag washers use less water and energy while delivering exceptional cleaning power. Multiple sizes available for any load.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Advanced cleaning cycles</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Energy-efficient operation</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Gentle on fabrics</span>
-                </li>
-              </ul>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card image={{ src: '/images/01-washer.jpg', alt: 'High-efficiency Maytag washers', objectPosition: 'top' }}>
+              <CardContent>
+                <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
+                  <DropIcon size={32} weight="duotone" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-black">Smart Laundry Experience</h3>
+                <p className="text-sm leading-relaxed text-[#363d4f]">
+                  Simple digital payments, easy ordering, and a seamless system that makes doing laundry faster and more convenient every visit.
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-black mb-3">Commercial Dryers</h3>
-              <p className="text-gray-600 mb-4">
-                Large-capacity dryers with precise temperature control ensure your clothes dry quickly and evenly without damage.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Multiple heat settings</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Sensor dry technology</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Reduced drying time</span>
-                </li>
-              </ul>
-            </div>
+            <Card image={{ src: '/images/dryers.jpg', alt: 'Commercial Maytag dryers' }}>
+              <CardContent>
+                <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
+                  <SunHorizonIcon size={32} weight="duotone" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-black">Powered by Our Community</h3>
+                <p className="text-sm leading-relaxed text-[#363d4f]">
+                  Our team comes from our community, creating a welcoming space where neighbors support neighbors and loyalty rewards give back.
+                </p>
+              </CardContent>
+            </Card>
 
-            <div className="bg-white p-6 rounded-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-black mb-3">Regular Maintenance</h3>
-              <p className="text-gray-600 mb-4">
-                All equipment is professionally maintained on a strict schedule to ensure optimal performance and reliability.
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Daily cleaning protocols</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Professional servicing</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full"></div>
-                  <span>Immediate repairs</span>
-                </li>
-              </ul>
-            </div>
+            <Card image={{ src: '/images/maintenance.png', alt: 'Professional equipment maintenance', objectPosition: 'top' }}>
+              <CardContent>
+                <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
+                  <WrenchIcon size={32} weight="duotone" />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-black">Care You Can See</h3>
+                <p className="text-sm leading-relaxed text-[#363d4f]">
+                  Hands-on oversight from the owners ensures clean facilities, well-maintained machines, and a laundry experience you can rely on.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -240,8 +190,10 @@ export function AboutPage() {
             Visit us today and discover why thousands of Raleigh residents trust us with their laundry needs.
           </p>
           <a
-            href="/contact"
-            className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
+            href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-white font-medium text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
             Visit Our Location
           </a>
