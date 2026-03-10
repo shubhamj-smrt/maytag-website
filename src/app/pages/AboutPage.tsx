@@ -1,4 +1,5 @@
 import { Users, Award, Heart, Shield } from 'lucide-react';
+import { HeartIcon, HeartStraightIcon, ShieldIcon, TrophyIcon, UsersThreeIcon } from '@phosphor-icons/react'
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 export function AboutPage() {
@@ -40,7 +41,7 @@ export function AboutPage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-              src="/images/01-hero-image.png"
+              src="/images/01-about-hero.png"
             alt="Maytag Coin Laundry Storefront"
             className="w-full h-full object-cover"
           />
@@ -153,7 +154,7 @@ export function AboutPage() {
       </section>
 
       {/* Equipment Section */}
-      <section className="py-16 sm:py-20 bg-gray-50">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">State-of-the-Art Equipment</h2>
