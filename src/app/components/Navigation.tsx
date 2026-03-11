@@ -15,7 +15,6 @@ export function Navigation() {
     { path: '/about', labelKey: 'nav.about' },
     { path: '/testimonials', labelKey: 'nav.testimonials' },
     { path: '/contact', labelKey: 'nav.contact' },
-    { path: '/wolfpack', labelKey: 'nav.wolfpack' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
