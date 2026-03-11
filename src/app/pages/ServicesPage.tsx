@@ -1,3 +1,4 @@
+import React from 'react';
 import { Shirt, Wind, Droplet, Package } from 'lucide-react';
 import { Card, CardContent } from '../components/Card';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
@@ -68,15 +69,21 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* Self-Service Laundromat — text left, image collage right */}
+      {/* Self-Service Laundromat — text + image block same row from md; image block = col1 lady, col2 stacked */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
-            {/* Left: copy */}
-            <div className="order-2 lg:order-1">
-              <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6 text-balance">
-                Clean, Convenient and Modern Self-Service Laundromat in Raleigh
-              </h2>
+          {/* Single row from md: text | images. Below md stacks with images first. */}
+          <div className="flex flex-col md:flex-row md:items-stretch gap-10 md:gap-8 lg:gap-12">
+            {/* Left: copy — stays in row with images from md up */}
+            <div className="order-2 md:order-1 md:flex-1 md:min-w-0 flex flex-col justify-center">
+              <div className="mb-6">
+                <div className="text-[#00bfb3] uppercase tracking-wide font-bold text-sm sm:text-base">
+                  Clean, Convenient and Modern
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-black text-balance">
+                  Self-Service Laundromat in Raleigh
+                </h2>
+              </div>
               <p className="text-gray-700 mb-6 leading-relaxed">
                 Use our modern self-service laundromat in Raleigh, NC to wash and dry your clothes quickly and conveniently. Our facility features state-of-the-art washers and high-efficiency dryers designed to handle everything from everyday loads to extra-large laundry.
               </p>
@@ -84,25 +91,27 @@ export function ServicesPage() {
                 We have multiple washer sizes, fast drying cycles, and both cashless and coin payment options for a simple and flexible laundry experience. Whether you&apos;re washing a small load or large bedding and towels, our machines are built to get your laundry clean and dry faster.
               </p>
             </div>
-            {/* Right: collage — one large on top, two smaller below */}
-            <div className="order-1 lg:order-2 w-full">
-              <div className="flex flex-col gap-3 sm:gap-4">
-                <div className="w-full overflow-hidden rounded-lg shadow-lg">
+            {/* Right: image section — column 1 = lady full height, column 2 = app + terminal stacked */}
+            <div className="order-1 md:order-2 w-full md:flex-1 md:min-w-0">
+              <div className="flex flex-row gap-3 sm:gap-4 items-stretch h-full min-h-[260px] sm:min-h-[320px]">
+                {/* Column 1: lady — spans full height of the pair beside it */}
+                <div className="flex-1 min-w-0 rounded-lg overflow-hidden shadow-lg bg-gray-100">
                   <img
                     src="/images/self-service-laundromat-main.png"
                     alt="Guest using a front-loading washer at our self-service laundromat"
-                    className="w-full h-auto object-cover object-center"
+                    className="w-full h-full object-cover object-center min-h-[240px] md:min-h-0"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <div className="overflow-hidden rounded-lg shadow-md aspect-square">
+                {/* Column 2: two images stacked vertically */}
+                <div className="flex flex-col gap-3 sm:gap-4 flex-1 min-w-0">
+                  <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
                     <img
                       src="/images/self-service-laundromat-app.png"
                       alt="Mobile app with wallet and start machine — cashless laundry payment"
                       className="w-full h-full object-cover object-center"
                     />
                   </div>
-                  <div className="overflow-hidden rounded-lg shadow-md aspect-square">
+                  <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
                     <img
                       src="/images/self-service-laundromat-terminal.png"
                       alt="Bubblepay terminal with scan and tap payment instructions"
