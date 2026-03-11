@@ -20,6 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.testimonials': 'Testimonials',
     'nav.contact': 'Contact',
     'nav.getStarted': 'Get Started',
+    'nav.wolfpack': 'Wolfpack',
     'nav.callUs': 'Call: (984) 205-9506',
 
     // Footer
@@ -383,6 +384,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.testimonials': 'Testimonios',
     'nav.contact': 'Contacto',
     'nav.getStarted': 'Comenzar',
+    'nav.wolfpack': 'Wolfpack',
     'nav.callUs': 'Llamar: (984) 205-9506',
 
     // Footer
