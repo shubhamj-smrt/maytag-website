@@ -4,6 +4,8 @@ import { DropIcon, ShieldIcon, SunHorizonIcon, TrophyIcon, UsersThreeIcon, Wrenc
 import { Card, CardContent } from '../components/Card';
 
 export function ServicesPage() {
+  const { t } = useLanguage();
+
   const services = [
     {
       icon: <Shirt className="w-12 h-12" />,
@@ -59,11 +61,19 @@ export function ServicesPage() {
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/images/01-hero-image.png"
-            alt="Maytag Coin Laundry Storefront"
+            alt={t('common.heroAlt')}
             className="w-full h-full object-cover"
           />
+          {/* Mobile: overlay from bottom */}
           <div
-            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            className="absolute inset-x-0 bottom-0 h-2/3 md:hidden"
+            style={{
+              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+          {/* Desktop: overlay from left */}
+          <div
+            className="hidden md:block absolute inset-y-0 left-0 w-3/5"
             style={{
               background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
             }}
@@ -71,9 +81,9 @@ export function ServicesPage() {
         </div>
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">Our Services</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">{t('services.hero.title')}</h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
-              From self-service options to full-service wash and fold, we offer a complete range of laundry solutions to meet your needs.
+              {t('services.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -239,17 +249,17 @@ export function ServicesPage() {
                   <div className="text-[#00bfb3] mb-4">
                     {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-black mb-3">{service.title}</h3>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <h3 className="text-2xl font-bold text-black mb-3">{t(service.titleKey)}</h3>
+                  <p className="text-gray-600 mb-6">{t(service.descKey)}</p>
                   <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
+                    {service.featureKeys.map((key, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <div className="w-5 h-5 bg-[#00bfb3] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-gray-700">{t(key)}</span>
                       </li>
                     ))}
                   </ul>
@@ -322,13 +332,13 @@ export function ServicesPage() {
               href="tel:2523083052"
               className="bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors font-medium"
             >
-              Call Us Now
+              {t('services.cta.callUs')}
             </a>
             <a
               href="/contact"
               className="bg-transparent text-white px-8 py-4 rounded border border-white/80 hover:bg-white hover:text-black transition-colors font-medium"
             >
-              Visit Our Location
+              {t('services.cta.visitUs')}
             </a>
           </div>
         </div>

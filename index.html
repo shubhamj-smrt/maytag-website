@@ -5,6 +5,50 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Raleigh's Premier Laundromat</title>
+      <!-- Organization schema (global) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://maytaglaundromat.com/#organization",
+      "name": "Maytag Coin Laundry of Raleigh",
+      "url": "https://maytaglaundromat.com/",
+      "telephone": "+1-984-205-9506",
+      "logo": "https://maytaglaundromat.com/new-logo.svg",
+      "areaServed": {
+        "@type": "City",
+        "name": "Raleigh",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "North Carolina"
+        }
+      }
+    }
+    </script>
+
+    <!-- WebSite schema (global) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://maytaglaundromat.com/#website",
+      "url": "https://maytaglaundromat.com/",
+      "name": "Maytag Coin Laundry of Raleigh",
+      "publisher": {
+        "@id": "https://maytaglaundromat.com/#organization"
+      },
+      "inLanguage": "en-US"
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENLFSQZMND"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ENLFSQZMND');
+      </script>
     </head>
 
     <body>

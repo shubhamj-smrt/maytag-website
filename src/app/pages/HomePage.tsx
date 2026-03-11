@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router';
+import { AreasMap } from '../components/AreasMap';
 import { Star, MapPin, Clock, Phone, CircleCheck } from 'lucide-react';
 import { Card, CardContent } from '../components/Card';
 import { useLanguage } from '../context/LanguageContext';
@@ -15,6 +17,90 @@ const areas = [
 export function HomePage() {
   const { t } = useLanguage();
 
+  useEffect(() => {
+    // Canonical link
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://maytaglaundromat.com/';
+    document.head.appendChild(canonical);
+
+    // Homepage-specific JSON-LD schema
+    const schema = document.createElement('script');
+    schema.type = 'application/ld+json';
+    schema.id = 'homepage-schema';
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': ['WebPage', 'DryCleaningOrLaundry'],
+      '@id': 'https://maytaglaundromat.com/#laundromat',
+      url: 'https://maytaglaundromat.com/',
+      name: 'Maytag Coin Laundry of Raleigh',
+      mainEntityOfPage: 'https://maytaglaundromat.com/',
+      description:
+        'Modern Raleigh laundromat offering self-service laundry, wash dry fold, and convenient cashless and coin laundry options. Clean, affordable, and convenient laundry service in Raleigh, NC.',
+      telephone: '+1-984-205-9506',
+      priceRange: '$',
+      paymentAccepted: 'Coins, Credit Card, Debit Card',
+      currenciesAccepted: 'USD',
+      foundingDate: '1995',
+      knowsLanguage: ['English', 'Spanish'],
+      image: ['https://maytaglaundromat.com/images/01-hero-image.png'],
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '15 Jones Franklin Rd',
+        addressLocality: 'Raleigh',
+        addressRegion: 'NC',
+        postalCode: '27606',
+        addressCountry: 'US',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Raleigh',
+      },
+      amenityFeature: [
+        { '@type': 'LocationFeatureSpecification', name: 'Cashless payment', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Coin-operated machines', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Wash and fold service', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Air conditioning', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Free Wi-Fi', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Restrooms', value: true },
+        { '@type': 'LocationFeatureSpecification', name: 'Parking', value: true },
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Laundry Services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Self-Service Laundromat',
+              serviceType: 'Self-service laundry',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Wash Dry Fold Service',
+              serviceType: 'Wash dry fold',
+            },
+          },
+        ],
+      },
+      sameAs: [
+        'PASTE-YOUR-GOOGLE-BUSINESS-PROFILE-URL-HERE',
+        'PASTE-YOUR-FACEBOOK-URL-HERE',
+        'PASTE-YOUR-INSTAGRAM-URL-HERE',
+      ],
+    });
+    document.head.appendChild(schema);
+
+    return () => {
+      canonical.remove();
+      schema.remove();
+    };
+  }, []);
+
   const testimonials = [
     { rating: 5, nameKey: 'home.testimonials.1.name', textKey: 'home.testimonials.1.text', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=400&fit=crop&crop=faces&q=80' },
     { rating: 5, nameKey: 'home.testimonials.2.name', textKey: 'home.testimonials.2.text', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=400&fit=crop&crop=faces&q=80' },
@@ -30,13 +116,25 @@ export function HomePage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="/images/01-hero-image.png"
-            alt="Maytag Coin Laundry Storefront"
-            className="w-full h-full object-cover"
+            src="/images/01-homepage-hero-mobile.png"
+            alt={t('common.heroAlt')}
+            className="block md:hidden w-full h-full object-cover"
           />
-          {/* Gradient overlay limited to left side text area */}
+          <img
+            src="/images/01-hero-image.png"
+            alt={t('common.heroAlt')}
+            className="hidden md:block w-full h-full object-cover"
+          />
+          {/* Mobile: overlay from bottom */}
           <div
-            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            className="absolute inset-x-0 bottom-0 h-2/3 md:hidden"
+            style={{
+              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+          {/* Desktop: overlay from left */}
+          <div
+            className="hidden md:block absolute inset-y-0 left-0 w-3/5"
             style={{
               background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
             }}
@@ -52,7 +150,7 @@ export function HomePage() {
             </p>
             <Link
               to="/contact"
-              className="inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
+              className="block w-full md:w-auto md:inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
             >
               {t('home.hero.contactUs')}
             </Link>
@@ -150,35 +248,22 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch min-h-0">
-            {/* Left: Areas served list + Visit location */}
-            <div className="flex flex-col gap-6">
-              <h3 className="text-2xl font-semibold text-black">{t('home.areas.serviceAreas')}</h3>
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10">
+            {/* Left: Service areas map */}
+            <AreasMap className="w-full aspect-[4/3] lg:w-[420px] lg:h-[315px] lg:flex-shrink-0 rounded-2xl overflow-hidden shadow-lg border border-gray-200" />
+
+            {/* Right: Areas served list */}
+            <div className="w-full lg:w-auto flex flex-col gap-4">
               <ul className="space-y-2">
                 {areas.map((area) => (
-                  <li key={area.nameKey} className="flex items-center gap-2 text-gray-700">
+                  <li key={area.nameKey} className="flex items-center gap-2 text-gray-700 text-sm md:text-base">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00bfb3] flex-shrink-0" />
-                    <span className="font-medium text-black">{t(area.nameKey)}</span>
-                    <span className="text-gray-500">—</span>
-                    <span className="text-gray-600">{t(area.descKey)}</span>
+                    <span className="font-medium text-black whitespace-nowrap">{t(area.nameKey)}</span>
+                    <span className="text-gray-500 flex-shrink-0">—</span>
+                    <span className="text-gray-600 whitespace-nowrap">{t(area.descKey)}</span>
                   </li>
                 ))}
               </ul>
-              <div className="bg-[#00bfb3]/10 border border-[#00bfb3]/20 rounded-xl p-6 mt-auto">
-                <h4 className="font-semibold text-black mb-2">{t('home.areas.visitLocation')}</h4>
-                <p className="text-gray-700 mb-1">{t('home.areas.businessName')}</p>
-                <p className="text-gray-600 text-sm">{t('home.areas.servingSince')}</p>
-                <p className="text-gray-600 text-sm mt-2">{t('home.areas.phone')}: (252) 308-3052</p>
-              </div>
-            </div>
-
-            {/* Right: Laundromat image */}
-            <div className="w-full min-w-0 rounded-2xl overflow-hidden shadow-lg border border-gray-200 aspect-[4/3] min-h-[280px] lg:min-h-[360px]">
-              <img
-                src="/images/01-hero-image.png"
-                alt="Maytag Coin Laundry Storefront"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
 
@@ -192,32 +277,54 @@ export function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Find Us */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <MapPin className="w-6 h-6 text-black" />
-                  <h4 className="font-bold text-black text-lg">{t('home.questions.findUs')}</h4>
-                </div>
-                <p className="text-gray-600">{t('home.questions.address')}</p>
-              </div>
+              {/* Find Us → Google Maps */}
+              <a
+                href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full"
+              >
+                <Card hover className="h-full">
+                  <CardContent>
+                    <div className="flex items-center gap-3 mb-4">
+                      <MapPin className="w-6 h-6 text-black" />
+                      <h4 className="font-bold text-black text-lg">{t('home.questions.findUs')}</h4>
+                    </div>
+                    <p className="text-gray-600">{t('home.questions.address')}</p>
+                  </CardContent>
+                </Card>
+              </a>
 
-              {/* When We're Open */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-6 h-6 text-black" />
-                  <h4 className="font-bold text-black text-lg">{t('home.questions.whenOpen')}</h4>
-                </div>
-                <p className="text-gray-600">{t('home.questions.hours')}</p>
-              </div>
+              {/* When We're Open → Yelp */}
+              <a
+                href="https://www.yelp.com/biz/maytag-coin-laundry-of-raleigh-raleigh-3?dd_referrer=https%3A%2F%2Fwww.google.com%2F"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full"
+              >
+                <Card hover className="h-full">
+                  <CardContent>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Clock className="w-6 h-6 text-black" />
+                      <h4 className="font-bold text-black text-lg">{t('home.questions.whenOpen')}</h4>
+                    </div>
+                    <p className="text-gray-600 text-balance">{t('home.questions.hours')}</p>
+                  </CardContent>
+                </Card>
+              </a>
 
-              {/* Get in Touch */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                <div className="flex items-center gap-3 mb-4">
-                  <Phone className="w-6 h-6 text-black" />
-                  <h4 className="font-bold text-black text-lg">{t('home.questions.getInTouch')}</h4>
-                </div>
-                <p className="text-gray-600">{t('home.questions.email')}</p>
-              </div>
+              {/* Get in Touch → Call */}
+              <a href="tel:9842059506" className="block h-full">
+                <Card hover className="h-full">
+                  <CardContent>
+                    <div className="flex items-center gap-3 mb-4">
+                      <Phone className="w-6 h-6 text-black" />
+                      <h4 className="font-bold text-black text-lg">{t('home.questions.getInTouch')}</h4>
+                    </div>
+                    <p className="text-gray-600">{t('home.questions.email')}</p>
+                  </CardContent>
+                </Card>
+              </a>
             </div>
           </div>
         </div>

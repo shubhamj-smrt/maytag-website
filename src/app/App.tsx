@@ -8,6 +8,7 @@ import { PricingPage } from './pages/PricingPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { TestimonialsPage } from './pages/TestimonialsPage';
+import { LocationSEO } from './components/LocationSEO';
 import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
@@ -19,12 +20,21 @@ export default function App() {
           <Navigation />
           <main className="flex-grow">
             <Routes>
+              {/* Core pages */}
               <Route path="/" element={<HomePage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/pricing" element={<PricingPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/testimonials" element={<TestimonialsPage />} />
+
+              {/* Location pages — reuse existing pages with location SEO */}
+              <Route path="/laundromat-in/:locationSlug" element={<LocationSEO page="home"><HomePage /></LocationSEO>} />
+              <Route path="/services-in/:locationSlug" element={<LocationSEO page="services"><ServicesPage /></LocationSEO>} />
+              <Route path="/pricing-in/:locationSlug" element={<LocationSEO page="pricing"><PricingPage /></LocationSEO>} />
+              <Route path="/about-in/:locationSlug" element={<LocationSEO page="about"><AboutPage /></LocationSEO>} />
+              <Route path="/contact-in/:locationSlug" element={<LocationSEO page="contact"><ContactPage /></LocationSEO>} />
+              <Route path="/testimonials-in/:locationSlug" element={<LocationSEO page="testimonials"><TestimonialsPage /></LocationSEO>} />
             </Routes>
           </main>
           <Footer />

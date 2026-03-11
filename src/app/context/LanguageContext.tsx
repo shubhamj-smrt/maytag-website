@@ -1,6 +1,8 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Language = 'en' | 'es';
+
+const STORAGE_KEY = 'maytag-language';
 
 interface LanguageContextType {
   language: Language;
@@ -18,7 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.testimonials': 'Testimonials',
     'nav.contact': 'Contact',
     'nav.getStarted': 'Get Started',
-    'nav.callUs': 'Call: (252) 308-3052',
+    'nav.callUs': 'Call: (984) 205-9506',
 
     // Footer
     'footer.tagline': "Raleigh's premier coin laundry service. Clean, modern facilities with the latest equipment.",
@@ -91,7 +93,7 @@ const translations: Record<Language, Record<string, string>> = {
     'home.questions.whenOpen': "When we're open",
     'home.questions.hours': '5 AM - 11 PM, Open 7 Days Including Public Holidays',
     'home.questions.getInTouch': 'Get in touch',
-    'home.questions.email': '(252) 308-3052',
+    'home.questions.email': '(984) 205-9506',
 
     // Home Page - Testimonials
     'home.testimonials.title': 'What Our Customers Say',
@@ -155,6 +157,50 @@ const translations: Record<Language, Record<string, string>> = {
     'services.cta.subtitle': "Our friendly staff is here to help. Visit us or give us a call to learn more about how we can make your laundry day easier.",
     'services.cta.callUs': 'Call Us Now',
     'services.cta.visitUs': 'Visit Our Location',
+    'common.heroAlt': 'Maytag Coin Laundry Storefront',
+    'common.imageAlt.laundromat': 'Clean, modern laundromat with Maytag equipment',
+
+    // About Page - Additional
+    'about.hero.exploreServices': 'Explore Services',
+    'about.maytagStandard.title': 'The Maytag Standard',
+    'about.maytagStandard.p1': "Laundry is part of everyday life, and we believe the experience should be dependable and comfortable. At Maytag Coin Laundry, we focus on providing clean machines, a modern space, and a place customers can rely on when it's time to get laundry done.",
+    'about.maytagStandard.p2': "We're proud to be part of the Raleigh community. Our team takes pride in maintaining a clean laundromat and offering friendly, professional service to every customer who visits.",
+    'about.equipment.sectionTitle': 'Where Service Meets Innovation',
+    'about.equipment.sectionSubtitle': 'We exclusively use commercial-grade Maytag equipment, known for reliability and superior cleaning performance.',
+    'about.equipment.smartLaundry.title': 'Smart Laundry Experience',
+    'about.equipment.smartLaundry.desc': 'Simple digital payments, easy ordering, and a seamless system that makes doing laundry faster and more convenient every visit.',
+    'about.equipment.community.title': 'Powered by Our Community',
+    'about.equipment.community.desc': 'Our team comes from our community, creating a welcoming space where neighbors support neighbors and loyalty rewards give back.',
+    'about.equipment.care.title': 'Care You Can See',
+    'about.equipment.care.desc': 'Hands-on oversight from the owners ensures clean facilities, well-maintained machines, and a laundry experience you can rely on.',
+
+    // Pricing Page - Washer sizes
+    'pricing.washer.regular': 'Regular (20 lbs)',
+    'pricing.washer.large': 'Large (40 lbs)',
+    'pricing.washer.xl': 'Extra Large (60 lbs)',
+    'pricing.washer.super': 'Super (80 lbs)',
+    'pricing.custom': 'Custom',
+
+    // Testimonials - Stats and Why Love (keys exist)
+    // Testimonials - Individual reviews (we'll add key-based for structure)
+    'testimonials.review.1.name': 'Kenneth',
+    'testimonials.review.1.text': "This place is by far one of the best laundromats I've ever been. Very clean and very helpful. Me and my wife did clothes late, the owner waited til our clothes were done. I highly recommended you coming here.",
+    'testimonials.review.2.name': 'Teri',
+    'testimonials.review.2.text': "Nice and clean Laundromat. The machines all worked and they were clean inside and out. The place is roomy enough to sit down and rest while your clothes are getting clean. This will be the place I do laundry all the time.",
+    'testimonials.review.3.name': 'Amanda',
+    'testimonials.review.3.text': "My boyfriend and I love this laundry mat. We come here faithfully. We enjoy the relaxing clean quiet atmosphere.",
+    'testimonials.review.4.name': 'Lorrie',
+    'testimonials.review.4.text': "Great place to do your laundry. I have been twice it's clean. ALL washers and dryers are in working order. Free wifi and lots of magazines to read. Bring a book if not. Tables to sit at. Very nice.",
+    'testimonials.review.5.name': 'Kasey',
+    'testimonials.review.5.text': "This place is very nice, clean and has a drink machine. There is usually someone there in the next office able to help if you need it. Machines work well.",
+    'testimonials.review.6.name': 'Jerome',
+    'testimonials.review.6.text': "It was very clean. All equipment was very well maintained.",
+    'testimonials.review.7.name': 'Mooka Moo',
+    'testimonials.review.7.text': "I'm glad I went it's Great!",
+    'testimonials.review.8.name': 'Local Customer',
+    'testimonials.review.8.text': "Machines are clean, huge and fairly priced. Machines work great and dryers get hot!",
+    'testimonials.review.9.name': 'Recent Visitor',
+    'testimonials.review.9.text': "Friendly staff and there is always a person cleaning the vents to ensure machines remain operational. Great attention to maintenance.",
 
     // Pricing Page
     'pricing.hero.title': 'Affordable Pricing',
@@ -256,9 +302,12 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.hero.title': 'Contact Us',
     'contact.hero.subtitle': "Have questions? We're here to help. Reach out to us and we'll respond as soon as possible.",
     'contact.address': 'Address',
+    'contact.addressLine1': '15 Jones Franklin Rd',
+    'contact.addressLine2': 'Raleigh, NC 27606',
     'contact.phone': 'Phone',
     'contact.email': 'Email',
     'contact.hours': 'Hours',
+    'contact.everyDay': 'Monday - Sunday',
     'contact.hoursShort': 'Mon-Fri: 5AM-11PM',
     'contact.hoursShort2': 'Sat-Sun: 7AM-9PM',
     'contact.sendMessage': 'Send Us a Message',
@@ -275,7 +324,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Feedback',
     'contact.form.namePlaceholder': 'Your name',
     'contact.form.emailPlaceholder': 'your@email.com',
-    'contact.form.phonePlaceholder': '(252) 308-3052',
+    'contact.form.phonePlaceholder': '(984) 205-9506',
     'contact.form.messagePlaceholder': 'Tell us how we can help you...',
     'contact.form.submit': 'Send Message',
     'contact.form.submitted': 'Message Sent!',
@@ -334,13 +383,13 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.testimonials': 'Testimonios',
     'nav.contact': 'Contacto',
     'nav.getStarted': 'Comenzar',
-    'nav.callUs': 'Llamar: (252) 308-3052',
+    'nav.callUs': 'Llamar: (984) 205-9506',
 
     // Footer
-    'footer.tagline': 'El servicio de lavanderia premier de Raleigh. Instalaciones limpias y modernas con el mejor equipo.',
-    'footer.quickLinks': 'Enlaces Rapidos',
-    'footer.businessHours': 'Horario de Atencion',
-    'footer.contactUs': 'Contactenos',
+    'footer.tagline': 'El servicio de lavandería premier de Raleigh. Instalaciones limpias y modernas con el mejor equipo.',
+    'footer.quickLinks': 'Enlaces Rápidos',
+    'footer.businessHours': 'Horario de Atención',
+    'footer.contactUs': 'Contáctenos',
     'footer.monFri': 'Lun-Vie: 6:00 AM - 10:00 PM',
     'footer.sat': 'Sab: 7:00 AM - 9:00 PM',
     'footer.sun': 'Dom: 7:00 AM - 9:00 PM',
@@ -349,28 +398,28 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.copyright': 'Maytag Coin Laundry Raleigh. Todos los derechos reservados.',
 
     // Home Page - Hero
-    'home.hero.title': 'El Servicio de Lavanderia Premier de Raleigh',
-    'home.hero.subtitle': 'Experimente la combinacion perfecta de equipo moderno, limpieza y conveniencia. Su dia de lavanderia ahora es mas facil.',
-    'home.hero.contactUs': 'Contactenos',
+    'home.hero.title': 'El Servicio de Lavandería Premier de Raleigh',
+    'home.hero.subtitle': 'Experimente la combinación perfecta de equipo moderno, limpieza y conveniencia. Su día de lavandería ahora es más fácil.',
+    'home.hero.contactUs': 'Contáctenos',
 
     // Home Page - Services Section
     'home.services.title': 'Nuestros Servicios',
-    'home.services.subtitle': 'Ya sea que prefiera hacerlo usted mismo o que nosotros nos encarguemos de todo, tenemos la solucion de lavanderia perfecta para usted.',
-    'home.services.selfService.title': 'Lavanderia de Autoservicio',
-    'home.services.selfService.description': 'Tome control de su lavanderia con nuestras lavadoras y secadoras Maytag de ultima generacion. Multiples tamanos de maquinas disponibles para cualquier carga, desde ropa diaria hasta edredones voluminosos. Disfrute de WiFi gratis y un ambiente comodo mientras espera.',
-    'home.services.selfService.feature1': 'Maquinas de alta eficiencia',
-    'home.services.selfService.feature2': 'Multiples tamanos de carga',
+    'home.services.subtitle': 'Ya sea que prefiera hacerlo usted mismo o que nosotros nos encarguemos de todo, tenemos la solución de lavandería perfecta para usted.',
+    'home.services.selfService.title': 'Lavandería de Autoservicio',
+    'home.services.selfService.description': 'Tome control de su lavandería con nuestras lavadoras y secadoras Maytag de última generación. Múltiples tamaños de máquinas disponibles para cualquier carga, desde ropa diaria hasta edredones voluminosos. Disfrute de WiFi gratis y un ambiente cómodo mientras espera.',
+    'home.services.selfService.feature1': 'Máquinas de alta eficiencia',
+    'home.services.selfService.feature2': 'Múltiples tamaños de carga',
     'home.services.selfService.feature3': 'WiFi gratis',
     'home.services.selfService.feature4': 'Instalacion climatizada',
     'home.services.washFold.title': 'Servicio de Lavado y Doblado',
-    'home.services.washFold.description': 'Poco tiempo? Dejenos hacer el trabajo por usted. Deje su ropa y recojala fresca, limpia y perfectamente doblada. Nuestro personal profesional trata cada articulo con cuidado usando detergentes y suavizantes premium.',
+    'home.services.washFold.description': '¿Poco tiempo? Déjenos hacer el trabajo por usted. Deje su ropa y recójala fresca, limpia y perfectamente doblada. Nuestro personal profesional trata cada artículo con cuidado usando detergentes y suavizantes premium.',
     'home.services.washFold.feature1': 'Servicio el mismo dia disponible',
     'home.services.washFold.feature2': 'Doblado profesional',
     'home.services.washFold.feature3': 'Detergentes premium',
     'home.services.washFold.feature4': 'Entrega conveniente',
 
     'home.services.pickupDelivery.title': 'Recogida y Entrega Gratis',
-    'home.services.pickupDelivery.description': 'Muy ocupado para visitar? Recogemos su ropa y la entregamos fresca y doblada en su puerta. Recogida y entrega gratis en nuestra area de servicio—lavanderia sin esfuerzo.',
+    'home.services.pickupDelivery.description': '¿Muy ocupado para visitar? Recogemos su ropa y la entregamos fresca y doblada en su puerta. Recogida y entrega gratis en nuestra área de servicio—lavandería sin esfuerzo.',
     'home.services.pickupDelivery.feature1': 'Recogida y entrega gratis',
     'home.services.pickupDelivery.feature2': 'Misma calidad de lavado y doblado',
     'home.services.pickupDelivery.feature3': 'Horarios flexibles',
@@ -378,34 +427,34 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Home Page - Areas Section
     'home.areas.title': 'Areas que Servimos',
-    'home.areas.subtitle': 'Convenientemente ubicados en Raleigh, orgullosamente servimos a clientes de toda el area del Triangulo. Ya sea que venga del centro o de las comunidades cercanas, estamos aqui para ayudar con todas sus necesidades de lavanderia.',
+    'home.areas.subtitle': 'Convenientemente ubicados en Raleigh, orgullosamente servimos a clientes de toda el área del Triángulo. Ya sea que venga del centro o de las comunidades cercanas, estamos aquí para ayudar con todas sus necesidades de lavandería.',
     'home.areas.serviceAreas': 'Areas de Servicio',
     'home.areas.raleigh': 'Raleigh',
     'home.areas.raleighDesc': 'Nuestra base',
     'home.areas.cary': 'Cary',
     'home.areas.caryDesc': 'Corto viaje al oeste',
     'home.areas.apex': 'Apex',
-    'home.areas.apexDesc': 'Suroeste del Triangulo',
+    'home.areas.apexDesc': 'Suroeste del Triángulo',
     'home.areas.eastRaleigh': 'Este de Raleigh',
     'home.areas.eastRaleighDesc': 'Comunidades del este',
     'home.areas.westRaleigh': 'Oeste de Raleigh',
-    'home.areas.westRaleighDesc': 'Area de NC State',
+    'home.areas.westRaleighDesc': 'Área de NC State',
     'home.areas.garner': 'Garner',
     'home.areas.garnerDesc': 'Sur de Raleigh',
-    'home.areas.visitLocation': 'Visite Nuestra Ubicacion',
+    'home.areas.visitLocation': 'Visite Nuestra Ubicación',
     'home.areas.businessName': 'Maytag Coin Laundry de Raleigh',
-    'home.areas.servingSince': 'Sirviendo el area del Triangulo desde 1995',
-    'home.areas.phone': 'Telefono',
-    'home.areas.mapHint': 'Use los controles del mapa para acercar y alejar para explorar nuestras areas de servicio',
+    'home.areas.servingSince': 'Sirviendo el área del Triángulo desde 1995',
+    'home.areas.phone': 'Teléfono',
+    'home.areas.mapHint': 'Use los controles del mapa para acercar y alejar para explorar nuestras áreas de servicio',
 
     // Home Page - Questions Section
-    'home.questions.title': 'Tiene mas preguntas?',
-    'home.questions.subtitle': 'Visite nuestra tienda, llamenos, o envienos un correo electronico - somos faciles de contactar.',
-    'home.questions.findUs': 'Encuentrenos',
+    'home.questions.title': '¿Tiene más preguntas?',
+    'home.questions.subtitle': 'Visite nuestra tienda, llámenos o envíenos un correo electrónico; somos fáciles de contactar.',
+    'home.questions.findUs': 'Encuéntrenos',
     'home.questions.address': '2428 Hillsborough St, Raleigh, NC 27607',
-    'home.questions.whenOpen': 'Cuando estamos abiertos',
-    'home.questions.hours': '6 AM - 10 PM, Abierto 7 Dias Incluyendo Feriados',
-    'home.questions.getInTouch': 'Contactenos',
+    'home.questions.whenOpen': 'Cuándo estamos abiertos',
+    'home.questions.hours': '6 AM - 10 PM, Abierto 7 días incluyendo feriados',
+    'home.questions.getInTouch': 'Contáctenos',
     'home.questions.email': 'info@maytaglaundry.com',
 
     // Home Page - Testimonials
@@ -425,64 +474,107 @@ const translations: Record<Language, Record<string, string>> = {
     'home.testimonials.6.text': 'Personal amable, instalaciones limpias y excelentes precios. ¿Qué más se puede pedir? Muy recomendado para todos.',
 
     // Home Page - CTA
-    'home.cta.title': 'Listo para Experimentar la Diferencia?',
-    'home.cta.subtitle': 'Visitenos hoy y descubra por que somos la lavanderia favorita de Raleigh. No necesita cita!',
+    'home.cta.title': '¿Listo para Experimentar la Diferencia?',
+    'home.cta.subtitle': 'Visítenos hoy y descubra por qué somos la lavandería favorita de Raleigh. ¡No necesita cita!',
     'home.cta.button': 'Obtener Direcciones',
 
     // Services Page
     'services.hero.title': 'Nuestros Servicios',
-    'services.hero.subtitle': 'Desde opciones de autoservicio hasta servicio completo de lavado y doblado, ofrecemos una gama completa de soluciones de lavanderia para satisfacer sus necesidades.',
+    'services.hero.subtitle': 'Desde opciones de autoservicio hasta servicio completo de lavado y doblado, ofrecemos una gama completa de soluciones de lavandería para satisfacer sus necesidades.',
     'services.selfWash.title': 'Lavado de Autoservicio',
-    'services.selfWash.description': 'Use nuestras lavadoras Maytag de ultima generacion para limpiar su ropa exactamente como le gusta. Multiples tamanos disponibles desde capacidad regular hasta extra grande.',
+    'services.selfWash.description': 'Use nuestras lavadoras Maytag de última generación para limpiar su ropa exactamente como le gusta. Múltiples tamaños disponibles desde capacidad regular hasta extra grande.',
     'services.selfWash.feature1': 'Lavadoras regulares, grandes y XL',
     'services.selfWash.feature2': 'Opciones de agua caliente, tibia y fria',
     'services.selfWash.feature3': 'Multiples configuraciones de ciclo',
-    'services.selfWash.feature4': 'Maquinas de bajo consumo',
+    'services.selfWash.feature4': 'Máquinas de bajo consumo',
     'services.selfDry.title': 'Secado de Autoservicio',
-    'services.selfDry.description': 'Nuestras secadoras de alta eficiencia secan su ropa rapida y uniformemente. Las secadoras de gran capacidad pueden manejar incluso sus cargas mas grandes con facilidad.',
+    'services.selfDry.description': 'Nuestras secadoras de alta eficiencia secan su ropa rápida y uniformemente. Las secadoras de gran capacidad pueden manejar incluso sus cargas más grandes con facilidad.',
     'services.selfDry.feature1': 'Multiples configuraciones de temperatura',
     'services.selfDry.feature2': 'Secadoras de gran capacidad',
-    'services.selfDry.feature3': 'Ciclos de secado rapido',
+    'services.selfDry.feature3': 'Ciclos de secado rápido',
     'services.selfDry.feature4': 'Opciones sin arrugas',
     'services.washFold.title': 'Servicio de Lavado y Doblado',
     'services.washFold.description': 'Deje que nuestro personal profesional maneje su ropa de principio a fin. Deje su ropa y recojala limpia, fresca y perfectamente doblada.',
     'services.washFold.feature1': 'Servicio el mismo dia disponible',
     'services.washFold.feature2': 'Doblado profesional',
     'services.washFold.feature3': 'Cuidado especial para prendas delicadas',
-    'services.washFold.feature4': 'Detergentes ecologicos',
+    'services.washFold.feature4': 'Detergentes ecológicos',
     'services.commercial.title': 'Servicios Comerciales',
-    'services.commercial.description': 'Ofrecemos servicios de lavanderia al por mayor para negocios, hoteles y restaurantes. Precios competitivos y tiempos de entrega confiables para todas sus necesidades comerciales.',
+    'services.commercial.description': 'Ofrecemos servicios de lavandería al por mayor para negocios, hoteles y restaurantes. Precios competitivos y tiempos de entrega confiables para todas sus necesidades comerciales.',
     'services.commercial.feature1': 'Descuentos por volumen',
     'services.commercial.feature2': 'Recogida y entrega regular',
     'services.commercial.feature3': 'Planes de servicio personalizados',
     'services.commercial.feature4': 'Calidad garantizada',
     'services.amenities.title': 'Comodidades Premium para Su Confort',
-    'services.amenities.subtitle': 'Creemos que hacer la lavanderia debe ser lo mas comodo y conveniente posible. Por eso hemos equipado nuestras instalaciones con comodidades modernas para hacer su visita agradable.',
+    'services.amenities.subtitle': 'Creemos que hacer la lavandería debe ser lo más cómodo y conveniente posible. Por eso hemos equipado nuestras instalaciones con comodidades modernas para hacer su visita agradable.',
     'services.amenities.wifi': 'WiFi gratis en toda la instalacion',
-    'services.amenities.seating': 'Areas de asientos comodas',
-    'services.amenities.vending': 'Maquinas expendedoras de snacks y bebidas',
+    'services.amenities.seating': 'Áreas de asientos cómodas',
+    'services.amenities.vending': 'Máquinas expendedoras de snacks y bebidas',
     'services.amenities.folding': 'Mesas de doblado y carritos disponibles',
     'services.amenities.atm': 'Cajero automatico en el lugar',
-    'services.amenities.security': 'Camaras de seguridad para su proteccion',
+    'services.amenities.security': 'Cámaras de seguridad para su protección',
     'services.amenities.parking': 'Area de estacionamiento bien iluminada',
-    'services.amenities.attendant': 'Personal de servicio durante horas de operacion',
-    'services.cta.title': 'Tiene Preguntas Sobre Nuestros Servicios?',
-    'services.cta.subtitle': 'Nuestro amable personal esta aqui para ayudar. Visitenos o llamenos para saber mas sobre como podemos hacer su dia de lavanderia mas facil.',
-    'services.cta.callUs': 'Llamenos Ahora',
-    'services.cta.visitUs': 'Visite Nuestra Ubicacion',
+    'services.amenities.attendant': 'Personal de servicio durante horas de operación',
+    'services.cta.title': '¿Tiene Preguntas Sobre Nuestros Servicios?',
+    'services.cta.subtitle': 'Nuestro amable personal está aquí para ayudar. Visítenos o llámenos para saber más sobre cómo podemos hacer su día de lavandería más fácil.',
+    'services.cta.callUs': 'Llámennos Ahora',
+    'services.cta.visitUs': 'Visite Nuestra Ubicación',
+    'common.heroAlt': 'Fachada de Maytag Coin Laundry',
+    'common.imageAlt.laundromat': 'Lavandería limpia y moderna con equipo Maytag',
+
+    // About Page - Additional
+    'about.hero.exploreServices': 'Explorar Servicios',
+    'about.maytagStandard.title': 'El Estándar Maytag',
+    'about.maytagStandard.p1': 'La lavandería es parte de la vida cotidiana, y creemos que la experiencia debe ser confiable y cómoda. En Maytag Coin Laundry, nos enfocamos en proporcionar máquinas limpias, un espacio moderno y un lugar en el que los clientes puedan confiar cuando llega el momento de lavar.',
+    'about.maytagStandard.p2': 'Estamos orgullosos de ser parte de la comunidad de Raleigh. Nuestro equipo se enorgullece de mantener una lavandería limpia y ofrecer un servicio amable y profesional a cada cliente que nos visita.',
+    'about.equipment.sectionTitle': 'Donde el Servicio Encuentra la Innovación',
+    'about.equipment.sectionSubtitle': 'Utilizamos exclusivamente equipo Maytag de grado comercial, conocido por su confiabilidad y rendimiento de limpieza superior.',
+    'about.equipment.smartLaundry.title': 'Experiencia de Lavandería Inteligente',
+    'about.equipment.smartLaundry.desc': 'Pagos digitales simples, pedidos fáciles y un sistema fluido que hace que lavar la ropa sea más rápido y conveniente en cada visita.',
+    'about.equipment.community.title': 'Impulsados por Nuestra Comunidad',
+    'about.equipment.community.desc': 'Nuestro equipo proviene de nuestra comunidad, creando un espacio acogedor donde los vecinos se apoyan entre sí y las recompensas de lealtad retribuyen.',
+    'about.equipment.care.title': 'Atención que Puede Ver',
+    'about.equipment.care.desc': 'La supervisión directa de los propietarios garantiza instalaciones limpias, máquinas bien mantenidas y una experiencia de lavandería en la que puede confiar.',
+
+    // Pricing Page - Washer sizes
+    'pricing.washer.regular': 'Regular (20 lbs)',
+    'pricing.washer.large': 'Grande (40 lbs)',
+    'pricing.washer.xl': 'Extra Grande (60 lbs)',
+    'pricing.washer.super': 'Súper (80 lbs)',
+    'pricing.custom': 'Personalizado',
+
+    // Testimonials - Individual reviews (Spanish translations)
+    'testimonials.review.1.name': 'Kenneth',
+    'testimonials.review.1.text': "Este lugar es, sin duda, una de las mejores lavanderías en las que he estado. Muy limpio y muy servicial. Mi esposa y yo lavamos tarde y el dueño esperó hasta que terminamos. Les recomiendo mucho que vengan aquí.",
+    'testimonials.review.2.name': 'Teri',
+    'testimonials.review.2.text': "Lavandería agradable y limpia. Todas las máquinas funcionaban y estaban limpias por dentro y por fuera. El lugar es lo suficientemente amplio para sentarse y descansar mientras la ropa se lava. Este será el lugar donde lavaré la ropa siempre.",
+    'testimonials.review.3.name': 'Amanda',
+    'testimonials.review.3.text': "Mi novio y yo amamos esta lavandería. Venimos fielmente. Disfrutamos del ambiente relajado, limpio y tranquilo.",
+    'testimonials.review.4.name': 'Lorrie',
+    'testimonials.review.4.text': "Excelente lugar para lavar la ropa. He venido dos veces y está limpio. Todas las lavadoras y secadoras funcionan. WiFi gratis y muchas revistas para leer. Traiga un libro si no. Mesas para sentarse. Muy agradable.",
+    'testimonials.review.5.name': 'Kasey',
+    'testimonials.review.5.text': "Este lugar es muy agradable, limpio y tiene una máquina de bebidas. Generalmente hay alguien en la oficina de al lado que puede ayudar si lo necesita. Las máquinas funcionan bien.",
+    'testimonials.review.6.name': 'Jerome',
+    'testimonials.review.6.text': "Estaba muy limpio. Todo el equipo estaba muy bien mantenido.",
+    'testimonials.review.7.name': 'Mooka Moo',
+    'testimonials.review.7.text': "¡Me alegra haber venido, es genial!",
+    'testimonials.review.8.name': 'Cliente Local',
+    'testimonials.review.8.text': "Las máquinas están limpias, son enormes y tienen precios justos. Las máquinas funcionan muy bien y las secadoras se calientan mucho.",
+    'testimonials.review.9.name': 'Visitante Reciente',
+    'testimonials.review.9.text': "Personal amable y siempre hay alguien limpiando las rejillas para asegurar que las máquinas sigan funcionando. Gran atención al mantenimiento.",
 
     // Pricing Page
     'pricing.hero.title': 'Precios Accesibles',
     'pricing.hero.subtitle': 'Precios transparentes y competitivos sin cargos ocultos. Pague solo por lo que use con nuestras opciones flexibles.',
     'pricing.selfService.title': 'Precios de Autoservicio',
-    'pricing.selfService.subtitle': 'Precios simples y directos para nuestras maquinas operadas con monedas. Todas las maquinas aceptan monedas, billetes y tarjetas.',
+    'pricing.selfService.subtitle': 'Precios simples y directos para nuestras máquinas operadas con monedas. Todas las máquinas aceptan monedas, billetes y tarjetas.',
     'pricing.washers': 'Lavadoras',
     'pricing.dryers': 'Secadoras',
     'pricing.cycleTime': 'Tiempo de ciclo',
     'pricing.per10min': 'Por 10 minutos',
     'pricing.avgCycle': 'Ciclo completo promedio',
     'pricing.proTip': 'Consejo:',
-    'pricing.proTipText': 'Las secadoras de alta eficiencia tipicamente necesitan 30-40 minutos para una carga completa, costando alrededor de $1.00-$2.00 en total.',
+    'pricing.proTipText': 'Las secadoras de alta eficiencia típicamente necesitan 30-40 minutos para una carga completa, costando alrededor de $1.00-$2.00 en total.',
     'pricing.washFold.title': 'Servicio de Lavado y Doblado',
     'pricing.washFold.subtitle': 'Ahorre tiempo con nuestro servicio profesional de lavado y doblado. Deje su ropa y nosotros nos encargamos del resto.',
     'pricing.basic': 'Basico',
@@ -565,15 +657,18 @@ const translations: Record<Language, Record<string, string>> = {
     'about.equipment.maintenance.feature3': 'Reparaciones inmediatas',
     'about.cta.title': 'Experimente la Diferencia',
     'about.cta.subtitle': 'Visitenos hoy y descubra por que miles de residentes de Raleigh nos confian sus necesidades de lavanderia.',
-    'about.cta.button': 'Visite Nuestra Ubicacion',
+    'about.cta.button': 'Visite Nuestra Ubicación',
 
     // Contact Page
     'contact.hero.title': 'Contactenos',
     'contact.hero.subtitle': 'Tiene preguntas? Estamos aqui para ayudar. Comuniquese con nosotros y le responderemos lo antes posible.',
-    'contact.address': 'Direccion',
-    'contact.phone': 'Telefono',
+    'contact.address': 'Dirección',
+    'contact.addressLine1': '15 Jones Franklin Rd',
+    'contact.addressLine2': 'Raleigh, NC 27606',
+    'contact.phone': 'Teléfono',
     'contact.email': 'Correo',
     'contact.hours': 'Horario',
+    'contact.everyDay': 'Lunes - Domingo',
     'contact.hoursShort': 'Lun-Vie: 5AM-11PM',
     'contact.hoursShort2': 'Sab-Dom: 7AM-9PM',
     'contact.sendMessage': 'Envienos un Mensaje',
@@ -590,11 +685,11 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Comentarios',
     'contact.form.namePlaceholder': 'Su nombre',
     'contact.form.emailPlaceholder': 'su@correo.com',
-    'contact.form.phonePlaceholder': '(252) 308-3052',
+    'contact.form.phonePlaceholder': '(984) 205-9506',
     'contact.form.messagePlaceholder': 'Diganos como podemos ayudarle...',
     'contact.form.submit': 'Enviar Mensaje',
     'contact.form.submitted': 'Mensaje Enviado!',
-    'contact.visitLocation': 'Visite Nuestra Ubicacion',
+    'contact.visitLocation': 'Visite Nuestra Ubicación',
     'contact.businessHours': 'Horario de Atencion',
     'contact.monFri': 'Lunes - Viernes',
     'contact.saturday': 'Sabado',
@@ -645,7 +740,19 @@ const translations: Record<Language, Record<string, string>> = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem(STORAGE_KEY) as Language | null;
+      if (stored === 'en' || stored === 'es') return stored;
+    }
+    return 'en';
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, language);
+    }
+  }, [language]);
 
   const t = (key: string): string => {
     return translations[language][key] || key;

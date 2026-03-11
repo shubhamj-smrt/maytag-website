@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { Card, CardContent } from '../components/Card';
+import { useLanguage } from '../context/LanguageContext';
 
 export function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,11 +36,19 @@ export function ContactPage() {
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/images/01-hero-image.png"
-            alt="Maytag Coin Laundry Storefront"
+            alt={t('common.heroAlt')}
             className="w-full h-full object-cover"
           />
+          {/* Mobile: overlay from bottom */}
           <div
-            className="absolute inset-y-0 left-0 w-1/2 md:w-3/5"
+            className="absolute inset-x-0 bottom-0 h-2/3 md:hidden"
+            style={{
+              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
+            }}
+          />
+          {/* Desktop: overlay from left */}
+          <div
+            className="hidden md:block absolute inset-y-0 left-0 w-3/5"
             style={{
               background: 'linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%)'
             }}
@@ -46,9 +56,9 @@ export function ContactPage() {
         </div>
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">Contact Us</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">{t('contact.hero.title')}</h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
-              Have questions? We're here to help. Reach out to us and we'll respond as soon as possible.
+              {t('contact.hero.subtitle')}
             </p>
           </div>
         </div>
@@ -63,8 +73,8 @@ export function ContactPage() {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
                   <MapPin className="w-6 h-6 text-[#00bfb3]" />
                 </div>
-                <h3 className="font-semibold text-black mb-2">Address</h3>
-                <p className="text-gray-600 text-sm">15 Jones Franklin Rd<br />Raleigh, NC 27606</p>
+                <h3 className="font-semibold text-black mb-2">{t('contact.address')}</h3>
+                <p className="text-gray-600 text-sm">{t('contact.addressLine1')}<br />{t('contact.addressLine2')}</p>
               </CardContent>
             </Card>
 
@@ -73,9 +83,9 @@ export function ContactPage() {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
                   <Phone className="w-6 h-6 text-[#00bfb3]" />
                 </div>
-                <h3 className="font-semibold text-black mb-2">Phone</h3>
-                <a href="tel:2523083052" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
-                  (252) 308-3052
+                <h3 className="font-semibold text-black mb-2">{t('contact.phone')}</h3>
+                <a href="tel:9842059506" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
+                  (984) 205-9506
                 </a>
               </CardContent>
             </Card>
@@ -85,8 +95,8 @@ export function ContactPage() {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
                   <Clock className="w-6 h-6 text-[#00bfb3]" />
                 </div>
-                <h3 className="font-semibold text-black mb-2">Hours</h3>
-                <p className="text-gray-600 text-sm">Mon-Sun: 5AM-11PM</p>
+                <h3 className="font-semibold text-black mb-2">{t('contact.hours')}</h3>
+                <p className="text-gray-600 text-sm">{t('home.questions.hours')}</p>
               </CardContent>
             </Card>
           </div>
@@ -94,11 +104,11 @@ export function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold text-black mb-6">Send Us a Message</h2>
+              <h2 className="text-3xl font-bold text-black mb-6">{t('contact.sendMessage')}</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-black mb-2">
-                    Name *
+                    {t('contact.form.name')} *
                   </label>
                   <input
                     type="text"
@@ -108,13 +118,13 @@ export function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                    placeholder="Your name"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
-                    Email *
+                    {t('contact.form.email')} *
                   </label>
                   <input
                     type="email"
@@ -124,13 +134,13 @@ export function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                    placeholder="your@email.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold text-black mb-2">
-                    Phone
+                    {t('contact.form.phone')}
                   </label>
                   <input
                     type="tel"
@@ -139,13 +149,13 @@ export function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                    placeholder="(252) 308-3052"
+                    placeholder={t('contact.form.phonePlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-semibold text-black mb-2">
-                    Subject *
+                    {t('contact.form.subject')} *
                   </label>
                   <select
                     id="subject"
@@ -155,18 +165,18 @@ export function ContactPage() {
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
                   >
-                    <option value="">Select a subject</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="services">Services Question</option>
-                    <option value="pricing">Pricing Information</option>
-                    <option value="commercial">Commercial Services</option>
-                    <option value="feedback">Feedback</option>
+                    <option value="">{t('contact.form.selectSubject')}</option>
+                    <option value="general">{t('contact.form.general')}</option>
+                    <option value="services">{t('contact.form.servicesQ')}</option>
+                    <option value="pricing">{t('contact.form.pricingInfo')}</option>
+                    <option value="commercial">{t('contact.form.commercialServices')}</option>
+                    <option value="feedback">{t('contact.form.feedback')}</option>
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-black mb-2">
-                    Message *
+                    {t('contact.form.message')} *
                   </label>
                   <textarea
                     id="message"
@@ -176,7 +186,7 @@ export function ContactPage() {
                     required
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors resize-none"
-                    placeholder="Tell us how we can help you..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                   />
                 </div>
 
@@ -187,11 +197,11 @@ export function ContactPage() {
                 >
                   {submitted ? (
                     <>
-                      <span>Message Sent!</span>
+                      <span>{t('contact.form.submitted')}</span>
                     </>
                   ) : (
                     <>
-                      <span>Send Message</span>
+                      <span>{t('contact.form.submit')}</span>
                       <Send className="w-5 h-5" />
                     </>
                   )}
@@ -201,7 +211,7 @@ export function ContactPage() {
 
             {/* Map and Additional Info */}
             <div>
-              <h2 className="text-3xl font-bold text-black mb-6">Visit Our Location</h2>
+              <h2 className="text-3xl font-bold text-black mb-6">{t('contact.visitLocation')}</h2>
               
               {/* Google Maps Embed */}
               <div className="rounded-lg mb-6 h-[300px] overflow-hidden border border-gray-300">
@@ -219,33 +229,33 @@ export function ContactPage() {
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
-                <h3 className="font-semibold text-black mb-4">Business Hours</h3>
+                <h3 className="font-semibold text-black mb-4">{t('contact.businessHours')}</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Sunday</span>
+                    <span className="text-gray-600">{t('contact.everyDay')}</span>
                     <span className="text-black font-semibold">5:00 AM - 11:00 PM</span>
                   </div>
                 </div>
               </div>
 
               <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-black mb-4">Parking Information</h3>
+                <h3 className="font-semibold text-black mb-4">{t('contact.parking.title')}</h3>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>Free parking available in front of facility</span>
+                    <span>{t('contact.parking.free')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>Well-lit parking area for your safety</span>
+                    <span>{t('contact.parking.lit')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>Easy loading and unloading access</span>
+                    <span>{t('contact.parking.loading')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>Handicap accessible spaces available</span>
+                    <span>{t('contact.parking.handicap')}</span>
                   </li>
                 </ul>
               </div>
@@ -258,42 +268,42 @@ export function ContactPage() {
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">{t('contact.faq.title')}</h2>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-6">
             <Card>
               <CardContent>
-                <h3 className="font-semibold text-black mb-2">Do I need to bring my own detergent?</h3>
+                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q1')}</h3>
                 <p className="text-gray-600">
-                  While you're welcome to bring your own, we offer high-quality detergent, fabric softener, and other supplies for purchase on-site.
+                  {t('contact.faq.a1')}
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent>
-                <h3 className="font-semibold text-black mb-2">What payment methods do you accept?</h3>
+                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q2')}</h3>
                 <p className="text-gray-600">
-                  We accept coins, bills, credit/debit cards, and mobile payment options. An ATM is also available on-site for your convenience.
+                  {t('contact.faq.a2')}
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent>
-                <h3 className="font-semibold text-black mb-2">Is an attendant available to help?</h3>
+                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q3')}</h3>
                 <p className="text-gray-600">
-                  Yes! We have attendants on duty during business hours who are happy to assist you with any questions or concerns.
+                  {t('contact.faq.a3')}
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent>
-                <h3 className="font-semibold text-black mb-2">How long does a typical wash and dry take?</h3>
+                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q4')}</h3>
                 <p className="text-gray-600">
-                  Wash cycles typically take 30-45 minutes depending on the machine size. Drying usually takes 30-40 minutes. Plan for about 60-90 minutes total.
+                  {t('contact.faq.a4')}
                 </p>
               </CardContent>
             </Card>
@@ -305,16 +315,16 @@ export function ContactPage() {
       <section className="py-16 sm:py-20 bg-[#00bfb3]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Still Have Questions?
+            {t('contact.cta.title')}
           </h2>
           <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
-            Give us a call or stop by during business hours. We're always happy to help!
+            {t('contact.cta.subtitle')}
           </p>
           <a
-            href="tel:2523083052"
+            href="tel:9842059506"
             className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
-            Call Us: (252) 308-3052
+            {t('contact.cta.button')}: (984) 205-9506
           </a>
         </div>
       </section>
