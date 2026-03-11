@@ -2,6 +2,7 @@ import React from 'react';
 import { Shirt, Wind, Droplet, Package } from 'lucide-react';
 import { DropIcon, ShieldIcon, SunHorizonIcon, TrophyIcon, UsersThreeIcon, WrenchIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
+import { useLanguage } from '../context/LanguageContext';
 
 export function ServicesPage() {
   const { t } = useLanguage();
