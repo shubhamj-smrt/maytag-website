@@ -124,8 +124,8 @@ export function ContactPage() {
                   <Phone className="w-6 h-6 text-[#00bfb3]" />
                 </div>
                 <h3 className="font-semibold text-black mb-2">{t('contact.phone')}</h3>
-                <a href="tel:4155335772" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
-                  (415) 533-5772
+                <a href="tel:9842059506" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
+                  (984) 205-9506
                 </a>
               </CardContent>
             </Card>
@@ -384,10 +384,10 @@ export function ContactPage() {
             {t('contact.cta.subtitle')}
           </p>
           <a
-            href="tel:4155335772"
+            href="tel:9842059506"
             className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
-            {t('contact.cta.button')}: (415) 533-5772
+            {t('contact.cta.button')}: (984) 205-9506
           </a>
         </div>
       </section>

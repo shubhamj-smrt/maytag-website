@@ -54,7 +54,7 @@ export function LocationSEO({ page, children }: Props) {
       '@type': 'DryCleaningOrLaundry',
       name: 'Maytag Coin Laundry of Raleigh',
       url: canonicalUrl,
-      telephone: '+1-415-533-5772',
+      telephone: '+1-984-205-9506',
       address: {
         '@type': 'PostalAddress',
         streetAddress: '15 Jones Franklin Rd',

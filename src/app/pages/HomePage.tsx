@@ -37,7 +37,7 @@ export function HomePage() {
       mainEntityOfPage: 'https://maytaglaundromat.com/',
       description:
         'Modern Raleigh laundromat offering self-service laundry, wash dry fold, and convenient cashless and coin laundry options. Clean, affordable, and convenient laundry service in Raleigh, NC.',
-      telephone: '+1-415-533-5772',
+      telephone: '+1-984-205-9506',
       priceRange: '$',
       paymentAccepted: 'Coins, Credit Card, Debit Card',
       currenciesAccepted: 'USD',
@@ -314,7 +314,7 @@ export function HomePage() {
               </a>
 
               {/* Get in Touch → Call */}
-              <a href="tel:4155335772" className="block h-full">
+              <a href="tel:9842059506" className="block h-full">
                 <Card hover className="h-full">
                   <CardContent>
                     <div className="flex items-center gap-3 mb-4">

@@ -21,7 +21,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contact',
     'nav.getStarted': 'Get Started',
     'nav.wolfpack': 'Wolfpack',
-    'nav.callUs': 'Call: (415) 533-5772',
+    'nav.callUs': 'Call: (984) 205-9506',
 
     // Footer
     'footer.tagline': "Raleigh's premier coin laundry service. Clean, modern facilities with the latest equipment.",
@@ -94,7 +94,7 @@ const translations: Record<Language, Record<string, string>> = {
     'home.questions.whenOpen': "When we're open",
     'home.questions.hours': '5 AM - 11 PM, Open 7 Days Including Public Holidays',
     'home.questions.getInTouch': 'Get in touch',
-    'home.questions.email': '(415) 533-5772',
+    'home.questions.email': '(984) 205-9506',
 
     // Home Page - Testimonials
     'home.testimonials.title': 'What Our Customers Say',
@@ -325,7 +325,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Feedback',
     'contact.form.namePlaceholder': 'Your name',
     'contact.form.emailPlaceholder': 'your@email.com',
-    'contact.form.phonePlaceholder': '(415) 533-5772',
+    'contact.form.phonePlaceholder': '(984) 205-9506',
     'contact.form.messagePlaceholder': 'Tell us how we can help you...',
     'contact.form.submit': 'Send Message',
     'contact.form.submitted': 'Message Sent!',
@@ -385,7 +385,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contacto',
     'nav.getStarted': 'Comenzar',
     'nav.wolfpack': 'Wolfpack',
-    'nav.callUs': 'Llamar: (415) 533-5772',
+    'nav.callUs': 'Llamar: (984) 205-9506',
 
     // Footer
     'footer.tagline': 'El servicio de lavandería premier de Raleigh. Instalaciones limpias y modernas con el mejor equipo.',
@@ -687,7 +687,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.feedback': 'Comentarios',
     'contact.form.namePlaceholder': 'Su nombre',
     'contact.form.emailPlaceholder': 'su@correo.com',
-    'contact.form.phonePlaceholder': '(415) 533-5772',
+    'contact.form.phonePlaceholder': '(984) 205-9506',
     'contact.form.messagePlaceholder': 'Diganos como podemos ayudarle...',
     'contact.form.submit': 'Enviar Mensaje',
     'contact.form.submitted': 'Mensaje Enviado!',

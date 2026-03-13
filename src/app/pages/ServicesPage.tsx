@@ -230,7 +230,7 @@ export function ServicesPage() {
             <br className="hidden sm:block" /> in Raleigh
           </h2>
           <a
-            href="tel:4155335772"
+            href="tel:2523083052"
             className="inline-flex items-center justify-center bg-[#00bfb3] text-white px-8 py-4 rounded font-semibold hover:bg-[#00a89d] transition-colors"
           >
             Schedule Delivery
@@ -330,7 +330,7 @@ export function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:4155335772"
+              href="tel:2523083052"
               className="bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors font-medium"
             >
               {t('services.cta.callUs')}

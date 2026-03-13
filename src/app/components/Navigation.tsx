@@ -71,7 +71,7 @@ export function Navigation() {
               </div>
             </div>
             <a
-              href="tel:4155335772"
+              href="tel:9842059506"
               className="bg-[#00bfb3] text-white px-6 py-2 rounded hover:bg-[#00a89d] transition-colors"
             >
               {t('nav.callUs')}
@@ -143,7 +143,7 @@ export function Navigation() {
               </div>
             </div>
             <a
-              href="tel:4155335772"
+              href="tel:9842059506"
               onClick={() => setIsMenuOpen(false)}
               className="block bg-[#00bfb3] text-white px-6 py-2 rounded hover:bg-[#00a89d] transition-colors text-center mt-4"
             >
