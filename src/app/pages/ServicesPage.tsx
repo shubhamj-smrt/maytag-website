@@ -61,9 +61,14 @@ export function ServicesPage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="/images/01-hero-image.png"
+            src="/images/services-mobile-hero.png"
             alt={t('common.heroAlt')}
-            className="w-full h-full object-cover"
+            className="block md:hidden w-full h-full object-cover object-center"
+          />
+          <img
+            src="/images/services-hero.png"
+            alt={t('common.heroAlt')}
+            className="hidden md:block w-full h-full object-cover object-top"
           />
           {/* Mobile: overlay from bottom */}
           <div
