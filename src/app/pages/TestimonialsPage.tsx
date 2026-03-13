@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'motion/react';
 import { Star } from 'lucide-react';
+import { DropIcon, WrenchIcon, UsersThreeIcon, TrophyIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
 import { SlidingNumber } from '../components/SlidingNumber';
 import { useLanguage } from '../context/LanguageContext';
@@ -207,19 +208,24 @@ export function TestimonialsPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { titleKey: 'testimonials.whyLove.clean', descKey: 'testimonials.whyLove.cleanDesc' },
-              { titleKey: 'testimonials.whyLove.equipment', descKey: 'testimonials.whyLove.equipmentDesc' },
-              { titleKey: 'testimonials.whyLove.staff', descKey: 'testimonials.whyLove.staffDesc' },
-              { titleKey: 'testimonials.whyLove.value', descKey: 'testimonials.whyLove.valueDesc' },
-            ].map((item, index) => (
-              <div key={index} className="text-center p-6">
-                <div className="w-16 h-16 bg-[#00bfb3] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Star className="w-8 h-8 text-[#00bfb3]" />
-                </div>
-                <h3 className="text-xl font-semibold text-black mb-2">{t(item.titleKey)}</h3>
-                <p className="text-gray-600">{t(item.descKey)}</p>
-              </div>
-            ))}
+              { Icon: DropIcon, titleKey: 'testimonials.whyLove.clean', descKey: 'testimonials.whyLove.cleanDesc' },
+              { Icon: WrenchIcon, titleKey: 'testimonials.whyLove.equipment', descKey: 'testimonials.whyLove.equipmentDesc' },
+              { Icon: UsersThreeIcon, titleKey: 'testimonials.whyLove.staff', descKey: 'testimonials.whyLove.staffDesc' },
+              { Icon: TrophyIcon, titleKey: 'testimonials.whyLove.value', descKey: 'testimonials.whyLove.valueDesc' },
+            ].map((item, index) => {
+              const IconComponent = item.Icon;
+              return (
+                <Card key={index} hover>
+                  <CardContent className="text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-[#00bfb3]/10 rounded-full mb-4">
+                      <IconComponent className="w-10 h-10 text-[#00bfb3]" weight="regular" />
+                    </div>
+                    <h3 className="text-xl font-bold text-black mb-3">{t(item.titleKey)}</h3>
+                    <p className="text-gray-600">{t(item.descKey)}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
