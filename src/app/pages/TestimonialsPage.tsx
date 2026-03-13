@@ -1,9 +1,58 @@
-import { Star, Quote } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'motion/react';
+import { Star } from 'lucide-react';
 import { Card, CardContent } from '../components/Card';
+import { SlidingNumber } from '../components/SlidingNumber';
 import { useLanguage } from '../context/LanguageContext';
+
+const TestimonialsColumn = (props: {
+  className?: string;
+  testimonials: Array<{ name: string; text: string; rating: number }>;
+  duration?: number;
+}) => {
+  return (
+    <div className={`overflow-hidden ${props.className ?? ''}`}>
+      <motion.div
+        animate={{ translateY: '-50%' }}
+        transition={{
+          duration: props.duration || 15,
+          repeat: Infinity,
+          ease: 'linear',
+          repeatType: 'loop',
+        }}
+        className="flex flex-col gap-6 pb-6"
+      >
+        {[...new Array(2)].map((_, index) => (
+          <React.Fragment key={index}>
+            {props.testimonials.map(({ text, name, rating }, i) => (
+              <Card key={i}>
+                <CardContent>
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(rating)].map((_, si) => (
+                      <Star key={si} className="w-4 h-4 fill-current text-yellow-500" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">"{text}"</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 bg-[#00bfb3] rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                      {name.charAt(0)}
+                    </div>
+                    <div className="font-medium text-black text-sm">{name}</div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </React.Fragment>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
 export function TestimonialsPage() {
   const { t } = useLanguage();
+  const statsRef = useRef(null);
+  const statsInView = useInView(statsRef, { once: true, margin: '-80px' });
 
   const testimonials = [
     { nameKey: 'testimonials.review.1.name', textKey: 'testimonials.review.1.text', rating: 5 },
@@ -18,9 +67,9 @@ export function TestimonialsPage() {
   ];
 
   const stats = [
-    { value: '30+', labelKey: 'testimonials.stats.years' },
-    { value: '4.8', labelKey: 'testimonials.stats.rating' },
-    { value: '1000+', labelKey: 'testimonials.stats.customers' },
+    { numericValue: 30, suffix: '+', labelKey: 'testimonials.stats.years' },
+    { numericValue: 5, suffix: '', labelKey: 'testimonials.stats.rating' },
+    { numericValue: 50, suffix: 'K+', labelKey: 'testimonials.stats.customers' },
   ];
 
   return (
@@ -66,12 +115,18 @@ export function TestimonialsPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-gray-50 border-b border-gray-200">
+      <section className="py-12 bg-white" ref={statsRef}>
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="flex flex-wrap justify-center gap-8 md:gap-48">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-[#00bfb3] mb-2">{stat.value}</div>
+                <div className="flex items-center justify-center gap-1.5 text-3xl sm:text-4xl font-bold text-[#00bfb3] mb-2">
+                  <SlidingNumber value={statsInView ? stat.numericValue : 0} duration={1.5} />
+                  {stat.suffix && <span>{stat.suffix}</span>}
+                  {stat.labelKey === 'testimonials.stats.rating' && (
+                    <Star className="w-6 h-6 sm:w-6 sm:h-6 fill-current text-yellow-400" />
+                  )}
+                </div>
                 <div className="text-gray-600">{t(stat.labelKey)}</div>
               </div>
             ))}
@@ -81,26 +136,37 @@ export function TestimonialsPage() {
 
       {/* Featured Testimonial */}
       <section className="py-16 sm:py-20">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="bg-[#00bfb3] rounded-lg p-8 sm:p-12 text-white relative overflow-hidden">
-            <Quote className="absolute top-6 left-6 w-16 h-16 text-white opacity-20" />
-            <div className="relative z-10">
-              <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-current text-yellow-400" />
-                ))}
-              </div>
-              <blockquote className="text-xl sm:text-2xl mb-6 leading-relaxed">
-                "{t('testimonials.review.1.text')}"
-              </blockquote>
-              <div className="font-semibold text-lg">- {t('testimonials.review.1.name')}</div>
-            </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-16">
+          {/* Image */}
+          <div className="w-full h-56 sm:w-64 sm:h-64 flex-shrink-0 rounded-2xl overflow-hidden shadow-md">
+            <img
+              src="/images/featured-testimonial.jpg"
+              alt="Happy couple"
+              className="w-full h-full object-cover"
+            />
           </div>
+
+          {/* Quote */}
+          <blockquote className="relative pl-6 before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-full before:bg-[#00bfb3]">
+            <div className="flex gap-1 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-current text-yellow-400" />
+              ))}
+            </div>
+            <p className="text-gray-800 text-lg leading-relaxed text-balance">
+              {t('testimonials.review.1.text')}
+            </p>
+            <footer className="mt-4 flex items-center gap-2">
+              <cite className="font-semibold text-black not-italic">{t('testimonials.review.1.name')}</cite>
+              <span aria-hidden className="bg-gray-400 size-1 rounded-full" />
+              <span className="text-gray-500">Verified Customer</span>
+            </footer>
+          </blockquote>
         </div>
       </section>
 
       {/* All Testimonials */}
-      <section className="py-16 sm:py-20 bg-gray-50">
+      <section className="py-16 sm:py-20 bg-gray-50 overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">{t('testimonials.allReviews.title')}</h2>
@@ -108,27 +174,24 @@ export function TestimonialsPage() {
               {t('testimonials.allReviews.subtitle')}
             </p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} hover>
-                <CardContent>
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-current text-yellow-500" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-4 leading-relaxed">"{t(testimonial.textKey)}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#00bfb3] rounded-full flex items-center justify-center text-white font-semibold">
-                      {t(testimonial.nameKey).charAt(0)}
-                    </div>
-                    <div className="font-semibold text-black">{t(testimonial.nameKey)}</div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        <div className="flex gap-6 justify-center max-h-[600px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]">
+          <TestimonialsColumn
+            testimonials={testimonials.filter((_, i) => i % 3 === 0).map(item => ({ name: t(item.nameKey), text: t(item.textKey), rating: item.rating }))}
+            duration={18}
+            className="w-full max-w-sm"
+          />
+          <TestimonialsColumn
+            testimonials={testimonials.filter((_, i) => i % 3 === 1).map(item => ({ name: t(item.nameKey), text: t(item.textKey), rating: item.rating }))}
+            duration={22}
+            className="hidden md:block w-full max-w-sm"
+          />
+          <TestimonialsColumn
+            testimonials={testimonials.filter((_, i) => i % 3 === 2).map(item => ({ name: t(item.nameKey), text: t(item.textKey), rating: item.rating }))}
+            duration={16}
+            className="hidden lg:block w-full max-w-sm"
+          />
         </div>
       </section>
 
