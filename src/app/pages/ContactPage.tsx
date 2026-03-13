@@ -153,7 +153,7 @@ export function ContactPage() {
               </Card>
             </a>
 
-            <a href="tel:4155335772" className="block h-full">
+            <a href="tel:9842059506" className="block h-full">
               <Card hover className="h-full">
                 <CardContent className="flex flex-row items-center gap-4 md:flex-col md:items-center md:text-center min-h-[5rem] md:min-h-0">
                   <div className="inline-flex flex-shrink-0 items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#00bfb3]/10 rounded-full md:mb-4">
@@ -161,7 +161,7 @@ export function ContactPage() {
                   </div>
                   <div className="text-left md:text-center">
                     <h3 className="font-semibold text-black mb-1 md:mb-2">{t('contact.phone')}</h3>
-                    <p className="text-gray-600 text-sm">(415) 533-5772</p>
+                    <p className="text-gray-600 text-sm">(984) 205-9506</p>
                   </div>
                 </CardContent>
               </Card>
