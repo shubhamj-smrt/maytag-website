@@ -1,10 +1,31 @@
-import { useState, useRef } from 'react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { MapPinIcon, PhoneIcon, ClockIcon, CaretDownIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../components/ui/accordion';
 import { useLanguage } from '../context/LanguageContext';
 
 export function ContactPage() {
   const { t } = useLanguage();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleTextareaInput = () => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  };
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -75,9 +96,14 @@ export function ContactPage() {
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="/images/01-hero-image.png"
+            src="/images/mobile-contact-hero-image.png"
             alt={t('common.heroAlt')}
-            className="w-full h-full object-cover"
+            className="block md:hidden w-full h-full object-cover"
+          />
+          <img
+            src="/images/01-contact-hero-image.png"
+            alt={t('common.heroAlt')}
+            className="hidden md:block w-full h-full object-cover object-top"
           />
           {/* Mobile: overlay from bottom */}
           <div
@@ -107,42 +133,71 @@ export function ContactPage() {
       {/* Contact Information */}
       <section className="py-16 sm:py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <Card hover>
-              <CardContent className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
-                  <MapPin className="w-6 h-6 text-[#00bfb3]" />
-                </div>
-                <h3 className="font-semibold text-black mb-2">{t('contact.address')}</h3>
-                <p className="text-gray-600 text-sm">{t('contact.addressLine1')}<br />{t('contact.addressLine2')}</p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-16">
+            <a
+              href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full"
+            >
+              <Card hover className="h-full">
+                <CardContent className="flex flex-row items-center gap-4 md:flex-col md:items-center md:text-center min-h-[5rem] md:min-h-0">
+                  <div className="inline-flex flex-shrink-0 items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#00bfb3]/10 rounded-full md:mb-4">
+                    <MapPinIcon className="w-8 h-8 md:w-10 md:h-10 text-[#00bfb3]" weight="regular" />
+                  </div>
+                  <div className="text-left md:text-center">
+                    <h3 className="font-semibold text-black mb-1 md:mb-2">{t('contact.address')}</h3>
+                    <p className="text-gray-600 text-sm">{t('contact.addressLine1')}<br />{t('contact.addressLine2')}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
 
-            <Card hover>
-              <CardContent className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
-                  <Phone className="w-6 h-6 text-[#00bfb3]" />
-                </div>
-                <h3 className="font-semibold text-black mb-2">{t('contact.phone')}</h3>
-                <a href="tel:9842059506" className="text-gray-600 text-sm hover:text-[#00bfb3] transition-colors">
-                  (984) 205-9506
-                </a>
-              </CardContent>
-            </Card>
+            <a href="tel:4155335772" className="block h-full">
+              <Card hover className="h-full">
+                <CardContent className="flex flex-row items-center gap-4 md:flex-col md:items-center md:text-center min-h-[5rem] md:min-h-0">
+                  <div className="inline-flex flex-shrink-0 items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#00bfb3]/10 rounded-full md:mb-4">
+                    <PhoneIcon className="w-8 h-8 md:w-10 md:h-10 text-[#00bfb3]" weight="regular" />
+                  </div>
+                  <div className="text-left md:text-center">
+                    <h3 className="font-semibold text-black mb-1 md:mb-2">{t('contact.phone')}</h3>
+                    <p className="text-gray-600 text-sm">(415) 533-5772</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
 
-            <Card hover>
-              <CardContent className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3] bg-opacity-10 rounded-full mb-4">
-                  <Clock className="w-6 h-6 text-[#00bfb3]" />
-                </div>
-                <h3 className="font-semibold text-black mb-2">{t('contact.hours')}</h3>
-                <p className="text-gray-600 text-sm">{t('home.questions.hours')}</p>
-              </CardContent>
-            </Card>
+            <a
+              href="https://www.yelp.com/biz/maytag-coin-laundry-of-raleigh-raleigh-3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block h-full"
+            >
+              <Card hover className="h-full">
+                <CardContent className="flex flex-row items-center gap-4 md:flex-col md:items-center md:text-center min-h-[5rem] md:min-h-0">
+                  <div className="inline-flex flex-shrink-0 items-center justify-center w-14 h-14 md:w-16 md:h-16 bg-[#00bfb3]/10 rounded-full md:mb-4">
+                    <ClockIcon className="w-8 h-8 md:w-10 md:h-10 text-[#00bfb3]" weight="regular" />
+                  </div>
+                  <div className="text-left md:text-center">
+                    <h3 className="font-semibold text-black mb-1 md:mb-2">{t('contact.hours')}</h3>
+                    <p className="text-gray-600 text-sm text-balance">{t('home.questions.hours')}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            {/* Left: Image — fixed height on mobile, fills form height on desktop */}
+            <div className="block order-first h-64 sm:h-80 lg:h-auto relative rounded-lg overflow-hidden">
+              <img
+                src="/images/thinking-person.png"
+                alt={t('common.heroAlt')}
+                className="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            </div>
+
+            {/* Right: Contact Form */}
             <div>
               <h2 className="text-3xl font-bold text-black mb-6">{t('contact.sendMessage')}</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -165,7 +220,7 @@ export function ContactPage() {
 
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-black mb-2">
-                    {t('contact.form.name')} *
+                    {t('contact.form.name')} <span style={{ color: '#FF2244' }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -181,7 +236,7 @@ export function ContactPage() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-black mb-2">
-                    {t('contact.form.email')} *
+                    {t('contact.form.email')} <span style={{ color: '#FF2244' }}>*</span>
                   </label>
                   <input
                     type="email"
@@ -212,37 +267,82 @@ export function ContactPage() {
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-semibold text-black mb-2">
-                    {t('contact.form.subject')} *
+                    {t('contact.form.subject')} <span style={{ color: '#FF2244' }}>*</span>
                   </label>
-                  <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                  >
-                    <option value="">{t('contact.form.selectSubject')}</option>
-                    <option value="general">{t('contact.form.general')}</option>
-                    <option value="services">{t('contact.form.servicesQ')}</option>
-                    <option value="pricing">{t('contact.form.pricingInfo')}</option>
-                    <option value="commercial">{t('contact.form.commercialServices')}</option>
-                    <option value="feedback">{t('contact.form.feedback')}</option>
-                  </select>
+                  {/* Hidden native select for form submission / validation */}
+                  <input type="hidden" name="subject" value={formData.subject} required />
+
+                  <div className="relative" ref={dropdownRef}>
+                    {/* Trigger */}
+                    <button
+                      type="button"
+                      onClick={() => setDropdownOpen(o => !o)}
+                      className={`w-full px-4 py-3 border rounded bg-white text-left text-base font-normal transition-colors flex items-center justify-between cursor-pointer ${
+                        dropdownOpen ? 'border-[#00bfb3]' : 'border-gray-300'
+                      }`}
+                    >
+                      <span className={formData.subject ? 'text-black' : 'text-gray-400'}>
+                        {formData.subject
+                          ? {
+                              general: t('contact.form.general'),
+                              services: t('contact.form.servicesQ'),
+                              pricing: t('contact.form.pricingInfo'),
+                              commercial: t('contact.form.commercialServices'),
+                              feedback: t('contact.form.feedback'),
+                            }[formData.subject]
+                          : t('contact.form.selectSubject')}
+                      </span>
+                      <CaretDownIcon
+                        className={`flex-shrink-0 text-[#00bfb3] transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                        size={18}
+                        weight="bold"
+                      />
+                    </button>
+
+                    {/* Dropdown panel */}
+                    {dropdownOpen && (
+                      <ul className="absolute left-0 right-0 top-full mt-1 z-50 bg-white border border-gray-300 rounded shadow-md overflow-hidden">
+                        {[
+                          { value: 'general', label: t('contact.form.general') },
+                          { value: 'services', label: t('contact.form.servicesQ') },
+                          { value: 'pricing', label: t('contact.form.pricingInfo') },
+                          { value: 'commercial', label: t('contact.form.commercialServices') },
+                          { value: 'feedback', label: t('contact.form.feedback') },
+                        ].map(option => (
+                          <li key={option.value}>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setFormData(prev => ({ ...prev, subject: option.value }));
+                                setDropdownOpen(false);
+                              }}
+                              className={`w-full px-4 py-3 text-left text-sm hover:bg-gray-50 transition-colors cursor-pointer ${
+                                formData.subject === option.value ? 'text-[#00bfb3] font-medium' : 'text-black'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-black mb-2">
-                    {t('contact.form.message')} *
+                    {t('contact.form.message')} <span style={{ color: '#FF2244' }}>*</span>
                   </label>
                   <textarea
+                    ref={textareaRef}
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onInput={handleTextareaInput}
                     required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors resize-none"
+                    rows={1}  
+                    className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors resize-none overflow-hidden min-h-[5rem] sm:min-h-0"
                     placeholder={t('contact.form.messagePlaceholder')}
                   />
                 </div>
@@ -265,63 +365,11 @@ export function ContactPage() {
                   ) : (
                     <>
                       <span>{t('contact.form.submit')}</span>
-                      <Send className="w-5 h-5" />
+                      <PaperPlaneTiltIcon className="w-4 h-4" weight="bold" />
                     </>
                   )}
                 </button>
               </form>
-            </div>
-
-            {/* Map and Additional Info */}
-            <div>
-              <h2 className="text-3xl font-bold text-black mb-6">{t('contact.visitLocation')}</h2>
-              
-              {/* Google Maps Embed */}
-              <div className="rounded-lg mb-6 h-[300px] overflow-hidden border border-gray-300">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.834389257489!2d-78.7209034!3d35.7855752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s15%20Jones%20Franklin%20Rd%2C%20Raleigh%2C%20NC%2027606!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Maytag Coin Laundry - 15 Jones Franklin Rd, Raleigh, NC 27606"
-                  className="w-full h-full"
-                />
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
-                <h3 className="font-semibold text-black mb-4">{t('contact.businessHours')}</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">{t('contact.everyDay')}</span>
-                    <span className="text-black font-semibold">5:00 AM - 11:00 PM</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h3 className="font-semibold text-black mb-4">{t('contact.parking.title')}</h3>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>{t('contact.parking.free')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>{t('contact.parking.lit')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>{t('contact.parking.loading')}</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <div className="w-1.5 h-1.5 bg-[#00bfb3] rounded-full mt-2"></div>
-                    <span>{t('contact.parking.handicap')}</span>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
@@ -331,46 +379,35 @@ export function ContactPage() {
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">{t('contact.faq.title')}</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
+              <span className="block">{t('contact.faq.title.line1')}</span>
+            </h2>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-6">
-            <Card>
-              <CardContent>
-                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q1')}</h3>
-                <p className="text-gray-600">
-                  {t('contact.faq.a1')}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent>
-                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q2')}</h3>
-                <p className="text-gray-600">
-                  {t('contact.faq.a2')}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent>
-                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q3')}</h3>
-                <p className="text-gray-600">
-                  {t('contact.faq.a3')}
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent>
-                <h3 className="font-semibold text-black mb-2">{t('contact.faq.q4')}</h3>
-                <p className="text-gray-600">
-                  {t('contact.faq.a4')}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <Card className="max-w-3xl mx-auto">
+            <CardContent>
+              <Accordion type="single" collapsible>
+                {[
+                  { q: t('contact.faq.q1'), a: t('contact.faq.a1') },
+                  { q: t('contact.faq.q2'), a: t('contact.faq.a2') },
+                  { q: t('contact.faq.q3'), a: t('contact.faq.a3') },
+                  { q: t('contact.faq.q4'), a: t('contact.faq.a4') },
+                ].map((item, index) => (
+                  <AccordionItem key={index} value={`faq-${index}`}>
+                    <AccordionTrigger
+                      className="text-base font-semibold text-black hover:no-underline hover:text-[#00bfb3]"
+                      icon={<CaretDownIcon className="pointer-events-none size-5 shrink-0 translate-y-0.5 text-[#00bfb3] transition-transform duration-200" weight="bold" />}
+                    >
+                      {item.q}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-gray-600">{item.a}</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
