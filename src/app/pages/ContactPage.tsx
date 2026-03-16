@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { MapPinIcon, PhoneIcon, ClockIcon, CaretDownIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../components/ui/accordion';
+import { CharacterMorph } from '../../components/ui/character-morph';
 import { useLanguage } from '../context/LanguageContext';
 
 export function ContactPage() {
@@ -122,7 +123,12 @@ export function ContactPage() {
         </div>
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">{t('contact.hero.title')}</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance max-w-xl sm:max-w-2xl lg:max-w-3xl">
+              <CharacterMorph
+                texts={[t('contact.hero.title')]}
+                className="block w-full max-w-full min-w-0 flex flex-wrap !whitespace-normal"
+              />
+            </h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
               {t('contact.hero.subtitle')}
             </p>

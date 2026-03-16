@@ -5,6 +5,7 @@ import { DropIcon, WrenchIcon, UsersThreeIcon, TrophyIcon } from '@phosphor-icon
 import { Card, CardContent } from '../components/Card';
 import { SlidingNumber } from '../components/SlidingNumber';
 import { useLanguage } from '../context/LanguageContext';
+import { CharacterMorph } from '@/components/ui/character-morph';
 
 const TestimonialsColumn = (props: {
   className?: string;
@@ -107,7 +108,12 @@ export function TestimonialsPage() {
         </div>
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">{t('testimonials.hero.title')}</h1>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance max-w-lg sm:max-w-2xl lg:max-w-3xl">
+              <CharacterMorph
+                texts={[t('testimonials.hero.title')]}
+                className="block w-full max-w-full min-w-0 flex flex-wrap !whitespace-normal"
+              />
+            </h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
               {t('testimonials.hero.subtitle')}
             </p>
