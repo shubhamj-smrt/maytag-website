@@ -25,14 +25,14 @@ export function CTAFormSuccessScreen({ fadingOut = false, onFadeOutComplete }: C
   };
 
   return (
-    <div className="relative overflow-visible">
+    <div
+      className={`relative overflow-visible transition-opacity duration-300 ${
+        fadingOut ? 'opacity-0' : visible ? 'opacity-100' : 'opacity-0'
+      }`}
+      onTransitionEnd={handleTransitionEnd}
+    >
       <GlowFlicker />
-      <div
-        className={`relative z-10 overflow-hidden bg-white rounded-xl shadow-lg p-6 sm:p-8 min-h-[420px] flex flex-col justify-center text-center transition-opacity duration-300 ${
-          fadingOut ? 'opacity-0' : visible ? 'opacity-100' : 'opacity-0'
-        }`}
-        onTransitionEnd={handleTransitionEnd}
-      >
+      <div className="relative z-10 overflow-hidden bg-white rounded-xl shadow-lg p-6 sm:p-8 min-h-[420px] flex flex-col justify-center text-center">
       <Lottie
         animationData={confettiAnimation}
         loop={true}
