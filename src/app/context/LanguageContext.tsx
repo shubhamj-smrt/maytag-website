@@ -113,9 +113,28 @@ const translations: Record<Language, Record<string, string>> = {
     'home.testimonials.6.text': 'Friendly staff, clean facility, and great prices. What more could you ask for? Highly recommend to everyone.',
 
     // Home Page - CTA
-    'home.cta.title': 'Ready to Experience the Difference?',
-    'home.cta.subtitle': "Visit us today and discover why we're Raleigh's favorite coin laundry. No appointment necessary!",
-    'home.cta.button': 'Get Directions',
+    'home.cta.title1': '$20 Off ',
+    'home.cta.title2': 'On Your First Laundry Delivery',
+    'home.cta.subtitle': "Get discount on your first delivery and stay connected for rewards and special offers.",
+    'home.cta.button': 'Claim $20',
+
+    // CTA Form (Claim offer)
+    'ctaForm.title': 'Claim Your $20 Off',
+    'ctaForm.subtitle': 'Enter your details and we\'ll send your discount code.',
+    'ctaForm.holdInstruction': "Hold the button for 3 seconds to verify you're human.",
+    'ctaForm.holdToVerify': 'Hold to Verify',
+    'ctaForm.verified': 'Verified',
+    'ctaForm.verifiedMessage': "Verified! You can now submit the form.",
+    'ctaForm.fillFieldsFirst': 'Please fill in all required fields.',
+    'ctaForm.errorEmailInvalid': 'Please enter a valid email address (must contain @).',
+    'ctaForm.errorPhoneUSOnly': 'Please enter a valid US phone number (10 digits).',
+    'ctaForm.submit': 'Submit',
+    'ctaForm.successTitle': 'You\'re All Set!',
+    'ctaForm.successMessage': 'We\'ll send your discount code and details to your email shortly.',
+    'ctaForm.backHome': 'Back to Home',
+    'ctaForm.alreadyRegistered': "Congratulations! You're already registered.",
+    'ctaForm.revertingToForm': 'Returning to the form in a few seconds...',
+    'ctaForm.backToWebsite': 'Take me back to the website',
 
     // Services Page
     'services.hero.title': 'Our Services',
@@ -476,9 +495,28 @@ const translations: Record<Language, Record<string, string>> = {
     'home.testimonials.6.text': 'Personal amable, instalaciones limpias y excelentes precios. ¿Qué más se puede pedir? Muy recomendado para todos.',
 
     // Home Page - CTA
-    'home.cta.title': '¿Listo para Experimentar la Diferencia?',
-    'home.cta.subtitle': 'Visítenos hoy y descubra por qué somos la lavandería favorita de Raleigh. ¡No necesita cita!',
-    'home.cta.button': 'Obtener Direcciones',
+    'home.cta.title1': '$20 de Descuento ',
+    'home.cta.title2': 'En Tu Primera Entrega de Lavandería',
+    'home.cta.subtitle': 'Obtén descuento en tu primera entrega y mantente conectado para recompensas y ofertas especiales.',
+    'home.cta.button': 'Reclamar $20',
+
+    // CTA Form (Claim offer)
+    'ctaForm.title': 'Reclame Sus $20 de Descuento',
+    'ctaForm.subtitle': 'Ingrese sus datos y le enviaremos su código de descuento.',
+    'ctaForm.holdInstruction': 'Mantenga presionado el botón durante 3 segundos para verificar que es humano.',
+    'ctaForm.holdToVerify': 'Mantener para Verificar',
+    'ctaForm.verified': 'Verificado',
+    'ctaForm.verifiedMessage': '¡Verificado! Ahora puede enviar el formulario.',
+    'ctaForm.fillFieldsFirst': 'Por favor complete los campos requeridos primero.',
+    'ctaForm.errorEmailInvalid': 'Por favor ingrese una dirección de correo electrónico válida (debe contener @).',
+    'ctaForm.errorPhoneUSOnly': 'Por favor ingrese un número de teléfono estadounidense válido (10 dígitos).',
+    'ctaForm.submit': 'Enviar',
+    'ctaForm.successTitle': '¡Listo!',
+    'ctaForm.successMessage': 'Le enviaremos su código de descuento y detalles a su correo electrónico pronto.',
+    'ctaForm.backHome': 'Volver al Inicio',
+    'ctaForm.alreadyRegistered': '¡Felicitaciones! Ya está registrado.',
+    'ctaForm.revertingToForm': 'Volviendo al formulario en unos segundos...',
+    'ctaForm.backToWebsite': 'Llévame de vuelta al sitio web',
 
     // Services Page
     'services.hero.title': 'Nuestros Servicios',
