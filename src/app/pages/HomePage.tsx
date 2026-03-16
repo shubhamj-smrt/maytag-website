@@ -112,7 +112,7 @@ export function HomePage() {
   ];
 
   return (
-    <div className="bg-white">
+    <div className="bg-white overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative text-white min-h-screen flex items-end">
         <div className="absolute inset-0 overflow-hidden">
@@ -143,10 +143,10 @@ export function HomePage() {
         </div>
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-20 sm:py-32 w-full">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance max-w-lg sm:max-w-2xl lg:max-w-3xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance max-w-xl sm:max-w-2xl lg:max-w-3xl">
               <CharacterMorph
                 texts={[t('home.hero.title')]}
-                className="block w-full max-w-full min-w-0 flex flex-wrap"
+                className="block w-full max-w-full min-w-0 flex flex-wrap !whitespace-normal"
               />
             </h1>
             <p className="text-lg sm:text-xl text-gray-200 max-w-[450px] mb-8">
@@ -291,10 +291,12 @@ export function HomePage() {
                 <Card hover className="h-full">
                   <CardContent>
                     <div className="flex items-center gap-3 mb-4">
-                      <MapPin className="w-6 h-6 text-black" />
+                      <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full">
+                        <MapPin className="w-6 h-6 text-[#00bfb3]" />
+                      </div>
                       <h4 className="font-bold text-black text-lg">{t('home.questions.findUs')}</h4>
                     </div>
-                    <p className="text-gray-600">{t('home.questions.address')}</p>
+                    <p className="text-gray-600 h-full">{t('home.questions.address')}</p>
                   </CardContent>
                 </Card>
               </a>
@@ -309,7 +311,9 @@ export function HomePage() {
                 <Card hover className="h-full">
                   <CardContent>
                     <div className="flex items-center gap-3 mb-4">
-                      <Clock className="w-6 h-6 text-black" />
+                      <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full">
+                        <Clock className="w-6 h-6 text-[#00bfb3]" />
+                      </div>
                       <h4 className="font-bold text-black text-lg">{t('home.questions.whenOpen')}</h4>
                     </div>
                     <p className="text-gray-600 text-balance">{t('home.questions.hours')}</p>
@@ -322,7 +326,9 @@ export function HomePage() {
                 <Card hover className="h-full">
                   <CardContent>
                     <div className="flex items-center gap-3 mb-4">
-                      <Phone className="w-6 h-6 text-black" />
+                      <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full">
+                        <Phone className="w-6 h-6 text-[#00bfb3]" />
+                      </div>
                       <h4 className="font-bold text-black text-lg">{t('home.questions.getInTouch')}</h4>
                     </div>
                     <p className="text-gray-600">{t('home.questions.email')}</p>
@@ -401,20 +407,19 @@ export function HomePage() {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 bg-[#00bfb3]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            {t('home.cta.title')}
-          </h2>
-          <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+            {t('home.cta.title1')}
+          </h1>
+          <h2 className="text-1.5xl sm:text-2xl font-semibold text-white mb-6 text-balance">{t('home.cta.title2')}</h2>
+          <p className="text-white text-lg mb-8 max-w-full sm:max-w-4xl mx-auto sm:whitespace-nowrap text-balance">
             {t('home.cta.subtitle')}
           </p>
-          <a
-            href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/claim"
             className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
             {t('home.cta.button')}
-          </a>
+          </Link>
         </div>
       </section>
     </div>
