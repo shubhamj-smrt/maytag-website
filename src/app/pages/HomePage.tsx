@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router';
 import { AreasMap } from '../components/AreasMap';
 import { Star, MapPin, Clock, Phone, CircleCheck } from 'lucide-react';
+import { GiftIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
 import { useLanguage } from '../context/LanguageContext';
 import { CharacterMorph } from '../../components/ui/character-morph';
@@ -407,17 +408,17 @@ export function HomePage() {
       {/* CTA Section */}
       <section className="py-16 sm:py-20 bg-[#00bfb3]">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
             {t('home.cta.title1')}
           </h1>
-          <h2 className="text-1.5xl sm:text-2xl font-semibold text-white mb-6 text-balance">{t('home.cta.title2')}</h2>
-          <p className="text-white text-lg mb-8 max-w-full sm:max-w-4xl mx-auto sm:whitespace-nowrap text-balance">
+          <p className="text-white text-lg mb-8 max-w-xl mx-auto text-balance">
             {t('home.cta.subtitle')}
           </p>
           <Link
             to="/claim"
-            className="inline-block bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
+            className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
           >
+            <GiftIcon size={20} weight="bold" />
             {t('home.cta.button')}
           </Link>
         </div>

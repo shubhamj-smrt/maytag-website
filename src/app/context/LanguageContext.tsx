@@ -113,13 +113,13 @@ const translations: Record<Language, Record<string, string>> = {
     'home.testimonials.6.text': 'Friendly staff, clean facility, and great prices. What more could you ask for? Highly recommend to everyone.',
 
     // Home Page - CTA
-    'home.cta.title1': '$20 Off ',
-    'home.cta.title2': 'On Your First Laundry Delivery',
-    'home.cta.subtitle': "Get discount on your first delivery and stay connected for rewards and special offers.",
-    'home.cta.button': 'Claim $20',
+    'home.cta.title1': 'Ditch Laundry This Month',
+    'home.cta.title2': 'With Free Pickup, Wash & Fold, and Delivery to Your Door',
+    'home.cta.subtitle': "Free pickup & delivery. Plan starts just $20/month. Get your first month FREE.",
+    'home.cta.button': 'Claim Offer',
 
     // CTA Form (Claim offer)
-    'ctaForm.title': 'Claim Your $20 Off',
+    'ctaForm.title': 'Claim Your Subscription',
     'ctaForm.subtitle': 'Enter your details and we\'ll send your discount code.',
     'ctaForm.holdInstruction': "Hold the button for 3 seconds to verify you're human.",
     'ctaForm.holdToVerify': 'Hold to Verify',
@@ -333,7 +333,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.sendMessage': 'Send Us a Message',
     'contact.form.name': 'Your Name',
     'contact.form.email': 'Email',
-    'contact.form.phone': 'Best number to reach you',
+    'contact.form.phone': 'Phone Number',
     'contact.form.subject': 'Subject',
     'contact.form.message': 'What can we help with?',
     'contact.form.selectSubject': 'Select a subject',
@@ -495,13 +495,13 @@ const translations: Record<Language, Record<string, string>> = {
     'home.testimonials.6.text': 'Personal amable, instalaciones limpias y excelentes precios. ¿Qué más se puede pedir? Muy recomendado para todos.',
 
     // Home Page - CTA
-    'home.cta.title1': '$20 de Descuento ',
-    'home.cta.title2': 'En Tu Primera Entrega de Lavandería',
-    'home.cta.subtitle': 'Obtén descuento en tu primera entrega y mantente conectado para recompensas y ofertas especiales.',
-    'home.cta.button': 'Reclamar $20',
+    'home.cta.title1': 'Olvídate de la Lavandería Este Mes',
+    'home.cta.title2': 'Con Recogida Gratis, Lavado y Doblado, y Entrega a Tu Puerta',
+    'home.cta.subtitle': 'Recogida y entrega gratis. Plan desde solo $20/mes. Obtén tu primer mes GRATIS.',
+    'home.cta.button': 'Reclamar Oferta',
 
     // CTA Form (Claim offer)
-    'ctaForm.title': 'Reclame Sus $20 de Descuento',
+    'ctaForm.title': 'Reclame Su Suscripción',
     'ctaForm.subtitle': 'Ingrese sus datos y le enviaremos su código de descuento.',
     'ctaForm.holdInstruction': 'Mantenga presionado el botón durante 3 segundos para verificar que es humano.',
     'ctaForm.holdToVerify': 'Mantener para Verificar',
