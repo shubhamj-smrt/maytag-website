@@ -398,6 +398,7 @@ export function ContactPage() {
                   { q: t('contact.faq.q2'), a: t('contact.faq.a2') },
                   { q: t('contact.faq.q3'), a: t('contact.faq.a3') },
                   { q: t('contact.faq.q4'), a: t('contact.faq.a4') },
+                  { q: t('contact.faq.q5'), a: t('contact.faq.a5') },
                 ].map((item, index) => (
                   <AccordionItem key={index} value={`faq-${index}`}>
                     <AccordionTrigger
