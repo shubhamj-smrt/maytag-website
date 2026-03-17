@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { MapPin, Phone, Clock, Facebook } from 'lucide-react';
 import { scrollToTop } from '../../lib/utils';
 import { useLanguage } from '../context/LanguageContext';
 import footerLogoSvg from '../../imports/new-logo-black.svg';
@@ -16,9 +16,18 @@ export function Footer() {
             <Link to="/" className="inline-block mb-4" onClick={scrollToTop}>
               <img src={footerLogoSvg} alt="Maytag Laundry" className="h-16 w-auto" />
             </Link>
-            <p className="text-gray-400 text-sm text-balance">
+            <p className="text-gray-400 text-sm text-balance mb-4">
               {t('footer.tagline')}
             </p>
+            <a
+              href="https://www.facebook.com/profile.php?id=61582250078677"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 hover:bg-[#00bfb3] text-gray-400 hover:text-white transition-colors"
+              aria-label="Follow us on Facebook"
+            >
+              <Facebook size={20} />
+            </a>
           </div>
 
           {/* Quick Links */}
