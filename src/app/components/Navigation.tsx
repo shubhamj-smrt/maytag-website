@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { scrollToTop } from '../../lib/utils';
 import navigationLogoSvg from '../../imports/new-logo-white.svg';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -24,7 +25,7 @@ export function Navigation() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center" onClick={scrollToTop}>
             <img src={navigationLogoSvg} alt="Maytag Laundry" className="h-12 w-auto" />
           </Link>
 
@@ -34,6 +35,7 @@ export function Navigation() {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={scrollToTop}
                 className={`transition-colors hover:text-[#00bfb3] ${isActive(item.path) ? 'text-[#00bfb3]' : 'text-black'
                   }`}
               >
@@ -105,7 +107,10 @@ export function Navigation() {
               <Link
                 key={item.path}
                 to={item.path}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  scrollToTop();
+                }}
                 className={`block py-3 transition-colors hover:text-[#00bfb3] ${isActive(item.path) ? 'text-[#00bfb3]' : 'text-black'
                   }`}
               >
