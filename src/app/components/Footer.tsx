@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Clock } from 'lucide-react';
+import { scrollToTop } from '../../lib/utils';
 import { useLanguage } from '../context/LanguageContext';
 import footerLogoSvg from '../../imports/new-logo-black.svg';
 
@@ -12,10 +13,10 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <Link to="/" className="inline-block mb-4">
+            <Link to="/" className="inline-block mb-4" onClick={scrollToTop}>
               <img src={footerLogoSvg} alt="Maytag Laundry" className="h-16 w-auto" />
             </Link>
-            <p className="text-gray-400 text-sm">
+            <p className="text-gray-400 text-sm text-balance">
               {t('footer.tagline')}
             </p>
           </div>
@@ -25,22 +26,27 @@ export function Footer() {
             <h3 className="font-semibold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm">
+                <Link to="/" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm" onClick={scrollToTop}>
                   {t('nav.home')}
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm">
+                <Link to="/services" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm" onClick={scrollToTop}>
                   {t('nav.services')}
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm">
+                <Link to="/about" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm" onClick={scrollToTop}>
                   {t('footer.aboutUs')}
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm">
+                <Link to="/testimonials" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm" onClick={scrollToTop}>
+                  {t('nav.testimonials')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-gray-400 hover:text-[#00bfb3] transition-colors text-sm" onClick={scrollToTop}>
                   {t('nav.contact')}
                 </Link>
               </li>
@@ -94,7 +100,26 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} {t('footer.copyright')}</p>
+          <p>
+            &copy; {new Date().getFullYear()}{' '}
+            <Link to="/" className="hover:text-[#00bfb3] transition-colors" onClick={scrollToTop}>
+              {t('footer.copyright.maytag')}
+            </Link>
+            {' | '}
+            <a
+              href="https://www.smrtsystems.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#00bfb3] transition-colors"
+            >
+              {t('footer.copyright.smrt')}
+            </a>
+            {' | '}
+            <Link to="/" className="hover:text-[#00bfb3] transition-colors" onClick={scrollToTop}>
+              {t('footer.copyright.terms')}
+            </Link>
+            {' | '}{' '}{t('footer.copyright.suffix')}
+          </p>
         </div>
       </div>
     </footer>
