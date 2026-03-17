@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
+import { scrollToTop } from '../../lib/utils';
 import { useLanguage } from '../context/LanguageContext';
 import { CTAFormSuccessScreen } from '../components/CTAFormSuccessScreen';
 
@@ -316,6 +317,7 @@ export function CTAFormPage() {
                 <Link
                   to="/"
                   className="text-white underline hover:text-white/90 transition-colors"
+                  onClick={scrollToTop}
                 >
                   {t('ctaForm.backToWebsite')}
                 </Link>

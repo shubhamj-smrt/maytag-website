@@ -1,6 +1,6 @@
 import React from 'react';
 import { Shirt, Wind, Droplet, Package } from 'lucide-react';
-import { DropIcon, ShieldIcon, SunHorizonIcon, TrophyIcon, UsersThreeIcon, WrenchIcon } from '@phosphor-icons/react';
+import { WifiHighIcon, ArmchairIcon, CoffeeIcon, ShoppingCartIcon, BankIcon, SecurityCameraIcon, CarIcon, UserIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
 import { useLanguage } from '../context/LanguageContext';
 import { CharacterMorph } from '../../components/ui/character-morph';
@@ -36,14 +36,14 @@ export function ServicesPage() {
   ]; 
 
   const amenities = [
-    { Icon: DropIcon, label: 'Free WiFi throughout facility' },
-    { Icon: SunHorizonIcon, label: 'Comfortable seating areas' },
-    { Icon: TrophyIcon, label: 'Vending machines for snacks and drinks' },
-    { Icon: UsersThreeIcon, label: 'Folding tables and carts available' },
-    { Icon: ShieldIcon, label: 'ATM on-site' },
-    { Icon: WrenchIcon, label: 'Security cameras for your safety' },
-    { Icon: TrophyIcon, label: 'Well-lit parking area' },
-    { Icon: UsersThreeIcon, label: 'Attendant on duty during business hours' },
+    { Icon: WifiHighIcon, label: 'Free WiFi throughout facility' },
+    { Icon: ArmchairIcon, label: 'Comfortable seating areas' },
+    { Icon: CoffeeIcon, label: 'Vending machines for snacks and drinks' },
+    { Icon: ShoppingCartIcon, label: 'Folding tables and carts available' },
+    { Icon: BankIcon, label: 'ATM on-site' },
+    { Icon: SecurityCameraIcon, label: 'Security cameras for your safety' },
+    { Icon: CarIcon, label: 'Well-lit parking area' },
+    { Icon: UserIcon, label: 'Attendant on duty during business hours' },
   ];
 
   const amenitiesImages = [
@@ -293,11 +293,11 @@ export function ServicesPage() {
             {amenities.map((amenity, index) => {
               const IconComponent = amenity.Icon;
               return (
-                <div key={index} className="flex items-start gap-3">
-                  <div className="mt-0.5 flex size-8 items-center justify-center text-[#00bfb3]">
-                    <IconComponent size={28} weight="duotone" />
+                <div key={index} className="flex items-center gap-3">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full flex-shrink-0 text-[#00bfb3]">
+                    <IconComponent size={24} weight="regular" />
                   </div>
-                  <div className="text-sm sm:text-base font-medium text-[#363d4f] leading-snug">
+                  <div className="text-sm sm:text-base font-medium text-[#363d4f] leading-snug text-balance">
                     {amenity.label}
                   </div>
                 </div>
@@ -344,7 +344,9 @@ export function ServicesPage() {
               {t('services.cta.callUs')}
             </a>
             <a
-              href="/contact"
+              href="https://www.google.com/maps?q=15+Jones+Franklin+Rd,+Raleigh,+NC+27606"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-transparent text-white px-8 py-4 rounded border border-white/80 hover:bg-white hover:text-black transition-colors font-medium"
             >
               {t('services.cta.visitUs')}

@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
-import { DropIcon, HeartStraightIcon, ShieldIcon, SunHorizonIcon, TrophyIcon, UsersThreeIcon, WrenchIcon } from '@phosphor-icons/react';
+import { scrollToTop } from '../../lib/utils';
+import { SparkleIcon, HeartStraightIcon, ShieldIcon, SunHorizonIcon, TrophyIcon, UsersThreeIcon, WrenchIcon, HandHeartIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { useLanguage } from '../context/LanguageContext';
@@ -56,6 +57,7 @@ export function AboutPage() {
             <Link
               to="/services"
               className="block w-full md:w-auto md:inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
+              onClick={scrollToTop}
             >
               {t('about.hero.exploreServices')}
             </Link>
@@ -159,8 +161,8 @@ export function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card image={{ src: '/images/01-washer.jpg', alt: 'High-efficiency Maytag washers', objectPosition: 'top' }}>
               <CardContent>
-                <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
-                  <DropIcon size={32} weight="duotone" />
+                <div className="mb-3 inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full flex-shrink-0 text-[#00bfb3]">
+                  <SparkleIcon size={24} weight="regular" />
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-black">{t('about.equipment.smartLaundry.title')}</h3>
                 <p className="text-sm leading-relaxed text-[#363d4f]">
@@ -171,8 +173,8 @@ export function AboutPage() {
 
             <Card image={{ src: '/images/dryers.jpg', alt: 'Commercial Maytag dryers' }}>
               <CardContent>
-                <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
-                  <SunHorizonIcon size={32} weight="duotone" />
+                <div className="mb-3 inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full flex-shrink-0 text-[#00bfb3]">
+                  <UsersThreeIcon size={24} weight="regular" />
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-black">{t('about.equipment.community.title')}</h3>
                 <p className="text-sm leading-relaxed text-[#363d4f]">
@@ -183,8 +185,8 @@ export function AboutPage() {
 
             <Card image={{ src: '/images/maintenance.png', alt: 'Professional equipment maintenance', objectPosition: 'top' }}>
               <CardContent>
-                <div className="mb-3 flex size-8 items-center justify-center text-[#00bfb3]">
-                  <WrenchIcon size={32} weight="duotone" />
+                <div className="mb-3 inline-flex items-center justify-center w-12 h-12 bg-[#00bfb3]/10 rounded-full flex-shrink-0 text-[#00bfb3]">
+                  <HandHeartIcon size={24} weight="regular" />
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-black">{t('about.equipment.care.title')}</h3>
                 <p className="text-sm leading-relaxed text-[#363d4f]">

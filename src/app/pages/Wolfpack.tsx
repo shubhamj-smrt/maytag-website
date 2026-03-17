@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { scrollToTop } from '../../lib/utils';
 import {
   GraduationCap,
   Clock,
@@ -119,6 +120,7 @@ export function WolfpackPage() {
               <Link
                 to="/pricing"
                 className="bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center inline-flex items-center justify-center gap-2"
+                onClick={scrollToTop}
               >
                 <Zap className="w-5 h-5" />
                 View Student Pricing
@@ -126,6 +128,7 @@ export function WolfpackPage() {
               <Link
                 to="/contact"
                 className="bg-white text-[#CC0000] px-8 py-4 rounded hover:bg-gray-100 transition-colors text-center"
+                onClick={scrollToTop}
               >
                 Get Directions
               </Link>
@@ -248,6 +251,7 @@ export function WolfpackPage() {
             <Link
               to="/pricing"
               className="inline-block bg-black text-white px-8 py-4 rounded hover:bg-gray-800 transition-colors"
+              onClick={scrollToTop}
             >
               See Full Pricing
             </Link>
@@ -301,6 +305,7 @@ export function WolfpackPage() {
                 <Link
                   to="/contact"
                   className="inline-block bg-[#00bfb3] text-white px-6 py-2 rounded hover:bg-[#00a89d] transition-colors text-sm"
+                  onClick={scrollToTop}
                 >
                   Sign Up Today
                 </Link>
@@ -370,6 +375,7 @@ export function WolfpackPage() {
                   <Link
                     to="/contact"
                     className="inline-block bg-[#CC0000] text-white px-8 py-4 rounded hover:bg-[#A00000] transition-colors"
+                    onClick={scrollToTop}
                   >
                     Get Directions & Contact Info
                   </Link>
@@ -404,12 +410,14 @@ export function WolfpackPage() {
             <Link
               to="/contact"
               className="inline-block bg-white text-[#CC0000] px-8 py-4 rounded hover:bg-gray-100 transition-colors font-semibold"
+              onClick={scrollToTop}
             >
               Visit Us Today
             </Link>
             <Link
               to="/services"
               className="inline-block bg-black text-white px-8 py-4 rounded hover:bg-gray-800 transition-colors"
+              onClick={scrollToTop}
             >
               Explore All Services
             </Link>

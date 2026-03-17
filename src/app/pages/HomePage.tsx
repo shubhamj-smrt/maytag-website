@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router';
+import { scrollToTop } from '../../lib/utils';
 import { AreasMap } from '../components/AreasMap';
 import { Star, MapPin, Clock, Phone, CircleCheck } from 'lucide-react';
 import { GiftIcon } from '@phosphor-icons/react';
@@ -156,6 +157,7 @@ export function HomePage() {
             <Link
               to="/contact"
               className="block w-full md:w-auto md:inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
+              onClick={scrollToTop}
             >
               {t('home.hero.contactUs')}
             </Link>
@@ -417,6 +419,7 @@ export function HomePage() {
           <Link
             to="/claim"
             className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
+            onClick={scrollToTop}
           >
             <GiftIcon size={20} weight="bold" />
             {t('home.cta.button')}

@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react';
 import { Link } from 'react-router';
+import { scrollToTop } from '../../lib/utils';
 import { Card, CardContent } from '../components/Card';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -161,6 +162,7 @@ export function PricingPage() {
                       ? 'bg-[#00bfb3] text-white hover:bg-[#00a89d]'
                       : 'bg-black text-white hover:bg-gray-800'
                   }`}
+                  onClick={scrollToTop}
                 >
                   {pkg.price === 'Custom' ? t('pricing.contactUs') : t('pricing.getStarted')}
                 </Link>
@@ -223,6 +225,7 @@ export function PricingPage() {
             <Link
               to="/contact"
               className="bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors"
+              onClick={scrollToTop}
             >
               {t('pricing.cta.visitUs')}
             </Link>
