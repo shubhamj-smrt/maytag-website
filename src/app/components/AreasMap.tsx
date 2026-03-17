@@ -16,7 +16,7 @@ const serviceAreas: Area[] = [
 ];
 
 // Centre the map on the laundromat itself
-const LAUNDROMAT: Area = { name: 'Maytag Coin Laundry', lat: 35.7856, lng: -78.7209 };
+const LAUNDROMAT: Area = { name: 'Maytag Laundry', lat: 35.7856, lng: -78.7209 };
 
 export function AreasMap({ className }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,7 +80,7 @@ export function AreasMap({ className }: { className?: string }) {
       // Laundromat pin
       L.marker([LAUNDROMAT.lat, LAUNDROMAT.lng], { icon: laundromatIcon })
         .addTo(map)
-        .bindPopup('<div style="text-align:center;white-space:nowrap"><strong>Maytag Coin Laundry</strong><br/>15 Jones Franklin Rd, Raleigh, NC</div>', popupOptions);
+        .bindPopup('<div style="text-align:center;white-space:nowrap"><strong>Maytag Laundry</strong><br/>15 Jones Franklin Rd, Raleigh, NC</div>', popupOptions);
 
       // Service area pins
       serviceAreas.forEach((area) => {
