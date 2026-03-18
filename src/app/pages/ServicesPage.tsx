@@ -135,14 +135,14 @@ export function ServicesPage() {
                 <div className="flex flex-col gap-3 sm:gap-4 flex-1 min-w-0">
                   <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
                     <img
-                      src="/images/self-service-laundromat-app.png"
+                      src="/images/self-service-side-payment.png"
                       alt="Mobile app with wallet and start machine — cashless laundry payment"
                       className="w-full h-full object-cover object-center"
                     />
                   </div>
                   <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
                     <img
-                      src="/images/self-service-laundromat-terminal.png"
+                      src="/images/self-service-side-dexter.png"
                       alt="Bubblepay terminal with scan and tap payment instructions"
                       className="w-full h-full object-cover object-center"
                     />
@@ -161,17 +161,16 @@ export function ServicesPage() {
           <div className="flex flex-col md:flex-row md:items-stretch gap-10 md:gap-8 lg:gap-12">
             {/* Left: image section — column 1 = hero image, column 2 = towels + bag stacked */}
             <div className="order-1 w-full md:flex-1 md:min-w-0">
-              <div className="flex flex-row gap-3 sm:gap-4 items-stretch h-full min-h-[260px] sm:min-h-[320px]">
-                {/* Column 1: hero image — spans full height of the pair beside it */}
+              <div className="flex flex-row gap-3 sm:gap-4 h-[320px] sm:h-[380px] md:h-[420px]">
                 <div className="flex-1 min-w-0 rounded-lg overflow-hidden shadow-lg bg-gray-100">
                   <img
                     src="/images/wash-fold-hero.png"
                     alt="Wash and fold laundry service"
-                    className="w-full h-full object-cover object-center min-h-[240px] md:min-h-0"
+                    className="w-full h-full object-cover object-center"
                   />
                 </div>
-                {/* Column 2: two images stacked vertically */}
-                <div className="flex flex-col gap-3 sm:gap-4 flex-1 min-w-0">
+
+                <div className="flex flex-col gap-3 sm:gap-4 flex-1 min-w-0 h-full">
                   <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
                     <img
                       src="/images/wash-fold-towels.png"
@@ -206,6 +205,62 @@ export function ServicesPage() {
               <p className="text-gray-700 leading-relaxed">
                 Our Raleigh laundromat uses high-quality detergents, modern machines, and careful handling to ensure your laundry is cleaned and folded to the highest standards. Customers choose us for our fast turnaround times, clean facility, and reliable laundry service.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pet Laundry / Dog Wash — like reference (text left, images right) */}
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          {/* Single row from md: text | images. Below md stacks with images first. */}
+          <div className="flex flex-col md:flex-row md:items-stretch gap-10 md:gap-8 lg:gap-12">
+            {/* Left: copy */}
+            <div className="order-2 md:order-1 md:flex-1 md:min-w-0 flex flex-col justify-center">
+              <div className="mb-6">
+                <div className="text-[#00bfb3] uppercase tracking-wide font-bold text-sm sm:text-base">
+                  Convenient and Pet-Safe
+                </div>
+                <h2 className="text-3xl sm:text-4xl font-bold text-black text-balance">
+                  Easiest Pet Laundry Service in Raleigh
+                </h2>
+              </div>
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                Keep your home fresh with our professional pet laundry service in Raleigh, NC. We specialize in cleaning dog beds, pet blankets, throws, and other pet items, removing dirt, odors, and pet hair effectively.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Our Raleigh laundromat uses high-quality detergents, powerful machines, and thorough cleaning processes to ensure your pet&apos;s items come out fresh, clean, and safe. Whether it&apos;s everyday pet bedding or heavily used items, we handle each load with care.
+              </p>
+            </div>
+
+            {/* Right: collage — column 1 large, column 2 stacked */}
+            <div className="order-1 md:order-2 w-full md:flex-1 md:min-w-0">
+              <div className="flex flex-row gap-3 sm:gap-4 h-[320px] sm:h-[380px] md:h-[500px]">
+                <div className="flex-1 min-w-0 rounded-lg overflow-hidden shadow-lg bg-gray-100">
+                  <img
+                    src="/images/pet-laundry-washer.png"
+                    alt="Happy dog enjoying clean pet laundry"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-3 sm:gap-4 flex-1 min-w-0 h-full">
+                  <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
+                    <img
+                      src="/images/pet-laundry-hero.png"
+                      alt="Washing pet bedding in a washer"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                  <div className="flex-1 min-h-0 rounded-lg overflow-hidden shadow-md bg-gray-100">
+                    <img
+                      src="/images/pet-laundry-dog-toy.png"
+                      alt="Dog waiting next to freshly cleaned pet items"
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
