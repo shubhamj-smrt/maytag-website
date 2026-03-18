@@ -13,6 +13,7 @@ import { CTAFormSuccessPreview } from './pages/CTAFormSuccessPreview';
 import { LocationSEO } from './components/LocationSEO';
 import { WolfpackPage } from './pages/Wolfpack';
 import { LanguageProvider } from './context/LanguageContext';
+import { Chatbot } from './components/Chatbot';
 
 function AppContent() {
   const location = useLocation();
@@ -44,6 +45,7 @@ function AppContent() {
         </Routes>
       </main>
       {!isClaimPage && <Footer />}
+      <Chatbot />
     </div>
   );
 }
