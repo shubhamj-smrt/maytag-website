@@ -115,15 +115,6 @@ export function Footer() {
               {t('footer.copyright.maytag')}
             </Link>
             {' | '}
-            <a
-              href="https://www.smrtsystems.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#00bfb3] transition-colors"
-            >
-              {t('footer.copyright.smrt')}
-            </a>
-            {' | '}
             <Link to="/" className="hover:text-[#00bfb3] transition-colors" onClick={scrollToTop}>
               {t('footer.copyright.terms')}
             </Link>
