@@ -6,6 +6,7 @@ import { CTAFormSuccessScreen } from '../components/CTAFormSuccessScreen';
 
 const HOLD_DURATION_MS = 3000;
 const SUCCESS_DISPLAY_MS = 5000;
+const CTA_FORM_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/615440/upskmeb/';
 
 function isValidEmail(value: string): boolean {
   if (!value.trim()) return false;
@@ -27,6 +28,7 @@ export function CTAFormPage() {
   const [showError, setShowError] = useState(false);
   const errorDismissRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [fadingOut, setFadingOut] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const registeredRef = useRef<Set<string>>(new Set());
@@ -48,21 +50,62 @@ export function CTAFormPage() {
     setErrors({});
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+
+    if (!emailValid || !phoneValid || !allFilled) {
+      validateAllAndShowErrors();
+      return;
+    }
+
+    if (!verified) {
+      setGeneralError(t('ctaForm.holdInstruction'));
+      setShowError(true);
+      return;
+    }
+
     const key = getRegistrationKey();
     if (registeredRef.current.has(key)) {
       setAlreadyRegistered(true);
       setVerified(false);
       return;
     }
-    registeredRef.current.add(key);
-    setSubmitted(true);
-    setFadingOut(false);
-    successRevertRef.current = setTimeout(() => {
-      setFadingOut(true);
-      successRevertRef.current = null;
-    }, SUCCESS_DISPLAY_MS);
+
+    setSubmitting(true);
+    setGeneralError(null);
+    setShowError(false);
+
+    try {
+      const now = new Date();
+      const res = await fetch(CTA_FORM_WEBHOOK_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          submittedAtIso: now.toISOString(),
+          submittedAtLocal: now.toLocaleString(),
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed: ${res.status}`);
+      }
+
+      registeredRef.current.add(key);
+      setSubmitted(true);
+      setFadingOut(false);
+      successRevertRef.current = setTimeout(() => {
+        setFadingOut(true);
+        successRevertRef.current = null;
+      }, SUCCESS_DISPLAY_MS);
+    } catch (err) {
+      setGeneralError(err instanceof Error ? err.message : t('contact.form.submitError'));
+      setShowError(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const clearHold = () => {
@@ -260,6 +303,14 @@ export function CTAFormPage() {
                     <p className="text-sm text-gray-700 bg-gray-100 border border-gray-300 rounded px-3 py-2 w-full text-left">
                       {t('ctaForm.alreadyRegistered')}
                     </p>
+                  ) : generalError ? (
+                    <p
+                      className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
+                        showError ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      {generalError}
+                    </p>
                   ) : !allFilled ? (
                     <p
                       className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
@@ -307,10 +358,10 @@ export function CTAFormPage() {
                 )}
                 <button
                   type="submit"
-                  disabled={!verified}
+                  disabled={!verified || submitting}
                   className="w-full bg-black text-white px-8 py-3 rounded hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-out font-semibold mt-2 cursor-pointer"
                 >
-                  {t('ctaForm.submit')}
+                  {submitting ? 'Sending...' : t('ctaForm.submit')}
                 </button>
               </form>
               <p className="text-center mt-6">
