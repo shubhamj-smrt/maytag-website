@@ -137,7 +137,7 @@ const translations: Record<Language, Record<string, string>> = {
     'ctaForm.backHome': 'Back to Home',
     'ctaForm.alreadyRegistered': "Congratulations! You're already registered.",
     'ctaForm.revertingToForm': 'Returning to the form in a few seconds...',
-    'ctaForm.backToWebsite': 'Take me back to the website',
+    'ctaForm.backToWebsite': 'Back to Homepage',
 
     // Services Page
     'services.hero.title': 'Our Services',

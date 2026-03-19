@@ -1,11 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
-import { scrollToTop } from '../../lib/utils';
 import { useLanguage } from '../context/LanguageContext';
+import { scrollToTop } from '../../lib/utils';
 import { CTAFormSuccessScreen } from '../components/CTAFormSuccessScreen';
 
 const HOLD_DURATION_MS = 3000;
-const SUCCESS_DISPLAY_MS = 5000;
 
 function isValidEmail(value: string): boolean {
   if (!value.trim()) return false;
@@ -27,10 +26,8 @@ export function CTAFormPage() {
   const [showError, setShowError] = useState(false);
   const errorDismissRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [fadingOut, setFadingOut] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const registeredRef = useRef<Set<string>>(new Set());
-  const successRevertRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [verified, setVerified] = useState(false);
   const [holdProgress, setHoldProgress] = useState(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -58,11 +55,6 @@ export function CTAFormPage() {
     }
     registeredRef.current.add(key);
     setSubmitted(true);
-    setFadingOut(false);
-    successRevertRef.current = setTimeout(() => {
-      setFadingOut(true);
-      successRevertRef.current = null;
-    }, SUCCESS_DISPLAY_MS);
   };
 
   const clearHold = () => {
@@ -134,20 +126,9 @@ export function CTAFormPage() {
     clearHold();
   };
 
-  const handleSuccessFadeOutComplete = () => {
-    setSubmitted(false);
-    setFadingOut(false);
-    setFormData({ name: '', email: '', phone: '' });
-    setVerified(false);
-    setErrors({});
-    setGeneralError(null);
-    setShowError(false);
-  };
-
   useEffect(() => {
     return () => {
       if (errorDismissRef.current) clearTimeout(errorDismissRef.current);
-      if (successRevertRef.current) clearTimeout(successRevertRef.current);
     };
   }, []);
 
@@ -184,10 +165,7 @@ export function CTAFormPage() {
       <div className="flex-1 flex items-center justify-center px-4 py-6 sm:py-8 min-h-0 overflow-visible">
         <div className="w-full max-w-md overflow-visible">
           {submitted ? (
-            <CTAFormSuccessScreen
-              fadingOut={fadingOut}
-              onFadeOutComplete={handleSuccessFadeOutComplete}
-            />
+            <CTAFormSuccessScreen />
           ) : (
             <>
               <h1 className="text-2xl sm:text-3xl font-bold text-white text-center mb-2 text-balance">
