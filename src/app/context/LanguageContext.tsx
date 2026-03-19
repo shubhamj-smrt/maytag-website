@@ -478,7 +478,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Home Page - Questions Section
     'home.questions.title': '¿Tiene más preguntas?',
-    'home.questions.subtitle': 'Visite nuestra tienda, llámenos o envíenos un correo electrónico; somos fáciles de contactar.',
+    'home.questions.subtitle': 'Visite nuestra tienda o llámenos; somos fáciles de contactar.',
     'home.questions.findUs': 'Encuéntrenos',
     'home.questions.address': '15 Jones Franklin Rd, Raleigh, NC 27606',
     'home.questions.whenOpen': 'Cuándo estamos abiertos',
@@ -524,7 +524,7 @@ const translations: Record<Language, Record<string, string>> = {
     'ctaForm.backHome': 'Volver al Inicio',
     'ctaForm.alreadyRegistered': '¡Felicitaciones! Ya está registrado.',
     'ctaForm.revertingToForm': 'Volviendo al formulario en unos segundos...',
-    'ctaForm.backToWebsite': 'Llévame de vuelta al sitio web',
+    'ctaForm.backToWebsite': 'Volver a la página de inicio',
 
     // Services Page
     'services.hero.title': 'Nuestros Servicios',
@@ -755,8 +755,10 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.faq.a2': 'Aceptamos billetes, tarjetas de credito/debito y opciones de pago movil. Tambien hay un cajero automatico disponible en el lugar.',
     'contact.faq.q3': 'Hay personal disponible para ayudar?',
     'contact.faq.a3': 'Si! Tenemos personal de servicio durante las horas de operacion que estara encantado de ayudarle con cualquier pregunta o inquietud.',
-    'contact.faq.q4': 'Cuanto tiempo toma un lavado y secado tipico?',
-    'contact.faq.a4': 'Los ciclos de lavado tipicamente toman 30-45 minutos dependiendo del tamano de la maquina. El secado usualmente toma 30-40 minutos. Planee aproximadamente 60-90 minutos en total.',
+    'contact.faq.q4': '¿Hablan español sus empleados?',
+    'contact.faq.a4': '¡Sí! Muchos de nuestros empleados hablan inglés y español y estarán encantados de ayudarle.',
+    'contact.faq.q5': 'Cuanto tiempo toma un lavado y secado tipico?',
+    'contact.faq.a5': 'Los ciclos de lavado tipicamente toman 30-45 minutos dependiendo del tamano de la maquina. El secado usualmente toma 30-40 minutos. Planee aproximadamente 60-90 minutos en total.',
     'contact.cta.title': 'Todavia Tiene Preguntas?',
     'contact.cta.subtitle': 'Llamenos o visitenos durante las horas de operacion. Siempre estaremos encantados de ayudar!',
     'contact.cta.button': 'Llamenos',
