@@ -10,18 +10,19 @@ import { ContactPage } from './pages/ContactPage';
 import { TestimonialsPage } from './pages/TestimonialsPage';
 import { CTAFormPage } from './pages/CTAFormPage';
 import { CTAFormSuccessPreview } from './pages/CTAFormSuccessPreview';
+import { SchedulePickupFormPage } from './pages/SchedulePickupFormPage';
 import { LocationSEO } from './components/LocationSEO';
 import { WolfpackPage } from './pages/Wolfpack';
 import { LanguageProvider } from './context/LanguageContext';
 
 function AppContent() {
   const location = useLocation();
-  const isClaimPage = location.pathname === '/claim' || location.pathname === '/claim/success';
+  const isStandaloneFormPage = location.pathname === '/claim' || location.pathname === '/claim/success' || location.pathname === '/schedule-pickup';
 
   return (
     <div className="min-h-screen flex flex-col">
-      {!isClaimPage && <Navigation />}
-      <main className={isClaimPage ? 'flex-grow' : 'flex-grow'}>
+      {!isStandaloneFormPage && <Navigation />}
+        <main className="flex-grow">
         <Routes>
               {/* Core pages */}
               <Route path="/" element={<HomePage />} />
@@ -33,6 +34,7 @@ function AppContent() {
               <Route path="/wolfpack" element={<WolfpackPage />} />
               <Route path="/claim" element={<CTAFormPage />} />
               <Route path="/claim/success" element={<CTAFormSuccessPreview />} />
+              <Route path="/schedule-pickup" element={<SchedulePickupFormPage />} />
 
               {/* Location pages — reuse existing pages with location SEO */}
               <Route path="/laundromat-in/:locationSlug" element={<LocationSEO page="home"><HomePage /></LocationSEO>} />
@@ -43,7 +45,7 @@ function AppContent() {
               <Route path="/testimonials-in/:locationSlug" element={<LocationSEO page="testimonials"><TestimonialsPage /></LocationSEO>} />
         </Routes>
       </main>
-      {!isClaimPage && <Footer />}
+      {!isStandaloneFormPage && <Footer />}
     </div>
   );
 }

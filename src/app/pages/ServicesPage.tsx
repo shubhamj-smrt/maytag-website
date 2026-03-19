@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { Shirt, Wind, Droplet, Package } from 'lucide-react';
 import { WifiHighIcon, ArmchairIcon, CoffeeIcon, ShoppingCartIcon, BankIcon, SecurityCameraIcon, CarIcon, UserIcon } from '@phosphor-icons/react';
 import { Card, CardContent } from '../components/Card';
 import { useLanguage } from '../context/LanguageContext';
 import { CharacterMorph } from '../../components/ui/character-morph';
+import { scrollToTop } from '../../lib/utils';
 
 export function ServicesPage() {
   const { t } = useLanguage();
@@ -91,9 +93,16 @@ export function ServicesPage() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">
               <CharacterMorph texts={[t('services.hero.title')]} />
             </h1>
-            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px]">
+            <p className="text-lg sm:text-xl text-gray-200 max-w-[450px] mb-8">
               {t('services.hero.subtitle')}
             </p>
+            <Link
+              to="/schedule-pickup"
+              className="block w-full md:w-auto md:inline-block bg-[#00bfb3] text-white px-8 py-4 rounded hover:bg-[#00a89d] transition-colors text-center"
+              onClick={scrollToTop}
+            >
+              {t('services.hero.schedulePickup')}
+            </Link>
           </div>
         </div>
       </section>
@@ -286,18 +295,19 @@ export function ServicesPage() {
         </div>
 
         {/* Content */}
-        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 h-[500px] py-16 sm:py-20 text-center text-white flex flex-col items-center justify-center">
-          <p className="text-base sm:text-lg text-gray-100 mb-2">It doesn’t end there.</p>
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 min-h-[420px] sm:min-h-[500px] py-12 sm:py-20 text-center text-white flex flex-col items-center justify-center">
+          <p className="text-base sm:text-lg text-gray-100 mb-2">{t('services.pickupDelivery.tagline')}</p>
           <h2 className="text-2xl sm:text-4xl font-bold text-balance mb-8">
-            Fastest Laundry Pickup &amp; Delivery
-            <br className="hidden sm:block" /> in Raleigh
+            {t('services.pickupDelivery.titleLine1')}
+            <br className="hidden sm:block" /> {t('services.pickupDelivery.titleLine2')}
           </h2>
-          <a
-            href="tel:2523083052"
-            className="inline-flex items-center justify-center bg-[#00bfb3] text-white px-8 py-4 rounded font-semibold hover:bg-[#00a89d] transition-colors"
+          <Link
+            to="/schedule-pickup"
+            className="inline-flex items-center justify-center w-full sm:w-auto bg-[#00bfb3] text-white px-8 py-4 rounded font-semibold hover:bg-[#00a89d] transition-colors min-h-[44px]"
+            onClick={scrollToTop}
           >
-            Schedule Delivery
-          </a>
+            {t('services.hero.schedulePickup')}
+          </Link>
         </div>
       </section>
 
