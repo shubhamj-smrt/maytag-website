@@ -20,7 +20,6 @@ function formatTimeForInput(d: Date): string {
   return [
     d.getHours().toString().padStart(2, "0"),
     d.getMinutes().toString().padStart(2, "0"),
-    "00",
   ].join(":")
 }
 
@@ -111,10 +110,11 @@ export function NewDateTimePicker({
         <input
           type="time"
           id="time"
+          step="60"
           value={timeValue}
           onChange={handleTimeChange}
           disabled={disabled}
-          className="w-full text-base px-4 py-2.5 min-h-[46px] border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
+          className="w-full text-base px-4 py-2.5 min-h-[46px] border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
         />
       </div>
     </div>
