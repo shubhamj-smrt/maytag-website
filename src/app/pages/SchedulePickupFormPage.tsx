@@ -1,18 +1,11 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { useLanguage } from '../context/LanguageContext';
 import { scrollToTop } from '../../lib/utils';
 import { SchedulePickupSuccessScreen } from '../components/SchedulePickupSuccessScreen';
+import { NewDateTimePicker } from '../../components/ui/new-date-time-picker';
 
 const HOLD_DURATION_MS = 3000;
-
-function getDatePlaceholder(locale: string): string {
-  return new Date().toLocaleDateString(locale, { weekday: 'long', month: 'long', day: 'numeric' });
-}
-
-function getTimePlaceholder(locale: string): string {
-  return new Date().toLocaleTimeString(locale, { hour: 'numeric', minute: '2-digit', hour12: true });
-}
 
 function isValidUSPhone(value: string): boolean {
   const digits = value.replace(/\D/g, '');
@@ -27,10 +20,9 @@ export function SchedulePickupFormPage() {
     name: '',
     phone: '',
     address: '',
-    preferredDate: '',
-    preferredTime: '',
     notes: '',
   });
+  const [preferredDateTime, setPreferredDateTime] = useState<Date | null>(null);
   const [errors, setErrors] = useState<{ phone?: string }>({});
   const [generalError, setGeneralError] = useState<string | null>(null);
   const [showError, setShowError] = useState(false);
@@ -40,10 +32,6 @@ export function SchedulePickupFormPage() {
   const [holdProgress, setHoldProgress] = useState(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const locale = language === 'es' ? 'es' : 'en-US';
-  const datePlaceholder = useMemo(() => getDatePlaceholder(locale), [locale]);
-  const timePlaceholder = useMemo(() => getTimePlaceholder(locale), [locale]);
 
   const phoneValid = isValidUSPhone(formData.phone);
   const phoneValidRef = useRef(phoneValid);
@@ -241,31 +229,12 @@ export function SchedulePickupFormPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="preferredDate" className="block text-sm font-semibold text-black mb-1">
-                    {t('pickupForm.preferredDate')}
-                  </label>
-                  <input
-                    type="text"
-                    id="preferredDate"
-                    name="preferredDate"
-                    value={formData.preferredDate}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                    placeholder={datePlaceholder}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="preferredTime" className="block text-sm font-semibold text-black mb-1">
-                    {t('pickupForm.preferredTime')}
-                  </label>
-                  <input
-                    type="text"
-                    id="preferredTime"
-                    name="preferredTime"
-                    value={formData.preferredTime}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
-                    placeholder={timePlaceholder}
+                  <NewDateTimePicker
+                    value={preferredDateTime}
+                    onChange={setPreferredDateTime}
+                    datePlaceholder={t('pickupForm.pickDatePlaceholder')}
+                    dateLabel={t('pickupForm.preferredDate')}
+                    timeLabel={t('pickupForm.preferredTime')}
                   />
                 </div>
                 <div>
