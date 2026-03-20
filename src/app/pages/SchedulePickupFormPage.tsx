@@ -2,14 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { useLanguage } from '../context/LanguageContext';
 import { scrollToTop } from '../../lib/utils';
-import { CTAFormSuccessScreen } from '../components/CTAFormSuccessScreen';
+import { SchedulePickupSuccessScreen } from '../components/SchedulePickupSuccessScreen';
+import { NewDateTimePicker } from '../../components/ui/new-date-time-picker';
 
 const HOLD_DURATION_MS = 3000;
-
-function isValidEmail(value: string): boolean {
-  if (!value.trim()) return false;
-  return value.includes('@') && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
-}
 
 function isValidUSPhone(value: string): boolean {
   const digits = value.replace(/\D/g, '');
@@ -18,58 +14,41 @@ function isValidUSPhone(value: string): boolean {
   return false;
 }
 
-export function CTAFormPage() {
+export function SchedulePickupFormPage() {
   const { language, setLanguage, t } = useLanguage();
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
-  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({});
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    notes: '',
+  });
+  const [preferredDateTime, setPreferredDateTime] = useState<Date | null>(null);
+  const [errors, setErrors] = useState<{ phone?: string }>({});
   const [generalError, setGeneralError] = useState<string | null>(null);
   const [showError, setShowError] = useState(false);
   const errorDismissRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [fadingOut, setFadingOut] = useState(false);
-  const [alreadyRegistered, setAlreadyRegistered] = useState(false);
-  const registeredRef = useRef<Set<string>>(new Set());
   const [verified, setVerified] = useState(false);
   const [holdProgress, setHoldProgress] = useState(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const getRegistrationKey = () =>
-    `${formData.email.trim().toLowerCase()}|${formData.phone.replace(/\D/g, '')}`;
+  const phoneValid = isValidUSPhone(formData.phone);
+  const phoneValidRef = useRef(phoneValid);
+  phoneValidRef.current = phoneValid;
+  const allFilled = Boolean(
+    formData.name.trim() &&
+    formData.phone.trim() &&
+    formData.address.trim()
+  );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setGeneralError(null);
     setShowError(false);
-    setAlreadyRegistered(false);
     setErrors({});
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (submitting) return;
-
-    if (!emailValid || !phoneValid || !allFilled) {
-      validateAllAndShowErrors();
-      return;
-    }
-
-    if (!verified) {
-      setGeneralError(t('ctaForm.holdInstruction'));
-      setShowError(true);
-      return;
-    }
-
-    const key = getRegistrationKey();
-    if (registeredRef.current.has(key)) {
-      setAlreadyRegistered(true);
-      setVerified(false);
-      return;
-    }
-    registeredRef.current.add(key);
-    setSubmitted(true);
+    if (name === 'phone' && verified && !isValidUSPhone(value)) setVerified(false);
   };
 
   const clearHold = () => {
@@ -84,20 +63,17 @@ export function CTAFormPage() {
     setHoldProgress(0);
   };
 
-  const emailValid = isValidEmail(formData.email);
-  const phoneValid = isValidUSPhone(formData.phone);
-  const allFilled = Boolean(formData.name.trim() && formData.email.trim() && formData.phone.trim());
-
-  const validateAllAndShowErrors = () => {
+  const validateAllAndShowErrors = (fromHoldAttempt = false) => {
     if (!allFilled) {
       setGeneralError(t('ctaForm.fillFieldsFirst'));
       setErrors({});
-    } else {
+    } else if (fromHoldAttempt) {
+      const valid = phoneValidRef.current;
       setGeneralError(null);
       setErrors({
-        email: !emailValid ? t('ctaForm.errorEmailInvalid') : undefined,
-        phone: !phoneValid ? t('ctaForm.errorPhoneUSOnly') : undefined,
+        phone: !valid ? t('ctaForm.errorPhoneUSOnly') : undefined,
       });
+      if (!valid) setVerified(false);
     }
     setShowError(true);
     if (errorDismissRef.current) clearTimeout(errorDismissRef.current);
@@ -111,34 +87,39 @@ export function CTAFormPage() {
   const startHold = (e?: React.TouchEvent) => {
     e?.preventDefault();
     if (!allFilled || verified) return;
-    if (!emailValid || !phoneValid) {
-      validateAllAndShowErrors();
-      return;
-    }
     clearHold();
     const start = Date.now();
+    const onHoldComplete = () => {
+      if (!phoneValidRef.current) {
+        validateAllAndShowErrors(true);
+        return;
+      }
+      setVerified(true);
+    };
     progressIntervalRef.current = setInterval(() => {
       const elapsed = Date.now() - start;
       const pct = Math.min(100, (elapsed / HOLD_DURATION_MS) * 100);
       setHoldProgress(pct);
       if (pct >= 100) {
         clearHold();
-        setVerified(true);
+        onHoldComplete();
       }
     }, 50);
     holdTimerRef.current = setTimeout(() => {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-        progressIntervalRef.current = null;
-      }
-      holdTimerRef.current = null;
+      clearHold();
       setHoldProgress(100);
-      setVerified(true);
+      onHoldComplete();
     }, HOLD_DURATION_MS);
   };
 
   const cancelHold = () => {
     clearHold();
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!verified) return;
+    setSubmitted(true);
   };
 
   useEffect(() => {
@@ -180,14 +161,14 @@ export function CTAFormPage() {
       <div className="flex-1 flex items-center justify-center px-4 py-6 sm:py-8 min-h-0 overflow-visible">
         <div className="w-full max-w-md overflow-visible">
           {submitted ? (
-            <CTAFormSuccessScreen />
+            <SchedulePickupSuccessScreen />
           ) : (
             <>
               <h1 className="text-2xl sm:text-3xl font-bold text-white text-center mb-2 text-balance">
-                {t('ctaForm.title')}
+                {t('pickupForm.title')}
               </h1>
               <p className="text-white/90 text-center text-sm sm:text-base mb-6 text-balance">
-                {t('ctaForm.subtitle')}
+                {t('pickupForm.subtitle')}
               </p>
               <form
                 onSubmit={handleSubmit}
@@ -204,29 +185,11 @@ export function CTAFormPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors"
+                    className={`w-full px-4 py-2.5 border rounded focus:outline-none transition-colors ${
+                      showError && !formData.name.trim() ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#00bfb3]'
+                    }`}
                     placeholder={t('contact.form.namePlaceholder')}
                   />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-black mb-1">
-                    {t('contact.form.email')} <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className={`w-full px-4 py-2.5 border rounded focus:outline-none transition-colors ${
-                      errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#00bfb3]'
-                    }`}
-                    placeholder={t('contact.form.emailPlaceholder')}
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email}</p>
-                  )}
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-semibold text-black mb-1">
@@ -240,28 +203,56 @@ export function CTAFormPage() {
                     onChange={handleChange}
                     required
                     className={`w-full px-4 py-2.5 border rounded focus:outline-none transition-colors ${
-                      errors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#00bfb3]'
+                      (allFilled && errors.phone) || (showError && !formData.phone.trim()) ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#00bfb3]'
                     }`}
                     placeholder={t('contact.form.phonePlaceholder')}
                   />
-                  {errors.phone && (
+                  {allFilled && errors.phone && (
                     <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
                   )}
                 </div>
+                <div>
+                  <label htmlFor="address" className="block text-sm font-semibold text-black mb-1">
+                    {t('pickupForm.address')} <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    required
+                    className={`w-full px-4 py-2.5 border rounded focus:outline-none transition-colors ${
+                      showError && !formData.address.trim() ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#00bfb3]'
+                    }`}
+                    placeholder={t('pickupForm.addressPlaceholder')}
+                  />
+                </div>
+                <div>
+                  <NewDateTimePicker
+                    value={preferredDateTime}
+                    onChange={setPreferredDateTime}
+                    datePlaceholder={t('pickupForm.pickDatePlaceholder')}
+                    dateLabel={t('pickupForm.preferredDate')}
+                    timeLabel={t('pickupForm.preferredTime')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="notes" className="block text-sm font-semibold text-black mb-1">
+                    {t('pickupForm.notes')}
+                  </label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleChange}
+                    rows={3}
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-[#00bfb3] transition-colors resize-none"
+                    placeholder={t('pickupForm.notesPlaceholder')}
+                  />
+                </div>
                 <div className="min-h-[44px] flex items-start">
-                  {alreadyRegistered ? (
-                    <p className="text-sm text-gray-700 bg-gray-100 border border-gray-300 rounded px-3 py-2 w-full text-left">
-                      {t('ctaForm.alreadyRegistered')}
-                    </p>
-                  ) : generalError ? (
-                    <p
-                      className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
-                        showError ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    >
-                      {generalError}
-                    </p>
-                  ) : !allFilled ? (
+                  {generalError || !allFilled ? (
                     <p
                       className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
                         showError ? 'opacity-100' : 'opacity-0'
@@ -272,7 +263,7 @@ export function CTAFormPage() {
                   ) : null}
                 </div>
                 <p className="text-sm text-black mb-2">{t('ctaForm.holdInstruction')}</p>
-                {verified ? (
+                {verified && phoneValid ? (
                   <div className="w-full px-3 py-3 rounded border-2 border-[#00bfb3] bg-[#00bfb3]/15 text-[#00a89d] font-medium transition-all duration-300 ease-out flex items-start justify-start">
                     <span className="inline-flex items-center gap-2">
                       <span className="text-[#00bfb3] font-bold">✓</span>
@@ -289,7 +280,7 @@ export function CTAFormPage() {
                     onTouchEnd={cancelHold}
                     onTouchCancel={cancelHold}
                     onContextMenu={(e) => e.preventDefault()}
-                    className="w-full px-8 py-3 rounded font-semibold relative overflow-hidden transition-colors duration-300 ease-out bg-[#00bfb3]/30 text-gray-800 cursor-pointer flex items-center justify-center text-center"
+                    className="w-full min-h-[44px] px-8 py-3 rounded font-semibold relative overflow-hidden transition-colors duration-300 ease-out bg-[#00bfb3]/30 text-gray-800 cursor-pointer flex items-center justify-center text-center"
                   >
                     <span
                       className="absolute inset-y-0 left-0 bg-[#00bfb3] transition-[width] duration-100 ease-linear"
@@ -300,23 +291,23 @@ export function CTAFormPage() {
                 ) : (
                   <button
                     type="button"
-                    onClick={validateAllAndShowErrors}
-                    className="w-full px-8 py-3 rounded font-semibold bg-[#00bfb3]/15 text-gray-500 cursor-not-allowed text-center"
+                    onClick={() => validateAllAndShowErrors()}
+                    className="w-full min-h-[44px] px-8 py-3 rounded font-semibold bg-[#00bfb3]/15 text-gray-500 cursor-not-allowed text-center"
                   >
                     {t('ctaForm.holdToVerify')}
                   </button>
                 )}
                 <button
                   type="submit"
-                  disabled={!verified || submitting}
-                  className="w-full bg-black text-white px-8 py-3 rounded hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-out font-semibold mt-2 cursor-pointer"
+                  disabled={!verified || !phoneValid}
+                  className="w-full min-h-[44px] bg-black text-white px-8 py-3 rounded hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-out font-semibold mt-2 cursor-pointer"
                 >
-                  {submitting ? 'Sending...' : t('ctaForm.submit')}
+                  {t('pickupForm.submit')}
                 </button>
               </form>
               <p className="text-center mt-6">
                 <Link
-                  to="/"
+                  to="/services"
                   className="text-white underline hover:text-white/90 transition-colors"
                   onClick={scrollToTop}
                 >
