@@ -403,7 +403,7 @@ export function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:2523083052"
+              href="tel:9842059506"
               className="bg-white text-black px-8 py-4 rounded hover:bg-gray-200 transition-colors font-medium"
             >
               {t('services.cta.callUs')}

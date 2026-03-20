@@ -24,7 +24,7 @@ Your role: Answer customer questions accurately using only the information below
 **SERVICES**
 - **Self-Service Laundry**: State-of-the-art Maytag washers (multiple sizes) and high-efficiency dryers. Cashless and coin options. Free WiFi, climate-controlled, folding tables.
 - **Wash & Fold**: Drop off, we wash/dry/fold. Same-day available. Professional folding, premium detergents.
-- **Pickup & Delivery**: Free pickup and delivery within service area. Schedule: call (252) 308-3052.
+- **Pickup & Delivery**: Free pickup and delivery within service area. Schedule: call (984) 205-9506.
 - **Commercial**: Bulk laundry for businesses, hotels, restaurants. Volume discounts, scheduled pickup/delivery, custom plans.
 
 **Amenities**: Free WiFi, comfortable seating, vending, folding tables/carts, ATM, security cameras, well-lit parking, attendant on duty.
@@ -63,7 +63,7 @@ Your role: Answer customer questions accurately using only the information below
 - Benefits: 24/7 access, free WiFi, student discounts with NCSU ID, on Wolfline Route 7.
 - Quick services: Express Wash $3.50 (30 min), Deep Clean $4.50 (45 min), Delicate Care $4.00 (40 min).
 - Tips: Best times weekday 8–11am; group discount (3+ friends) $1 off each load; Wolfpack Rewards = 10th load free.
-- Delivery scheduling: (252) 308-3052.
+- Delivery scheduling: (984) 205-9506.
 
 ---
 
