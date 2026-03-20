@@ -10,120 +10,114 @@ export function PrivacyPage() {
           {t('privacy.title')}
         </h1>
         <div className="prose prose-gray max-w-none">
-          <p><strong>Effective Date:</strong> March 2026</p><br />
+          <p><strong>{t('privacy.effectiveDate')}</strong> {t('privacy.effectiveDateValue')}</p>
 
           <p>
-            Maytag Laundromat (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website (
+            {t('privacy.introPrefix')}
             <a href="https://maytaglaundromat.com/" target="_blank" rel="noopener noreferrer" className="text-[#00bfb3] hover:underline">https://maytaglaundromat.com/</a>
-            ) or use our services, including in-store laundry, wash &amp; fold, pickup and delivery, and subscription services in Raleigh, North Carolina.
+            {t('privacy.introSuffix')}
           </p>
 
-          <p>
-            By using our services, you agree to the terms of this Privacy Policy.
-          </p>
+          <p>{t('privacy.agree')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">1. Information We Collect</h2>
-          <p>We may collect the following types of information:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s1.title')}</h2>
+          <p>{t('privacy.s1.intro')}</p>
 
-          <h3 className="text-lg font-semibold mt-6 mb-2">Personal Information</h3>
+          <h3 className="text-lg font-semibold mt-6 mb-2">{t('privacy.s1.personal')}</h3>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Name</li>
-            <li>Phone number</li>
-            <li>Email address</li>
-            <li>Billing and payment information</li>
-            <li>Pickup and delivery addresses</li>
+            <li>{t('privacy.s1.personal1')}</li>
+            <li>{t('privacy.s1.personal2')}</li>
+            <li>{t('privacy.s1.personal3')}</li>
+            <li>{t('privacy.s1.personal4')}</li>
+            <li>{t('privacy.s1.personal5')}</li>
           </ul>
 
-          <h3 className="text-lg font-semibold mt-6 mb-2">Service Information</h3>
+          <h3 className="text-lg font-semibold mt-6 mb-2">{t('privacy.s1.service')}</h3>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Laundry preferences and instructions</li>
-            <li>Order history</li>
-            <li>Subscription details</li>
+            <li>{t('privacy.s1.service1')}</li>
+            <li>{t('privacy.s1.service2')}</li>
+            <li>{t('privacy.s1.service3')}</li>
           </ul>
 
-          <h3 className="text-lg font-semibold mt-6 mb-2">Automatically Collected Information</h3>
-          <p>When you visit our website, we may collect:</p>
+          <h3 className="text-lg font-semibold mt-6 mb-2">{t('privacy.s1.auto')}</h3>
+          <p>{t('privacy.s1.autoIntro')}</p>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>IP address</li>
-            <li>Browser type</li>
-            <li>Device information</li>
-            <li>Pages visited and usage data</li>
+            <li>{t('privacy.s1.auto1')}</li>
+            <li>{t('privacy.s1.auto2')}</li>
+            <li>{t('privacy.s1.auto3')}</li>
+            <li>{t('privacy.s1.auto4')}</li>
           </ul>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">2. How We Use Your Information</h2>
-          <p>We use your information to:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s2.title')}</h2>
+          <p>{t('privacy.s2.intro')}</p>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Provide and manage laundry services</li>
-            <li>Process payments and subscriptions</li>
-            <li>Schedule pickups and deliveries</li>
-            <li>Communicate with you about your orders or account</li>
-            <li>Improve our services and customer experience</li>
-            <li>Send promotional offers (you may opt out at any time)</li>
+            <li>{t('privacy.s2.item1')}</li>
+            <li>{t('privacy.s2.item2')}</li>
+            <li>{t('privacy.s2.item3')}</li>
+            <li>{t('privacy.s2.item4')}</li>
+            <li>{t('privacy.s2.item5')}</li>
+            <li>{t('privacy.s2.item6')}</li>
           </ul>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">3. Sharing Your Information</h2>
-          <p>We do not sell your personal information.</p>
-          <p className="mt-4">We may share your information with:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s3.title')}</h2>
+          <p>{t('privacy.s3.noSell')}</p>
+          <p className="mt-4">{t('privacy.s3.intro')}</p>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Payment processors to securely handle transactions</li>
-            <li>Delivery personnel to complete pickup and delivery services</li>
-            <li>Service providers that help operate our website or business</li>
+            <li>{t('privacy.s3.item1')}</li>
+            <li>{t('privacy.s3.item2')}</li>
+            <li>{t('privacy.s3.item3')}</li>
           </ul>
-          <p>All third parties are required to maintain the confidentiality of your information.</p>
+          <p>{t('privacy.s3.closing')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">4. Data Security</h2>
-          <p>
-            We implement reasonable administrative, technical, and physical safeguards to protect your information. However, no method of transmission over the internet or electronic storage is 100% secure.
-          </p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s4.title')}</h2>
+          <p>{t('privacy.s4.content')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">5. Data Retention</h2>
-          <p>We retain your information only as long as necessary to:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s5.title')}</h2>
+          <p>{t('privacy.s5.intro')}</p>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Provide services</li>
-            <li>Maintain business records</li>
-            <li>Comply with legal obligations</li>
+            <li>{t('privacy.s5.item1')}</li>
+            <li>{t('privacy.s5.item2')}</li>
+            <li>{t('privacy.s5.item3')}</li>
           </ul>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">6. Your Choices and Rights</h2>
-          <p>You have the right to:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s6.title')}</h2>
+          <p>{t('privacy.s6.intro')}</p>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Access or update your personal information</li>
-            <li>Request deletion of your data (subject to legal requirements)</li>
-            <li>Opt out of marketing communications</li>
+            <li>{t('privacy.s6.item1')}</li>
+            <li>{t('privacy.s6.item2')}</li>
+            <li>{t('privacy.s6.item3')}</li>
           </ul>
-          <p>To exercise these rights, please contact us using the information below.</p>
+          <p>{t('privacy.s6.closing')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">7. Cookies and Tracking Technologies</h2>
-          <p>Our website may use cookies and similar technologies to:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s7.title')}</h2>
+          <p>{t('privacy.s7.intro')}</p>
           <ul className="list-disc pl-6 space-y-1 my-4">
-            <li>Enhance user experience</li>
-            <li>Analyze website traffic</li>
-            <li>Remember user preferences</li>
+            <li>{t('privacy.s7.item1')}</li>
+            <li>{t('privacy.s7.item2')}</li>
+            <li>{t('privacy.s7.item3')}</li>
           </ul>
-          <p>You can control cookies through your browser settings.</p>
+          <p>{t('privacy.s7.closing')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">8. Children&apos;s Privacy</h2>
-          <p>Our services are not directed to children under 13. We do not knowingly collect personal information from children.</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s8.title')}</h2>
+          <p>{t('privacy.s8.content')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">9. Local Compliance (North Carolina &amp; U.S. Laws)</h2>
-          <p>
-            As a business operating in Raleigh, North Carolina, we comply with applicable U.S. privacy laws. While North Carolina does not currently have a comprehensive consumer privacy law, we follow best practices to protect your personal information and honor applicable consumer rights.
-          </p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s9.title')}</h2>
+          <p>{t('privacy.s9.content')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">10. Changes to This Policy</h2>
-          <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s10.title')}</h2>
+          <p>{t('privacy.s10.content')}</p>
 
-          <h2 className="text-xl font-semibold mt-8 mb-3">11. Contact Us</h2>
-          <p>If you have questions or concerns about this Privacy Policy, please contact us:</p>
+          <h2 className="text-xl font-semibold mt-8 mb-3">{t('privacy.s11.title')}</h2>
+          <p>{t('privacy.s11.intro')}</p>
           <p className="my-4">
-            <strong>Maytag Laundromat</strong><br />
-            Raleigh, North Carolina<br />
-            Website: <a href="https://maytaglaundromat.com/" target="_blank" rel="noopener noreferrer" className="text-[#00bfb3] hover:underline">https://maytaglaundromat.com/</a><br />
-            Phone: <a href="tel:9842059506" className="text-[#00bfb3] hover:underline">(984) 205-9506</a>
+            <strong>{t('privacy.s11.company')}</strong><br />
+            {t('privacy.s11.location')}<br />
+            {t('privacy.s11.website')} <a href="https://maytaglaundromat.com/" target="_blank" rel="noopener noreferrer" className="text-[#00bfb3] hover:underline">https://maytaglaundromat.com/</a><br />
+            {t('privacy.s11.phone')} <a href="tel:9842059506" className="text-[#00bfb3] hover:underline">(984) 205-9506</a>
           </p>
 
           <p className="mt-8 pt-6 border-t border-gray-200">
-            By using our services, you acknowledge that you have read and understood this Privacy Policy.
+            {t('privacy.acknowledge')}
           </p>
         </div>
       </div>
