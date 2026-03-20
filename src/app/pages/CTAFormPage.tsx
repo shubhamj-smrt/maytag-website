@@ -26,6 +26,8 @@ export function CTAFormPage() {
   const [showError, setShowError] = useState(false);
   const errorDismissRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [fadingOut, setFadingOut] = useState(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState(false);
   const registeredRef = useRef<Set<string>>(new Set());
   const [verified, setVerified] = useState(false);
@@ -45,8 +47,21 @@ export function CTAFormPage() {
     setErrors({});
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+
+    if (!emailValid || !phoneValid || !allFilled) {
+      validateAllAndShowErrors();
+      return;
+    }
+
+    if (!verified) {
+      setGeneralError(t('ctaForm.holdInstruction'));
+      setShowError(true);
+      return;
+    }
+
     const key = getRegistrationKey();
     if (registeredRef.current.has(key)) {
       setAlreadyRegistered(true);
@@ -238,6 +253,14 @@ export function CTAFormPage() {
                     <p className="text-sm text-gray-700 bg-gray-100 border border-gray-300 rounded px-3 py-2 w-full text-left">
                       {t('ctaForm.alreadyRegistered')}
                     </p>
+                  ) : generalError ? (
+                    <p
+                      className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
+                        showError ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      {generalError}
+                    </p>
                   ) : !allFilled ? (
                     <p
                       className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
@@ -285,10 +308,10 @@ export function CTAFormPage() {
                 )}
                 <button
                   type="submit"
-                  disabled={!verified}
+                  disabled={!verified || submitting}
                   className="w-full bg-black text-white px-8 py-3 rounded hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-out font-semibold mt-2 cursor-pointer"
                 >
-                  {t('ctaForm.submit')}
+                  {submitting ? 'Sending...' : t('ctaForm.submit')}
                 </button>
               </form>
               <p className="text-center mt-6">
