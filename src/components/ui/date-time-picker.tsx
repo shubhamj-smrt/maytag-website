@@ -28,7 +28,7 @@ function buildDateTime(date: Date, hour: string, minute: string, ampm: string): 
 export default function DateTimePicker({
   value,
   onChange,
-  datePlaceholder = "Pick a date",
+  datePlaceholder = "Select date",
   timePlaceholder,
   disabled = false,
   className,
