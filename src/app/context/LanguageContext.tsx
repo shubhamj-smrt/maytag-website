@@ -303,7 +303,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About Page
     'about.hero.title': 'About Us',
-    'about.hero.subtitle': "For over 15 years, we've been Raleigh's trusted choice for quality laundry services and exceptional customer care.",
+    'about.hero.subtitle': "For over 30 years, we've been Raleigh's trusted choice for quality laundry services and exceptional customer care.",
     'about.story.title': 'Our Story',
     'about.story.p1': 'Maytag Laundry Raleigh was founded in 2010 with a simple mission: to provide the Raleigh community with a clean, modern, and welcoming place to do laundry. What started as a small neighborhood laundromat has grown into a full-service facility trusted by thousands of customers.',
     'about.story.p2': "We understand that doing laundry is a necessity, but that doesn't mean it has to be a chore. That's why we've invested in the best equipment, maintained the highest standards of cleanliness, and created a comfortable environment where you can get your laundry done efficiently.",
@@ -714,7 +714,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // About Page
     'about.hero.title': 'Sobre Nosotros',
-    'about.hero.subtitle': 'Por mas de 15 anos, hemos sido la opcion de confianza de Raleigh para servicios de lavanderia de calidad y atencion al cliente excepcional.',
+    'about.hero.subtitle': 'Por mas de 30 anos, hemos sido la opcion de confianza de Raleigh para servicios de lavanderia de calidad y atencion al cliente excepcional.',
     'about.story.title': 'Nuestra Historia',
     'about.story.p1': 'Maytag Laundry Raleigh fue fundada en 2010 con una mision simple: proporcionar a la comunidad de Raleigh un lugar limpio, moderno y acogedor para hacer la lavanderia. Lo que comenzo como una pequena lavanderia de barrio ha crecido hasta convertirse en una instalacion de servicio completo en la que confian miles de clientes.',
     'about.story.p2': 'Entendemos que hacer la lavanderia es una necesidad, pero eso no significa que tenga que ser una tarea pesada. Por eso hemos invertido en el mejor equipo, mantenido los mas altos estandares de limpieza y creado un ambiente comodo donde puede hacer su lavanderia de manera eficiente.',
