@@ -115,8 +115,12 @@ export function Footer() {
               {t('footer.copyright.maytag')}
             </Link>
             {' | '}
-            <Link to="/" className="hover:text-[#00bfb3] transition-colors" onClick={scrollToTop}>
+            <Link to="/terms" className="hover:text-[#00bfb3] transition-colors" onClick={scrollToTop}>
               {t('footer.copyright.terms')}
+            </Link>
+            {' | '}
+            <Link to="/privacy" className="hover:text-[#00bfb3] transition-colors" onClick={scrollToTop}>
+              {t('footer.copyright.privacy')}
             </Link>
             {' | '}{' '}{t('footer.copyright.suffix')}
           </p>

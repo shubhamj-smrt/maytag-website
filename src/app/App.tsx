@@ -13,6 +13,8 @@ import { CTAFormSuccessPreview } from './pages/CTAFormSuccessPreview';
 import { SchedulePickupFormPage } from './pages/SchedulePickupFormPage';
 import { LocationSEO } from './components/LocationSEO';
 import { WolfpackPage } from './pages/Wolfpack';
+import { TermsPage } from './pages/TermsPage';
+import { PrivacyPage } from './pages/PrivacyPage';
 import { LanguageProvider } from './context/LanguageContext';
 
 function AppContent() {
@@ -35,6 +37,8 @@ function AppContent() {
               <Route path="/claim" element={<CTAFormPage />} />
               <Route path="/claim/success" element={<CTAFormSuccessPreview />} />
               <Route path="/schedule-pickup" element={<SchedulePickupFormPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
 
               {/* Location pages — reuse existing pages with location SEO */}
               <Route path="/laundromat-in/:locationSlug" element={<LocationSEO page="home"><HomePage /></LocationSEO>} />

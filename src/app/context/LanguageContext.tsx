@@ -36,7 +36,12 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.copyright.maytag': 'Maytag Laundry',
     'footer.copyright.smrt': 'SMRT Systems',
     'footer.copyright.terms': 'Terms & Conditions',
+    'footer.copyright.privacy': 'Privacy Policy',
     'footer.copyright.suffix': 'All rights reserved.',
+
+    // Terms & Privacy
+    'terms.title': 'Terms & Conditions',
+    'privacy.title': 'Privacy Policy',
 
     // Home Page - Hero
     'home.hero.title': 'Raleigh\'s Premier Laundry Service',
@@ -449,7 +454,12 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.copyright.maytag': 'Maytag Laundry',
     'footer.copyright.smrt': 'SMRT Systems',
     'footer.copyright.terms': 'Términos y Condiciones',
+    'footer.copyright.privacy': 'Política de Privacidad',
     'footer.copyright.suffix': 'Todos los derechos reservados.',
+
+    // Terms & Privacy
+    'terms.title': 'Términos y Condiciones',
+    'privacy.title': 'Política de Privacidad',
 
     // Home Page - Hero
     'home.hero.title': 'El Mejor Servicio de Lavandería de Raleigh',
