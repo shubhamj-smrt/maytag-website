@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, PhoneOff } from 'lucide-react';
+import { MessageCircle, X, Minus } from 'lucide-react';
 import { cn } from './ui/utils';
 
 type Message = { role: 'user' | 'bot'; text: string };
-type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'ended';
+type ConnectionStatus = 'idle' | 'connecting' | 'connected' | 'disconnected' | 'ended';
 type ConnectionPhase = 'spinner' | 'connected_box' | 'typing_intro' | 'ready';
 
 const AGENT_NAMES = ['Mark', 'Vish', 'Brian', 'Cris', 'Aaron'];
+
+const INACTIVITY_DISCONNECT_MS = 30 * 1000; // 10 minutes
 
 const AGENT_INTROS: ((name: string) => string)[] = [
   (name) => `Hi, I am ${name}. What can I help you with today?`,
@@ -26,7 +28,7 @@ function pickRandomIntro(name: string) {
 }
 
 /** Backend API URL. Use /api/... in dev (proxied) or full URL in prod. Set VITE_CHAT_API_URL to override. */
-const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL ?? 'http://localhost:8000/api/simple_chat';
+const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL ?? 'https://smrtlite.org/api/simple_chat';
 
 async function fetchChatResponse(message: string): Promise<string> {
   const res = await fetch(CHAT_API_URL, {
@@ -53,11 +55,11 @@ function Spinner() {
 
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-1 py-2" aria-hidden>
+    <div className="flex items-center gap-0.5 py-1" aria-hidden>
       <style>{`
         @keyframes typing-bounce {
           0%, 60%, 100% { transform: translateY(0); }
-          30% { transform: translateY(-4px); }
+          30% { transform: translateY(-2px); }
         }
         .typing-dot {
           animation: typing-bounce 1.4s ease-in-out infinite;
@@ -66,7 +68,7 @@ function TypingIndicator() {
       {[0, 1, 2].map((i) => (
         <div
           key={i}
-          className="typing-dot h-2 w-2 rounded-full bg-gray-500"
+          className="typing-dot h-1.5 w-1.5 rounded-full bg-gray-500"
           style={{ animationDelay: `${i * 0.2}s` }}
         />
       ))}
@@ -76,7 +78,7 @@ function TypingIndicator() {
 
 /** Typing duration in ms based on response length. ~35 chars/sec to emulate agent typing. */
 function getTypingDurationMs(text: string): number {
-  const ms = Math.round((text.length / 12) * 1000);
+  const ms = Math.round((text.length / 20) * 1000);
   return Math.max(ms, 800); // min 800ms so very short replies still feel natural
 }
 
@@ -91,6 +93,8 @@ export function Chatbot() {
   const [showTypingAnimation, setShowTypingAnimation] = useState(false);
   const [isTypingBurstVisible, setIsTypingBurstVisible] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const lastActivityAtRef = useRef<number>(0);
+  const [connectionAttemptId, setConnectionAttemptId] = useState(0);
 
   const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   useEffect(() => { scrollToBottom(); }, [messages]);
@@ -105,7 +109,7 @@ export function Chatbot() {
     setIsTypingBurstVisible(true);
     const timers: ReturnType<typeof setTimeout>[] = [];
     const runCycle = () => {
-      const burstMs = 1800 + Math.random() * 1000; // 1.8–2.8s typing
+      const burstMs = 3000 + Math.random() * 1500; // 3–4.5s typing
       const pauseMs = 900 + Math.random() * 700;   // 0.9–1.6s pause
       timers.push(setTimeout(() => {
         setIsTypingBurstVisible(false);
@@ -119,39 +123,38 @@ export function Chatbot() {
     return () => timers.forEach(clearTimeout);
   }, [isInTypingPhase]);
 
-  // First-time open: connection flow — spinner → connected box → typing → intro
+  // First-time open or reconnection: connection flow — spinner → connected box → typing → intro
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || connectionStatus !== 'idle') return;
 
-    if (connectionStatus === 'idle') {
-      setConnectionStatus('connecting');
-      setConnectionPhase('spinner');
-      setMessages([]);
+    setMessages([]);
+    setConnectionStatus('connecting');
+    setConnectionPhase('spinner');
 
-      let connectedName = '';
-      const t1 = setTimeout(() => {
-        connectedName = pickRandomName();
-        setAgentName(connectedName);
-        setConnectionPhase('connected_box');
-      }, 5000);
+    let connectedName = '';
+    const t1 = setTimeout(() => {
+      connectedName = pickRandomName();
+      setAgentName(connectedName);
+      setConnectionPhase('connected_box');
+    }, 5000);
 
-      const t2 = setTimeout(() => {
-        setConnectionPhase('typing_intro');
-      }, 7000);
+    const t2 = setTimeout(() => {
+      setConnectionPhase('typing_intro');
+    }, 7000);
 
-      const t3 = setTimeout(() => {
-        setConnectionPhase('ready');
-        setMessages([{ role: 'bot', text: pickRandomIntro(connectedName) }]);
-        setConnectionStatus('connected');
-      }, 9500);
+    const t3 = setTimeout(() => {
+      setConnectionPhase('ready');
+      lastActivityAtRef.current = Date.now();
+      setMessages([{ role: 'bot', text: pickRandomIntro(connectedName) }]);
+      setConnectionStatus('connected');
+    }, 9500);
 
-      return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-        clearTimeout(t3);
-      };
-    }
-  }, [isOpen]);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, [isOpen, connectionAttemptId]);
 
   const handleEndChat = () => {
     setConnectionStatus('idle');
@@ -162,9 +165,28 @@ export function Chatbot() {
     setIsOpen(false);
   };
 
+  const handleReconnect = () => {
+    setMessages([]);
+    setConnectionStatus('idle');
+    setConnectionPhase(null);
+    setAgentName(null);
+    setConnectionAttemptId((n) => n + 1);
+  };
+
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed) return;
+
+    // Check for inactivity disconnect (10 min since last activity)
+    const now = Date.now();
+    if (lastActivityAtRef.current > 0 && now - lastActivityAtRef.current > INACTIVITY_DISCONNECT_MS) {
+      setMessages([{ role: 'bot', text: 'You were disconnected from the chat agent due to inactivity.' }]);
+      setInput('');
+      setConnectionStatus('disconnected');
+      return;
+    }
+
+    lastActivityAtRef.current = now;
     setMessages((prev) => [...prev, { role: 'user', text: trimmed }]);
     setInput('');
     setIsTyping(true);
@@ -202,12 +224,12 @@ export function Chatbot() {
       {/* Floating button */}
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => (isOpen ? handleEndChat() : setIsOpen(true))}
         className={cn(
           'fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg transition-all',
           'bg-[#00bfb3] text-white hover:bg-[#00a89d] hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00bfb3] focus-visible:ring-offset-2'
         )}
-        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+        aria-label={isOpen ? 'End chat' : 'Open chat'}
       >
         {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
       </button>
@@ -215,7 +237,7 @@ export function Chatbot() {
       {/* Chat panel — fixed height, scrollable messages */}
       <div
         className={cn(
-          'fixed bottom-24 right-6 z-40 flex h-[450px] w-full max-w-sm flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl transition-all duration-200 ease-out',
+          'fixed bottom-24 left-4 right-4 sm:left-auto sm:right-6 sm:w-full sm:max-w-sm z-40 flex h-[450px] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl transition-all duration-200 ease-out',
           isOpen ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
         )}
       >
@@ -223,27 +245,16 @@ export function Chatbot() {
           <h3 className="font-semibold text-white">
             {agentName ? `Chat with ${agentName}` : 'Chat with us'}
           </h3>
-          <div className="flex items-center gap-1">
-            {(connectionStatus === 'connected' || connectionStatus === 'connecting') && (
-              <button
-                type="button"
-                onClick={handleEndChat}
-                className="flex items-center gap-1 rounded px-2 py-1 text-xs text-white/90 hover:bg-white/20 hover:text-white"
-                aria-label="End chat"
-              >
-                <PhoneOff className="h-4 w-4" />
-                End chat
-              </button>
-            )}
+          {(connectionStatus === 'connected' || connectionStatus === 'connecting' || connectionStatus === 'disconnected') && (
             <button
               type="button"
               onClick={() => setIsOpen(false)}
               className="rounded p-1 text-white/90 hover:bg-white/20 hover:text-white"
-              aria-label="Close chat"
+              aria-label="Minimize chat"
             >
-              <X className="h-5 w-5" />
+              <Minus className="h-5 w-5" />
             </button>
-          </div>
+          )}
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col">
@@ -275,13 +286,24 @@ export function Chatbot() {
               </div>
             )}
             {connectionStatus === 'connecting' && connectionPhase === 'typing_intro' && isTypingBurstVisible && (
-              <div className="mr-auto max-w-[85%] rounded-lg bg-gray-100 px-3 py-2">
+              <div className="mr-auto w-fit rounded-lg bg-gray-100 px-3 py-2">
                 <TypingIndicator />
               </div>
             )}
             {connectionStatus === 'connected' && isTyping && showTypingAnimation && isTypingBurstVisible && (
-              <div className="mr-auto max-w-[85%] rounded-lg bg-gray-100 px-3 py-2">
+              <div className="mr-auto w-fit rounded-lg bg-gray-100 px-3 py-2">
                 <TypingIndicator />
+              </div>
+            )}
+            {connectionStatus === 'disconnected' && (
+              <div className="flex justify-center pt-2">
+                <button
+                  type="button"
+                  onClick={handleReconnect}
+                  className="rounded-lg bg-[#00bfb3] px-4 py-2 text-sm font-medium text-white hover:bg-[#00a89d]"
+                >
+                  Reconnect
+                </button>
               </div>
             )}
             <div ref={messagesEndRef} />
