@@ -8,7 +8,7 @@ type ConnectionPhase = 'spinner' | 'connected_box' | 'typing_intro' | 'ready';
 
 const AGENT_NAMES = ['Mark', 'Vish', 'Brian', 'Cris', 'Aaron'];
 
-const INACTIVITY_DISCONNECT_MS = 30 * 1000; // 10 minutes
+const INACTIVITY_DISCONNECT_MS = 10 * 60 * 1000; // 10 minutes
 
 const AGENT_INTROS: ((name: string) => string)[] = [
   (name) => `Hi, I am ${name}. What can I help you with today?`,
