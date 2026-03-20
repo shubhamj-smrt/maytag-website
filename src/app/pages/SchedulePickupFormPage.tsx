@@ -7,6 +7,10 @@ import { NewDateTimePicker } from '../../components/ui/new-date-time-picker';
 
 const HOLD_DURATION_MS = 3000;
 
+/** Google Apps Script Web App URL – captures form submissions to a Google Sheet */
+const GOOGLE_SHEETS_WEB_APP_URL =
+  'https://script.google.com/macros/s/AKfycbz34aM2KtTbCTa4NPCANFKhkpY-xqpl5qS5imuxlojf3LaiTGX92587sXhnA-k5DGLJ/exec';
+
 function isValidUSPhone(value: string): boolean {
   const digits = value.replace(/\D/g, '');
   if (digits.length === 10) return true;
@@ -28,6 +32,8 @@ export function SchedulePickupFormPage() {
   const [showError, setShowError] = useState(false);
   const errorDismissRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [verified, setVerified] = useState(false);
   const [holdProgress, setHoldProgress] = useState(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -119,6 +125,63 @@ export function SchedulePickupFormPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!verified) return;
+    setSubmitError(null);
+    setSubmitting(true);
+
+    const preferredDate = preferredDateTime
+      ? preferredDateTime.toLocaleDateString(undefined, {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })
+      : '';
+    const preferredTime = preferredDateTime
+      ? preferredDateTime.toLocaleTimeString(undefined, {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+      : '';
+
+    // Use form POST to hidden iframe – avoids CORS (Apps Script doesn't return CORS headers)
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = GOOGLE_SHEETS_WEB_APP_URL;
+    form.target = 'sheet-submit-frame';
+    form.style.display = 'none';
+
+    const fields: Record<string, string> = {
+      name: formData.name.trim(),
+      phone: formData.phone.trim(),
+      address: formData.address.trim(),
+      preferredDate,
+      preferredTime,
+      notes: formData.notes.trim(),
+    };
+
+    for (const [key, value] of Object.entries(fields)) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    let iframe = document.getElementById('sheet-submit-frame') as HTMLIFrameElement | null;
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'sheet-submit-frame';
+      iframe.id = 'sheet-submit-frame';
+      iframe.style.display = 'none';
+      iframe.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(iframe);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -251,7 +314,12 @@ export function SchedulePickupFormPage() {
                     placeholder={t('pickupForm.notesPlaceholder')}
                   />
                 </div>
-                <div className="min-h-[44px] flex items-start">
+                <div className="min-h-[44px] flex flex-col gap-1">
+                  {submitError && (
+                    <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left">
+                      {submitError}
+                    </p>
+                  )}
                   {generalError || !allFilled ? (
                     <p
                       className={`text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2 w-full text-left transition-opacity duration-300 ${
@@ -299,10 +367,10 @@ export function SchedulePickupFormPage() {
                 )}
                 <button
                   type="submit"
-                  disabled={!verified || !phoneValid}
+                  disabled={!verified || !phoneValid || submitting}
                   className="w-full min-h-[44px] bg-black text-white px-8 py-3 rounded hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-out font-semibold mt-2 cursor-pointer"
                 >
-                  {t('pickupForm.submit')}
+                  {submitting ? t('contact.form.sending') : t('pickupForm.submit')}
                 </button>
               </form>
               <p className="text-center mt-6">
