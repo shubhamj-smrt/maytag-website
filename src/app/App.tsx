@@ -16,6 +16,7 @@ import { WolfpackPage } from './pages/Wolfpack';
 import { TermsPage } from './pages/TermsPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { LanguageProvider } from './context/LanguageContext';
+import { Chatbot } from './components/Chatbot';
 
 function AppContent() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function AppContent() {
         </Routes>
       </main>
       {!isStandaloneFormPage && <Footer />}
+      <Chatbot />
     </div>
   );
 }
